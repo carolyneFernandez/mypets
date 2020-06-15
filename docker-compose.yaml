@@ -1,0 +1,68 @@
+version: '3'
+services:
+  mypets_web:
+    container_name: mypets_web
+    build:
+      context: .
+      args:
+        - UID=${UID}
+    ports:
+      - "8030:80"
+    volumes:
+      - .:/var/www/html:rw
+    links:
+      - mypets_db:mypets_db
+    networks:
+      - isolated_mypets
+      - frontend
+
+  mypets_db:
+    container_name: mypets_db
+    image: mysql
+    command: ["--default-authentication-plugin=mysql_native_password"]
+    volumes:
+      - "./.data/db:/var/lib/mysql:rw"
+    user: mysql
+    ports:
+      - 3330:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mypets
+      MYSQL_USER: mypets
+      MYSQL_PASSWORD: password
+    networks:
+      - isolated_mypets
+      - frontend
+
+  mypets_phpmyadmin:
+    container_name: mypets_phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+      - mypets_db
+    environment:
+      - PMA_HOST=mypets_db
+    links:
+      - mypets_db:mypets_db
+    ports:
+      - "8031:80"
+    networks:
+      - isolated_mypets
+      - frontend
+
+  mypets_mailhog:
+    image: mailhog/mailhog
+    command: ["-storage=maildir", "-maildir-path=/maildir"]
+    volumes:
+      - './.data/mailhog:/maildir'
+    ports:
+      - 8032:8025
+      - 1030:1025
+    networks:
+      - isolated_mypets
+      - frontend
+
+networks:
+  isolated_mypets:
+    external:
+      name: isolated_mypets
+  frontend:

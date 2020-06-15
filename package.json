@@ -1,0 +1,33 @@
+{
+  "devDependencies": {
+    "@symfony/webpack-encore": "^0.30.2",
+    "core-js": "^3.6.5",
+    "regenerator-runtime": "^0.13.2",
+    "webpack-notifier": "^1.8.0"
+  },
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "dev-server": "encore dev-server",
+    "dev": "encore dev",
+    "watch": "encore dev --watch",
+    "build": "encore production --progress"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.0",
+    "@fullcalendar/bootstrap": "^4.4.2",
+    "@fullcalendar/core": "^4.4.2",
+    "@fullcalendar/daygrid": "^4.4.2",
+    "@fullcalendar/interaction": "^4.4.2",
+    "@fullcalendar/list": "^4.4.2",
+    "@fullcalendar/timegrid": "^4.4.2",
+    "bootstrap": "^4.5.0",
+    "bootstrap-select": "^1.13.17",
+    "bootswatch": "^4.5.0",
+    "flatpickr": "^4.6.3",
+    "jquery": "^3.5.1",
+    "node-sass": "^4.14.1",
+    "popper.js": "^1.16.1",
+    "sass-loader": "^8.0.2"
+  }
+}
