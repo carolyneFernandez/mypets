@@ -1,2 +1,14 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
+    form_themes: ['bootstrap_4_layout.html.twig']
+    globals:
+
+        ROLE_ADMIN: '%ROLE_ADMIN%'
+        ROLE_VETERINAIRE: '%ROLE_VETERINAIRE%'
+        ROLE_CLINIQUE: '%ROLE_CLINIQUE%'
+        ROLE_PROPRIETAIRE: '%ROLE_PROPRIETAIRE%'
+
+        MAIL_ADMIN: '%MAIL_ADMIN%'
+        project_dir: '%kernel.project_dir%'
+        public_dir: '%kernel.project_dir%/public'
+        url: '%env(URL)%'

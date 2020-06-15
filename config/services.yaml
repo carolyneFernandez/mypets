@@ -4,6 +4,15 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    ROLE_ADMIN: ROLE_ADMIN
+    ROLE_VETERINAIRE: ROLE_VETERINAIRE
+    ROLE_CLINIQUE: ROLE_CLINIQUE
+    ROLE_PROPRIETAIRE: ROLE_PROPRIETAIRE
+    MAIL_ADMIN: '%env(MAIL_ADMIN)%'
+
+
+    knp_paginator.template.pagination: 'layout/_pagination.html.twig'
+
 
 services:
     # default configuration for services in *this* file
