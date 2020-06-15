@@ -50,6 +50,7 @@ services:
       - frontend
 
   mypets_mailhog:
+    container_name: mypets_mailhog
     image: mailhog/mailhog
     command: ["-storage=maildir", "-maildir-path=/maildir"]
     volumes:
