@@ -17,25 +17,17 @@
                     You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
                 </div>
             {% endif %}
-            <label for="inputEmail"></label>
             <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
-            <label for="inputPassword"></label>
-            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required>
+            <input type="password" name="password" id="inputPassword" class="form-control mt-4" placeholder="Mot de passe" required>
 
             <input type="hidden" name="_csrf_token"
                    value="{{ csrf_token('authenticate') }}"
             >
 
-            {#
-                Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-                See https://symfony.com/doc/current/security/remember_me.html
-
-                <div class="checkbox mb-3">
-                    <label>
-                        <input type="checkbox" name="_remember_me"> Remember me
-                    </label>
-                </div>
-            #}
+            <div class="custom-control custom-checkbox mt-3">
+                <input type="checkbox" class="custom-control-input" name="_remember_me" id="_remember_me">
+                <label class="custom-control-label" for="_remember_me">Se souvenir</label>
+            </div>
             <div class="pull-right mt-3">
                 <button class="btn btn-lg btn-success rounded-pill btn-sm" type="submit">
                     Se connecter
