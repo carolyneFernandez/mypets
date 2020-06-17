@@ -4,66 +4,65 @@
 
 {% block body %}
 
-<section class="p-4">
-    <div class="mt-3 text-center">
-        <h1 class="display-6 mb-3"> Vos carnets de santé DÉMATERIALISÉ ! </h1>
-        {{ source("svg/manual-book.svg") }}
-        {{ source("svg/arrow-right-solid.svg") }}
-        {{ source("svg/laptop.svg") }}
-        <p class="mt-3"> Pour chacuns de vos animaux, 
-            plus besoin d’avoir votre carnet de santé physique,
-            <br>
-            MyPets se charge de garder les informations santé de vos animaux de compagnie !
-        </p>
-    </div>
-
-
-    <div class="mt-3 text-center">
-        <h1 class="display-6 mb-3"> Vou pouvez prendre rendez-vous !  </h1>
-        {{ source("svg/laptop.svg") }}
-        {{ source("svg/arrow-right-solid.svg") }}
-        {{ source("svg/vet.svg") }}
-        
-        <p class="mt-3"> En plus d’avoir vos carnets de santé sur notre plateforme vous pouvez aussi
-            <br>
-            prendre rendez-vous avec les vétérinaires
-            les plus proche de chez vous gratuitement.
-        </p>
-    </div>
-
-</section>
-
-
-
-<section class="p-4 bg-primary text-white">
-    <div class="mt-3 text-center">
-        <h1 class="display-6 mb-3"> Confirmation du rendez-vous !  </h1>
-        <div>
-            {{ source("svg/vet.svg") }}
-            {{ source("svg/arrow-right-solid.svg") }}
-            {{ source("svg/person.svg") }}
-        </div>
-        <p class="mt-3" > Votre rendez-vous est confirmé sous 24h, 
-            un mail de confirmation  vous sera envoyé. 
-            <br>
-            Plus qu’à attendre le jour J !
-        </p>
-    </div>
-
-    <div class="mt-3 text-center">
-        <h1 class="display-6 mb-3"> Un imprévu ? Pas de soucis !  </h1>
-        <div>
-            {{ source("svg/person.svg") }}
-            {{ source("svg/arrow-right-solid.svg") }}
-            {{ source("svg/times-solid.svg") }}
-        </div>
-        <div>
-            <p class="mt-3 mb-3"> Vous pouvez à tout moment annuler votre rendez-vous si vous avez un imprévu.
+    <section class="p-4">
+        <div class="mt-3 text-center">
+            <h1 class="display-6 mb-3"> Vos carnets de santé DÉMATERIALISÉ ! </h1>
+            <img src="{{ asset("assets/img/svg/manual-book.svg") }}" alt="manual_book">
+            <img src="{{ asset("assets/img/svg/arrow-right-solid.svg") }}" alt="manual_book">
+            <img src="{{ asset("assets/img/svg/laptop.svg") }}" alt="manual_book">
+            <p class="mt-3"> Pour chacuns de vos animaux,
+                plus besoin d’avoir votre carnet de santé physique,
                 <br>
-                Tout ça, rapidement et gratuitement !
+                MyPets se charge de garder les informations santé de vos animaux de compagnie !
             </p>
         </div>
-    </div>
-</section>
+
+
+        <div class="mt-3 text-center">
+            <h1 class="display-6 mb-3"> Vou pouvez prendre rendez-vous ! </h1>
+            <img src="{{ asset("assets/img/svg/laptop.svg") }}" alt="manual_book">
+            <img src="{{ asset("assets/img/svg/arrow-right-solid.svg") }}" alt="manual_book">
+            <img src="{{ asset("assets/img/svg/vet.svg") }}" alt="manual_book">
+            <p class="mt-3"> En plus d’avoir vos carnets de santé sur notre plateforme vous pouvez aussi
+                <br>
+                prendre rendez-vous avec les vétérinaires
+                les plus proche de chez vous gratuitement.
+            </p>
+        </div>
+
+    </section>
+
+
+
+    <section class="p-4 bg-primary text-white">
+        <div class="mt-3 text-center">
+            <h1 class="display-6 mb-3"> Confirmation du rendez-vous ! </h1>
+            <div>
+                <img src="{{ asset("assets/img/svg/vet.svg") }}" alt="manual_book">
+                <img src="{{ asset("assets/img/svg/arrow-right-solid.svg") }}" alt="manual_book">
+                <img src="{{ asset("assets/img/svg/person.svg") }}" alt="manual_book">
+            </div>
+            <p class="mt-3"> Votre rendez-vous est confirmé sous 24h,
+                un mail de confirmation vous sera envoyé.
+                <br>
+                Plus qu’à attendre le jour J !
+            </p>
+        </div>
+
+        <div class="mt-3 text-center">
+            <h1 class="display-6 mb-3"> Un imprévu ? Pas de soucis ! </h1>
+            <div>
+                <img src="{{ asset("assets/img/svg/person.svg") }}" alt="manual_book">
+                <img src="{{ asset("assets/img/svg/arrow-right-solid.svg") }}" alt="manual_book">
+                <img src="{{ asset("assets/img/svg/times-solid.svg") }}" alt="manual_book">
+            </div>
+            <div>
+                <p class="mt-3 mb-3"> Vous pouvez à tout moment annuler votre rendez-vous si vous avez un imprévu.
+                    <br>
+                    Tout ça, rapidement et gratuitement !
+                </p>
+            </div>
+        </div>
+    </section>
     
 {% endblock %}
