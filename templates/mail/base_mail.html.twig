@@ -1,0 +1,32 @@
+{% import 'function/_macro_encore.html.twig' as function %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    {{ function.encore_absolute_link_tags('css/app') }}
+</head>
+<body class="bg-primary text-white">
+
+<div class="col-sm-12 col-md-10 col-lg-8 col-xl-6 mx-auto mt-3 d-flex flex-column align-items-center justify-content-between">
+    <div class="text-center">
+        <img src="{{ absolute_url(asset('assets/img/homepage/mypets_logo_background.png')) }}" width="200" alt="logo">
+    </div>
+
+    <div>
+        {% block body %}{% endblock %}
+
+        <p>
+            En vous souhaitant,<br>
+            <br>
+            MyPets<br>
+        </p>
+    </div>
+
+    <footer class="mt-5">
+        <p class="text-center p-0">MyPets - Plateforme de dématérialisation de carnet de santé de votre animal de compagnie.</p>
+    </footer>
+    {% block footer %}{% endblock %}
+</div>
+
+</body>
+</html>

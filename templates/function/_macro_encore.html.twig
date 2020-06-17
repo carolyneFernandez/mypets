@@ -1,0 +1,19 @@
+{% macro encore_absolute_link_tags(entry_point) %}
+    {% for file in encore_entry_css_files(entry_point) %}
+        <link href="{{ absolute_url(asset(file)) }}" rel="stylesheet"/>
+    {% endfor %}
+{% endmacro %}
+
+{% macro get_path_asset(entry_point) %}
+    {% for file in encore_entry_css_files(entry_point) %}
+        {#        <link href="{{ absolute_url(asset(file)) }}" rel="stylesheet"/>#}
+        {{ get_file_content(asset(file)) }}
+    {% endfor %}
+{% endmacro %}
+
+{% macro encore_absolute_script_tags(entry_point) %}
+    {% for file in encore_entry_css_files(entry_point) %}
+        <script src="{{ absolute_url(asset(file)) }}"></script>
+    {% endfor %}
+{% endmacro %}
+

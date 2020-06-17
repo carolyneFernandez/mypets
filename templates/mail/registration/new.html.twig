@@ -1,0 +1,16 @@
+{% extends 'mail/base_mail.html.twig' %}
+{# @var clinique \App\Entity\Clinique #}
+{% block body %}
+    <p>
+        Bonjour,<br>
+        <br>
+        Une nouvelle demande d'inscription d'une clinique vient d'arrivée.<br>
+        <br>
+        Nom de la clinique : {{ clinique.nom }}<br>
+        Adresse : {{ clinique.adresse }}<br>
+        Téléphone : {{ clinique.telephone }}<br>
+        <br>
+        <a href="#" class="btn btn-warning rounded-pill">Ouvrir la demande</a>
+
+    </p>
+{% endblock %}

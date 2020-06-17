@@ -1,0 +1,22 @@
+{% macro input_addons(child) %}
+
+    <div class="form-group">
+        {{ form_label(child) }}
+        <div class="form-group">
+            <div class="input-group mb-3">
+                {% if child.vars.attr.prepend is defined %}
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">{{ child.vars.attr.prepend|raw }}</span>
+                    </div>
+                {% endif %}
+                {{ form_widget(child) }}
+                {% if child.vars.attr.append is defined %}
+                    <div class="input-group-append">
+                        <span class="input-group-text">{{ child.vars.attr.append|raw }}</span>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endmacro %}

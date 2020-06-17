@@ -2,7 +2,7 @@
   content: "Parcourir";
 }
 
-label.required:not(.custom-control-label):not(.no-star-required):after {
+label.required:not(.custom-control-label):not(.no-star-required):after, .label.required:after {
   content: "*";
-  color: $gray-700;
+  color: $danger;
 }

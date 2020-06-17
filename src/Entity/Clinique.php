@@ -60,9 +60,14 @@ class Clinique
     private $veterinaires;
 
     /**
-     * @ORM\OneToMany(targetEntity=Secretaire::class, mappedBy="clinique", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Secretaire::class, mappedBy="clinique", orphanRemoval=true, cascade={"persist"})
      */
     private $secretaires;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $demande = 0;
 
     public function __construct()
     {
@@ -237,6 +242,18 @@ class Clinique
                 $secretaire->setClinique(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDemande(): ?bool
+    {
+        return $this->demande;
+    }
+
+    public function setDemande(bool $demande): self
+    {
+        $this->demande = $demande;
 
         return $this;
     }

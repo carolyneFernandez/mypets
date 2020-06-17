@@ -55,11 +55,13 @@ class Veterinaire extends User
 
     public function __construct()
     {
+        parent::__construct();
         $this->veterinaireHoraires = new ArrayCollection();
         $this->animals = new ArrayCollection();
         $this->vaccins = new ArrayCollection();
         $this->rdvs = new ArrayCollection();
         $this->consultations = new ArrayCollection();
+        $this->addRole('ROLE_VETERINAIRE');
     }
 
     public function getIntervalBetweenRdv(): ?\DateTimeInterface
