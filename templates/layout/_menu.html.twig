@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
-
-    <img style="width: 100px; height: 100px;" src="{{ asset('assets/img/homepage/mypets_logo2.png') }}" class="" alt="MyPets logo"/>
+    <a href="{{ url('index') }}">
+        <img style="width: 100px; height: 100px;" src="{{ asset('assets/img/homepage/mypets_logo2.png') }}" class="" alt="MyPets logo"/>
+    </a>
     <nav class="navbar navbar-dark bg-primary">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -12,7 +13,7 @@
                 <a class="nav-link" href="#"> CLINIQUES À PROXIMITÉ</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#"> MON COMPTE</a>
+                <a class="nav-link" href="{{ app.user ==false ? url('app_login') : '#' }}"> MON COMPTE</a>
             </li>
         </ul>
     </div>

@@ -1,0 +1,36 @@
+.div-login {
+
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+
+  img {
+    width: 140px;
+  }
+
+  form {
+    background-color: $primary;
+    color: $white;
+  }
+
+  input {
+    background: none;
+    color: $white;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: solid 1px $white;
+
+    &::placeholder {
+      color: $white;
+    }
+
+    &:active, &:focus {
+      color: white;
+      background: none;
+    }
+  }
+
+}

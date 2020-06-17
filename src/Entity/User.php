@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -27,7 +28,7 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $email;
 
@@ -50,7 +51,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="boolean", options={"default"=1})
      */
-    private $actif;
+    private $actif = true;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -66,6 +67,16 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $prenom;
+
+    /**
+     * User constructor.
+     * @throws Exception
+     */
+    public function __construct()
+    {
+        $this->dateCreation = new \DateTime();
+    }
+
 
     public function getId(): ?int
     {

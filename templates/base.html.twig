@@ -2,11 +2,13 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{{ asset('assets/img/homepage/mypets_logo2.png') }}">
+    <title>{% block title %}MyPets{% endblock %}</title>
     {{ encore_entry_link_tags('css/app') }}
     {% block stylesheets %}{% endblock %}
 </head>
-<body>
+<body style="min-height: 100vh;">
 {% block nav %}
     {% include 'layout/_menu.html.twig' %}
 {% endblock %}
