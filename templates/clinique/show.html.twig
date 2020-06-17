@@ -1,0 +1,44 @@
+{% extends 'clinique/base_clinique.html.twig' %}
+
+{% block title %}Clinique{% endblock %}
+
+{% block body %}
+    <h1 class="text-center">{{ clinique.nom }}</h1>
+
+    <a class="btn btn-secondary rounded" href="{{ path('clinique_index') }}">RETOUR</a>
+    <a class="btn btn-warning pull-right mb-2 rounded" href="{{ path('clinique_edit', {'id': clinique.id}) }}">MODIFIER</a>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ clinique.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ clinique.nom }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ clinique.adresse }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ clinique.email }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ clinique.telephone }}</td>
+            </tr>
+            <tr>
+                <th>RdvDomicile</th>
+                <td>{{ clinique.rdvDomicile ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Siret</th>
+                <td>{{ clinique.siret }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}

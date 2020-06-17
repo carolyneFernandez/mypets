@@ -108,6 +108,11 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator implements P
         $user->setDerniereConnexion(new \DateTime());
         $this->entityManager->flush();
 
+
+        if (in_array($this->container->getParameter('ROLE_CLINIQUE'), $user->getRoles())) {
+            return new RedirectResponse($this->urlGenerator->generate('clinique_show', ['id' => $user->getClinique()->getId()]));
+        }
+
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }

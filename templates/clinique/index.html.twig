@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Clinique index{% endblock %}
+
+{% block body %}
+    <h1>Clinique index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Adresse</th>
+                <th>Email</th>
+                <th>Telephone</th>
+                <th>RdvDomicile</th>
+                <th>Siret</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for clinique in cliniques %}
+            <tr>
+                <td>{{ clinique.id }}</td>
+                <td>{{ clinique.nom }}</td>
+                <td>{{ clinique.adresse }}</td>
+                <td>{{ clinique.email }}</td>
+                <td>{{ clinique.telephone }}</td>
+                <td>{{ clinique.rdvDomicile ? 'Yes' : 'No' }}</td>
+                <td>{{ clinique.siret }}</td>
+                <td>
+                    <a href="{{ path('clinique_show', {'id': clinique.id}) }}">show</a>
+                    <a href="{{ path('clinique_edit', {'id': clinique.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('clinique_new') }}">Create new</a>
+{% endblock %}
