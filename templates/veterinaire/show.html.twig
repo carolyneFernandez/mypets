@@ -1,9 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout/base_user.html.twig' %}
 
-{% block title %}Veterinaire{% endblock %}
+{% block title %}MyPets | Détail vétérinaire{% endblock %}
 
 {% block body %}
-    <h1>Veterinaire</h1>
+    <h1 class="text-center"> Fiche du vétérinaire : {{ veterinaire.nom }}  {{ veterinaire.prenom }}</h1>
+    <a href="{{ path('veterinaire_index') }}">Retour à la liste</a>
+
+    <a href="{{ path('veterinaire_edit', {'id': veterinaire.id}) }}">edit</a>
 
     <table class="table">
         <tbody>
@@ -54,9 +57,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('veterinaire_index') }}">back to list</a>
-
-    <a href="{{ path('veterinaire_edit', {'id': veterinaire.id}) }}">edit</a>
 
     {{ include('veterinaire/_delete_form.html.twig') }}
 {% endblock %}

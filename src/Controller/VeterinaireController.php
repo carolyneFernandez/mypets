@@ -9,6 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 
 /**
  * @Route("/veterinaire")
@@ -20,6 +22,15 @@ class VeterinaireController extends AbstractController
      */
     public function index(VeterinaireRepository $veterinaireRepository): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
+
+        if(in_array($this->getParameter('ROLE_CLINIQUE'), $user->getRoles())){
+            return $this->render('veterinaire/index.html.twig', [
+                'veterinaires' => $user->getClinique()->getVeterinaires(),
+            ]);
+        }
+
         return $this->render('veterinaire/index.html.twig', [
             'veterinaires' => $veterinaireRepository->findAll(),
         ]);
@@ -27,18 +38,26 @@ class VeterinaireController extends AbstractController
 
     /**
      * @Route("/new", name="veterinaire_new", methods={"GET","POST"})
+     * @Security("is_granted('ROLE_CLINIQUE') or is_granted('ROLE_ADMIN')")
      */
     public function new(Request $request): Response
     {
         $veterinaire = new Veterinaire();
         $form = $this->createForm(VeterinaireType::class, $veterinaire);
         $form->handleRequest($request);
+        
+        /** @var User $user */
+        $user = $this->getUser();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            
+            if(in_array($this->getParameter('ROLE_CLINIQUE'), $user->getRoles())){
+                $veterinaire->setClinique($user->getClinique());
+            }
+            
             $entityManager->persist($veterinaire);
             $entityManager->flush();
-
             return $this->redirectToRoute('veterinaire_index');
         }
 
@@ -50,6 +69,7 @@ class VeterinaireController extends AbstractController
 
     /**
      * @Route("/{id}", name="veterinaire_show", methods={"GET"})
+     * @Security("is_granted('ROLE_CLINIQUE') or is_granted('ROLE_ADMIN')")
      */
     public function show(Veterinaire $veterinaire): Response
     {
@@ -60,6 +80,7 @@ class VeterinaireController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="veterinaire_edit", methods={"GET","POST"})
+     * @Security("is_granted('ROLE_CLINIQUE') or is_granted('ROLE_ADMIN')")
      */
     public function edit(Request $request, Veterinaire $veterinaire): Response
     {

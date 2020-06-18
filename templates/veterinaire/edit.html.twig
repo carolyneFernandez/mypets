@@ -1,13 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout/base_user.html.twig' %}
 
-{% block title %}Edit Veterinaire{% endblock %}
+{% block title %}MyPets | Modifier vétérinaire{% endblock %}
 
 {% block body %}
-    <h1>Edit Veterinaire</h1>
+    <h1 class="text-center">Modifier les informations du vétérinaire: {{ veterinaire.nom }} {{ veterinaire.prenom }}</h1>
 
-    {{ include('veterinaire/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('veterinaire/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('veterinaire_index') }}">back to list</a>
+    <a class="btn btn-secondary rounded btn-sm" href="{{ path('veterinaire_index') }}"><i class="fas fa-arrow-left mr-1"></i>Retour à la liste</a>
 
-    {{ include('veterinaire/_delete_form.html.twig') }}
 {% endblock %}

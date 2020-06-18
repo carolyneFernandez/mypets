@@ -1,11 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout/base_user.html.twig' %}
 
-{% block title %}New Veterinaire{% endblock %}
+{% block title %}MyPets | Créer un vétérinaire{% endblock %}
 
 {% block body %}
-    <h1>Create new Veterinaire</h1>
+    <h1 class="text-center">Nouveau vétérinaire</h1>
 
+    <a class="btn btn-secondary rounded btn-sm" href="{{ path('veterinaire_index') }}"><i class="fas fa-arrow-left mr-1"></i>Retour à la liste</a>
+    
     {{ include('veterinaire/_form.html.twig') }}
 
-    <a href="{{ path('veterinaire_index') }}">back to list</a>
 {% endblock %}

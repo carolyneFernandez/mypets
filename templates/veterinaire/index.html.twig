@@ -3,23 +3,23 @@
 {% block title %}Veterinaire index{% endblock %}
 
 {% block body %}
-    <h1>Veterinaire index</h1>
+    <h1 class="text-center">Tous les vétérinaires</h1>
+    
+    <a class="btn btn-success rounded pull-right mb-2 btn-sm" href="{{ path('veterinaire_new') }}"><i class="fas fa-plus mr-1"></i>Ajouter un vétérinaire</a>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Email</th>
-                <th>Roles</th>
-                <th>Password</th>
-                <th>DateCreation</th>
+                <th>Date de création</th>
                 <th>Actif</th>
-                <th>DerniereConnexion</th>
+                <th>Dernière connexion</th>
                 <th>Nom</th>
-                <th>Prenom</th>
-                <th>IntervalBetweenRdv</th>
+                <th>Prénom</th>
+                <th>Interval entre rendez-vous</th>
                 <th>Formations</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -27,8 +27,6 @@
             <tr>
                 <td>{{ veterinaire.id }}</td>
                 <td>{{ veterinaire.email }}</td>
-                <td>{{ veterinaire.roles ? veterinaire.roles|json_encode : '' }}</td>
-                <td>{{ veterinaire.password }}</td>
                 <td>{{ veterinaire.dateCreation ? veterinaire.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ veterinaire.actif ? 'Oui' : 'Non' }}</td>
                 <td>{{ veterinaire.derniereConnexion ? veterinaire.derniereConnexion|date('d-m-Y H:i:s') : '' }}</td>
@@ -37,17 +35,16 @@
                 <td>{{ veterinaire.intervalBetweenRdv ? veterinaire.intervalBetweenRdv|date('H:i:s') : '' }}</td>
                 <td>{{ veterinaire.formations }}</td>
                 <td>
-                    <a href="{{ path('veterinaire_show', {'id': veterinaire.id}) }}">show</a>
-                    <a href="{{ path('veterinaire_edit', {'id': veterinaire.id}) }}">edit</a>
+                    <a href="{{ path('veterinaire_show', {'id': veterinaire.id}) }}">Détails</a>
+                    <a href="{{ path('veterinaire_edit', {'id': veterinaire.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="12">no records found</td>
+                <td colspan="12">Aucun vétérinaires dans la clinique.</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('veterinaire_new') }}">Create new</a>
 {% endblock %}
