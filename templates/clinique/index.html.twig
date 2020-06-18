@@ -32,7 +32,9 @@
                 <td>{{ clinique.siret }}</td>
                 <td>
                     <a class="btn btn-secondary btn-sm rounded" href="{{ path('clinique_show', {'id': clinique.id}) }}">Détails</a>
-                    <a class="btn btn-warning btn-sm rounded" href="{{ path('clinique_edit', {'id': clinique.id}) }}">Modifier</a>
+                    {% if is_granted(ROLE_ADMIN) or clinique.hasUser(app.user) %}
+                        <a class="btn btn-warning btn-sm rounded" href="{{ path('clinique_edit', {'id': clinique.id}) }}">Modifier</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}

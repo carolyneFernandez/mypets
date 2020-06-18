@@ -9,6 +9,7 @@ twig:
         ROLE_PROPRIETAIRE: '%ROLE_PROPRIETAIRE%'
 
         MAIL_ADMIN: '%MAIL_ADMIN%'
+        MAIL_CONTACT: '%MAIL_CONTACT%'
         project_dir: '%kernel.project_dir%'
         public_dir: '%kernel.project_dir%/public/'
         url: '%env(URL)%'

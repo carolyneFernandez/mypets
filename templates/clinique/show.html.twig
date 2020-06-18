@@ -19,24 +19,93 @@
         <tr>
             <th>Adresse</th>
             <td>{{ clinique.adresse }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ clinique.email }}</td>
-            </tr>
-            <tr>
-                <th>Telephone</th>
-                <td>{{ clinique.telephone }}</td>
-            </tr>
-            <tr>
-                <th>Rendez-vous à domicile ?</th>
-                <td>{{ clinique.rdvDomicile ? 'Oui' : 'Non' }}</td>
-            </tr>
-            <tr>
-                <th>Siret</th>
-                <td>{{ clinique.siret }}</td>
-            </tr>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{ clinique.email }}</td>
+        </tr>
+        <tr>
+            <th>Telephone</th>
+            <td>{{ clinique.telephone }}</td>
+        </tr>
+        <tr>
+            <th>Rendez-vous à domicile ?</th>
+            <td>{{ clinique.rdvDomicile ? 'Oui' : 'Non' }}</td>
+        </tr>
+        <tr>
+            <th>Siret</th>
+            <td>{{ clinique.siret }}</td>
+        </tr>
         </tbody>
     </table>
 
+    {% if is_granted(ROLE_ADMIN) and clinique.demande %}
+        <div class="text-center">
+            <button type="button" data-toggle="modal" data-target="#modalValideInscription" class="btn btn-primary btn-sm rounded-pill">Traîter l'inscription</button>
+        </div>
+
+
+        <!-- Modal valide inscription -->
+        <div class="modal fade" id="modalValideInscription" tabindex="-1" role="dialog" aria-labelledby="modalValideInscriptionLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalValideInscriptionLabel">Inscription de la clinique <span class="font-weight-bold text-primary">{{ clinique.nom }}</span></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h3>Valider : </h3>
+                        <p>
+                            Si vous choisissez de <span class="font-weight-bold text-success">valider</span> l'inscription de la clinique, l'utilisateur principal recevra un email de validation et pourra commencer à utiliser les différents services que vous proposez.
+                        </p>
+                        <h3>Refuser : </h3>
+                        <p>
+                            Si vous choisissez de <span class="font-weight-bold text-danger">refuser</span> l'inscription de la clinique, l'utilisateur principal recevra un email lui indiquant un refus d'inscription.
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">Fermer</button>
+                        <button type="button" data-dismiss="modal" data-toggle="modal" data-target="#modalRefusInscription" class="btn btn-danger rounded-pill"><i class="fas fa-times mr-1"></i>Refuser</button>
+                        <a href="{{ url('admin_clinique_valider', {id: clinique.id}) }}" class="btn btn-success rounded-pill"><i class="fas fa-check mr-1"></i>Valider</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal refus inscription -->
+        <div class="modal fade" id="modalRefusInscription" tabindex="-1" role="dialog" aria-labelledby="modalRefusInscriptionLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalRefusInscriptionLabel">Refus d'inscription de la clinique <span class="font-weight-bold text-primary">{{ clinique.nom }}</span></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" action="{{ url('admin_clinique_refuser', {id: clinique.id}) }}" id="formRefusInscription">
+                            <div class="form-group">
+                                <label for="motifAnnulation">Motif d'annulation</label>
+                                <textarea class="form-control" id="motifAnnulation" rows="3" name="motifRefus" required></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">Fermer</button>
+                        <button type="button" class="btn btn-danger rounded-pill" id="button-send-formRefus"><i class="fas fa-times mr-1"></i>Refuser</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endif %}
+
+{% endblock %}
+
+{% block javascripts %}
+    {% if is_granted(ROLE_ADMIN) and clinique.demande %}
+        {{ encore_entry_script_tags('js/component/clinique/valide.js') }}
+    {% endif %}
 {% endblock %}
