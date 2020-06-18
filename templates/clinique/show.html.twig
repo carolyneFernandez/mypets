@@ -5,18 +5,18 @@
 {% block body %}
     <h1 class="text-center">{{ clinique.nom }}</h1>
 
-    <a class="btn btn-secondary rounded" href="{{ path('clinique_index') }}">RETOUR</a>
-    <a class="btn btn-warning pull-right mb-2 rounded" href="{{ path('clinique_edit', {'id': clinique.id}) }}">MODIFIER</a>
+    <a class="btn btn-secondary rounded btn-sm" href="{{ path('clinique_index') }}"><i class="fas fa-arrow-left mr-1"></i>Retour à la liste </a>
+    <a class="btn btn-warning pull-right mb-2 rounded btn-sm" href="{{ path('clinique_edit', {'id': clinique.id}) }}">Modifier</a>
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Nom</th>
-                <td>{{ clinique.nom }}</td>
-            </tr>
-            <tr>
-                <th>Adresse</th>
-                <td>{{ clinique.adresse }}</td>
+        <tr>
+            <th>Nom</th>
+            <td>{{ clinique.nom }}</td>
+        </tr>
+        <tr>
+            <th>Adresse</th>
+            <td>{{ clinique.adresse }}</td>
             </tr>
             <tr>
                 <th>Email</th>

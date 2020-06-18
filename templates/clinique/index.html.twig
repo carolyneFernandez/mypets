@@ -5,17 +5,17 @@
 {% block body %}
     <h1 class="text-center">Toutes les cliniques</h1>
 
-    <a class="btn btn-success rounded pull-right mb-2" href="{{ path('clinique_new') }}">NOUVELLE CLINIQUE</a>
+    <a class="btn btn-success rounded pull-right mb-2" href="{{ path('clinique_new') }}">Nouvelle clinique</a>
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Adresse</th>
-                <th>Email</th>
-                <th>Telephone</th>
-                <th>Rendez-vous à domicile ?</th>
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Adresse</th>
+            <th>Email</th>
+            <th>Telephone</th>
+            <th>Rendez-vous à domicile ?</th>
                 <th>Siret</th>
                 <th>actions</th>
             </tr>
@@ -31,8 +31,8 @@
                 <td>{{ clinique.rdvDomicile ? 'Oui' : 'Non' }}</td>
                 <td>{{ clinique.siret }}</td>
                 <td>
-                    <a class="btn btn-secondary rounded" href="{{ path('clinique_show', {'id': clinique.id}) }}">DÉTAILS</a>
-                    <a class="btn btn-warning rounded" href="{{ path('clinique_edit', {'id': clinique.id}) }}">MODIFIER</a>
+                    <a class="btn btn-secondary btn-sm rounded" href="{{ path('clinique_show', {'id': clinique.id}) }}">Détails</a>
+                    <a class="btn btn-warning btn-sm rounded" href="{{ path('clinique_edit', {'id': clinique.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
