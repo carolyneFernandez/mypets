@@ -1,0 +1,2 @@
+{% extends is_granted(ROLE_ADMIN) ? 'layout/base_admin.html.twig' : is_granted(ROLE_CLINIQUE) ? 'layout/base_clinique.html.twig' : is_granted(ROLE_VETERINAIRE) ? 'layout/base_veterinaire.html.twig' : is_granted(ROLE_PROPRIETAIRE) ? 'layout/base_proprietaire.html.twig' : 'base.html.twig' %}
+

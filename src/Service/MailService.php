@@ -78,8 +78,8 @@ class MailService extends AbstractController
      */
     public function sendMail()
     {
-            $this->mailer->send($this->mail);
         try {
+            $this->mailer->send($this->mail);
 
             return true;
         } catch (\Exception $e) {

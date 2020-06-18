@@ -10,7 +10,7 @@
         Adresse : {{ clinique.adresse }}<br>
         Téléphone : {{ clinique.telephone }}<br>
         <br>
-        <a href="#" class="btn btn-warning rounded-pill">Ouvrir la demande</a>
+        <a href="{{ url('admin_clinique_show', {id: clinique.id}) }}" class="btn btn-warning rounded-pill">Ouvrir la demande</a>
 
     </p>
 {% endblock %}
