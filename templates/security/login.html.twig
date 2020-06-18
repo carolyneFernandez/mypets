@@ -14,7 +14,7 @@
 
             {% if app.user %}
                 <div class="mb-3">
-                    You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                    Vous êtes déjà connectés en tant que {{ app.user.nomPrenom }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
                 </div>
             {% endif %}
             <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
@@ -29,7 +29,7 @@
                 <label class="custom-control-label" for="_remember_me">Se souvenir</label>
             </div>
             <div class="pull-right mt-3">
-                <button class="btn btn-lg btn-success rounded-pill btn-sm" type="submit">
+                <button class="btn btn-lg btn-success rounded-pill" type="submit">
                     Se connecter
                 </button>
             </div>

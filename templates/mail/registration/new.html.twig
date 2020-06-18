@@ -1,5 +1,5 @@
 {% extends 'mail/base_mail.html.twig' %}
-{# @var clinique \App\Entity\Clinique #}
+
 {% block body %}
     <p>
         Bonjour,<br>
@@ -10,7 +10,8 @@
         Adresse : {{ clinique.adresse }}<br>
         Téléphone : {{ clinique.telephone }}<br>
         <br>
-        <a href="{{ url('admin_clinique_show', {id: clinique.id}) }}" class="btn btn-warning rounded-pill">Ouvrir la demande</a>
-
     </p>
+    <div class="text-center">
+        <a href="{{ url('clinique_show', {id: clinique.id}) }}" class="btn btn-warning rounded-pill">Ouvrir la demande</a>
+    </div>
 {% endblock %}

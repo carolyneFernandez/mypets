@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Clinique;
+use App\Entity\Secretaire;
 use App\Form\CliniqueType;
 use App\Repository\CliniqueRepository;
+use App\Service\MailService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -100,5 +102,89 @@ class CliniqueAdminController extends AbstractController
 
         return $this->redirectToRoute('admin_clinique_index');
     }
+
+
+    /**
+     * @Route("/{id}/valide", name="admin_clinique_valider", methods={"GET"})
+     * @param Request $request
+     * @param Clinique $clinique
+     * @param MailService $mailService
+     * @return Response
+     */
+    public function valide(Request $request, Clinique $clinique, MailService $mailService): Response
+    {
+
+        if ($clinique->getDemande()) {
+
+            /** @var Secretaire $secretaire */
+            $secretaire = $clinique->getSecretaires()
+                                   ->first()
+            ;
+            $clinique->setDemande(false);
+            $secretaire->setActif(true);
+            $this->getDoctrine()
+                 ->getManager()
+                 ->flush()
+            ;
+
+            $mailService->setAndSendMail($secretaire->getEmail(), 'Validation de votre inscription', 'mail/registration/valide.html.twig', ['clinique' => $clinique]);
+
+            $this->addFlash('success', 'L\'inscription de la clinique a été validée.');
+
+        } else {
+            $this->addFlash('danger', 'L\'inscription de la clinique a déjà été validée.');
+        }
+
+
+        return $this->redirectToRoute('clinique_show', [
+            'id' => $clinique->getId(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/refuse", name="admin_clinique_refuser", methods={"GET","POST"})
+     * @param Request $request
+     * @param Clinique $clinique
+     * @param MailService $mailService
+     * @return Response
+     */
+    public function refuser(Request $request, Clinique $clinique, MailService $mailService): Response
+    {
+
+        if ($clinique->getDemande()) {
+
+            $motifRefus = $request->request->get('motifRefus');
+
+            if ($motifRefus != null) {
+                /** @var Secretaire $secretaire */
+                $secretaire = $clinique->getSecretaires()
+                                       ->first()
+                ;
+                $mailService->setAndSendMail($secretaire->getEmail(), 'Refus de votre inscription', 'mail/registration/refus.html.twig', [
+                    'clinique' => $clinique,
+                    'motifRefus' => $motifRefus
+                ]);
+
+                $em = $this->getDoctrine()
+                           ->getManager()
+                ;
+
+                $em->remove($secretaire);
+                $em->remove($clinique);
+                $em->flush();
+                $this->addFlash('warning', 'L\'inscription a été refusée.');
+
+            } else {
+                $this->addFlash('danger', 'Vous devez saisir un motif de refus d\'inscription.');
+            }
+
+        } else {
+            $this->addFlash('danger', 'L\'inscription de la clinique a déjà été validée.');
+        }
+
+
+        return $this->redirectToRoute('clinique_index');
+    }
+
 
 }

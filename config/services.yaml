@@ -9,6 +9,7 @@ parameters:
     ROLE_CLINIQUE: ROLE_CLINIQUE
     ROLE_PROPRIETAIRE: ROLE_PROPRIETAIRE
     MAIL_ADMIN: '%env(MAIL_ADMIN)%'
+    MAIL_CONTACT: '%env(MAIL_CONTACT)%'
 
 
     knp_paginator.template.pagination: 'layout/_pagination.html.twig'

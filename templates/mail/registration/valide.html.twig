@@ -1,0 +1,15 @@
+{% extends 'mail/base_mail.html.twig' %}
+
+{% block body %}
+    <p>
+        Bonjour,<br>
+        <br>
+        Nous revenons vers vous suite à votre demande d'inscription pour la clinique &laquo; {{ clinique.nom }} &raquo;.<br>
+        Nous avons la joie de vous compter parmis nous. Félicitations !<br>
+        <br>
+        Vous pouvez dès à présent vous connecter sur la plateforme avec les identifiants que vous avez saisis lors de votre inscription.<br>
+    </p>
+    <div class="text-center mt-2">
+        <a href="{{ url('app_login') }}" class="btn btn-warning rounded-pill">Se connecter</a>
+    </div>
+{% endblock %}

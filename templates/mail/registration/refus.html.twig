@@ -1,0 +1,18 @@
+{% extends 'mail/base_mail.html.twig' %}
+
+{% block body %}
+    <p>
+        Bonjour,<br>
+        <br>
+        Nous revenons vers vous suite à votre demande d'inscription pour la clinique &laquo; {{ clinique.nom }} &raquo;.<br>
+        Nous sommes aux regrets de vous informer du refus de cette dernière.<br>
+        <br>
+        Motif de refus : {{ motifRefus|nl2br }}<br>
+        <br>
+        Si le motif contient une information manquante, vous pouvez vous saisir de nouveau un <a href="{{ url('app_register') }}" class="text-white text-underline">formulaire d'inscription</a> en complétant correctement tous les champs.<br>
+        <br>
+        Si vous souhaitez contester le motif de refus, vous pouvez nous contacter en cliquant <a href="mailto:{{ MAIL_CONTACT }}?subject=Contestation refus inscription clinique {{ clinique.nom }}" class="text-white text-underline">ici</a>.<br>
+        <br>
+
+    </p>
+{% endblock %}
