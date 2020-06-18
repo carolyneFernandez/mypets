@@ -6,8 +6,10 @@
     <h1 class="text-center">{{ clinique.nom }}</h1>
 
     <a class="btn btn-secondary rounded btn-sm" href="{{ path('clinique_index') }}"><i class="fas fa-arrow-left mr-1"></i>Retour à la liste </a>
-    <a class="btn btn-warning pull-right mb-2 rounded btn-sm" href="{{ path('clinique_edit', {'id': clinique.id}) }}">Modifier</a>
 
+    {% if is_granted(ROLE_ADMIN) or clinique.hasUser(app.user) %}
+        <a class="btn btn-warning pull-right mb-2 rounded btn-sm" href="{{ path('clinique_edit', {'id': clinique.id}) }}">Modifier</a>
+    {% endif %}
     <table class="table">
         <tbody>
         <tr>

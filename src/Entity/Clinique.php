@@ -258,4 +258,16 @@ class Clinique
         return $this;
     }
 
+    public function hasUser(User $user)
+    {
+        if ($this->getSecretaires()
+                 ->contains($user))
+            return true;
+        if ($this->getVeterinaires()
+                 ->contains($user))
+            return true;
+
+        return false;
+    }
+
 }
