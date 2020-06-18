@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Veterinaire{% endblock %}
+
+{% block body %}
+    <h1>Veterinaire</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ veterinaire.id }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ veterinaire.email }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ veterinaire.roles ? veterinaire.roles|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ veterinaire.password }}</td>
+            </tr>
+            <tr>
+                <th>DateCreation</th>
+                <td>{{ veterinaire.dateCreation ? veterinaire.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Actif</th>
+                <td>{{ veterinaire.actif ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>DerniereConnexion</th>
+                <td>{{ veterinaire.derniereConnexion ? veterinaire.derniereConnexion|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ veterinaire.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ veterinaire.prenom }}</td>
+            </tr>
+            <tr>
+                <th>IntervalBetweenRdv</th>
+                <td>{{ veterinaire.intervalBetweenRdv ? veterinaire.intervalBetweenRdv|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Formations</th>
+                <td>{{ veterinaire.formations }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('veterinaire_index') }}">back to list</a>
+
+    <a href="{{ path('veterinaire_edit', {'id': veterinaire.id}) }}">edit</a>
+
+    {{ include('veterinaire/_delete_form.html.twig') }}
+{% endblock %}

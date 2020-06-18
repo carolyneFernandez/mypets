@@ -1,0 +1,53 @@
+{% extends 'layout/base_user.html.twig' %}
+
+{% block title %}Veterinaire index{% endblock %}
+
+{% block body %}
+    <h1>Veterinaire index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Password</th>
+                <th>DateCreation</th>
+                <th>Actif</th>
+                <th>DerniereConnexion</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>IntervalBetweenRdv</th>
+                <th>Formations</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for veterinaire in veterinaires %}
+            <tr>
+                <td>{{ veterinaire.id }}</td>
+                <td>{{ veterinaire.email }}</td>
+                <td>{{ veterinaire.roles ? veterinaire.roles|json_encode : '' }}</td>
+                <td>{{ veterinaire.password }}</td>
+                <td>{{ veterinaire.dateCreation ? veterinaire.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ veterinaire.actif ? 'Oui' : 'Non' }}</td>
+                <td>{{ veterinaire.derniereConnexion ? veterinaire.derniereConnexion|date('d-m-Y H:i:s') : '' }}</td>
+                <td>{{ veterinaire.nom }}</td>
+                <td>{{ veterinaire.prenom }}</td>
+                <td>{{ veterinaire.intervalBetweenRdv ? veterinaire.intervalBetweenRdv|date('H:i:s') : '' }}</td>
+                <td>{{ veterinaire.formations }}</td>
+                <td>
+                    <a href="{{ path('veterinaire_show', {'id': veterinaire.id}) }}">show</a>
+                    <a href="{{ path('veterinaire_edit', {'id': veterinaire.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('veterinaire_new') }}">Create new</a>
+{% endblock %}

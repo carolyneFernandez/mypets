@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Veterinaire{% endblock %}
+
+{% block body %}
+    <h1>Edit Veterinaire</h1>
+
+    {{ include('veterinaire/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('veterinaire_index') }}">back to list</a>
+
+    {{ include('veterinaire/_delete_form.html.twig') }}
+{% endblock %}
