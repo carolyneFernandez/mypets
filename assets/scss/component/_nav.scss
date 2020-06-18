@@ -1,0 +1,28 @@
+.nav-left {
+  img {
+    width: 3rem;
+  }
+
+  .nav-item {
+
+    cursor: pointer;
+
+    &:hover, &.active {
+
+      background-color: darken($primary, 5);
+
+      a {
+        color: $navbar-dark-hover-color;
+        text-decoration: none;
+      }
+
+    }
+
+    a {
+      color: $navbar-dark-color;
+    }
+
+  }
+
+
+}

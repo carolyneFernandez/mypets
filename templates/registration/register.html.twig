@@ -2,41 +2,47 @@
 
 {% block title %}Register{% endblock %}
 
-{% block body %}
+{% block bodySup %}
+    <div class="text-white bg-clinique">
+
+        <div class="container">
 
 
-    <h2 class="display-6 mb-3 text-center text-primary">Vous êtes une clinique et vous souhaitez rejoindre la plateforme ? Remplissez ce formulaire ci-dessous</h2>
+            <h2 class="display-6 mb-3 text-center">Vous êtes une clinique et vous souhaitez rejoindre la plateforme ? Remplissez ce formulaire ci-dessous</h2>
 
-    <div class="col-12 col-sm-10 col-md-8 col-lg-6 mx-auto">
-        {% for flashError in app.flashes('verify_email_error') %}
-            <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-        {% endfor %}
-        {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.nom) }}
-        {{ form_row(registrationForm.adresse) }}
-        {{ form_row(registrationForm.siret) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.telephone) }}
+            <div class="col-12 col-sm-10 col-md-8 col-lg-6 mx-auto">
+                {% for flashError in app.flashes('verify_email_error') %}
+                    <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+                {% endfor %}
+                {{ form_start(registrationForm) }}
+                {{ form_row(registrationForm.nom) }}
+                {{ form_row(registrationForm.adresse) }}
+                {{ form_row(registrationForm.siret) }}
+                {{ form_row(registrationForm.email) }}
+                {{ form_row(registrationForm.telephone) }}
 
-        {{ form_label(registrationForm.rdvDomicile) }}
-        {{ form_widget(registrationForm.rdvDomicile, {'label_attr': {'class': 'radio-custom'}}) }}
+                {{ form_label(registrationForm.rdvDomicile) }}
+                {{ form_widget(registrationForm.rdvDomicile, {'label_attr': {'class': 'radio-custom'}}) }}
 
-        <div class="px-4 border my-3">
-            <h2 class="mt-2 text-primary text-center">Premier compte d'utilisateur</h2>
-            {% for secretaire in registrationForm.secretaires %}
-                {{ form_row(secretaire.nom) }}
-                {{ form_row(secretaire.prenom) }}
-                {{ form_row(secretaire.email) }}
-                {{ form_row(secretaire.plainPassword.first) }}
-                {{ form_row(secretaire.plainPassword.second) }}
-            {% endfor %}
+                <div class="px-4 border my-3 rounded">
+                    <h2 class="mt-2 text-center">Premier compte d'utilisateur</h2>
+                    {% for secretaire in registrationForm.secretaires %}
+                        {{ form_row(secretaire.nom) }}
+                        {{ form_row(secretaire.prenom) }}
+                        {{ form_row(secretaire.email) }}
+                        {{ form_row(secretaire.plainPassword.first) }}
+                        {{ form_row(secretaire.plainPassword.second) }}
+                    {% endfor %}
+                </div>
+
+                {{ form_row(registrationForm.agreeTerms) }}
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-warning rounded-pill px-4 py-2">Envoyer</button>
+                    {{ form_end(registrationForm) }}
+                </div>
+            </div>
         </div>
 
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <div class="text-center">
-            <button type="submit" class="btn btn-warning rounded-pill px-4 py-2">Envoyer</button>
-            {{ form_end(registrationForm) }}
-        </div>
     </div>
 {% endblock %}

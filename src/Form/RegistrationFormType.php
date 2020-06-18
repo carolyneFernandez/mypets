@@ -51,6 +51,9 @@ class RegistrationFormType extends AbstractType
                 ])
                 ->add('telephone', TelType::class, [
                     'label' => 'Numéro de téléphone',
+                    'attr' => [
+                        'class' => 'rounded-pill'
+                    ]
                 ])
                 ->add('siret', TextType::class, [
                     'label' => 'N° de siret',

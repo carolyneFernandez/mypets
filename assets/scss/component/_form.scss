@@ -6,3 +6,14 @@ label.required:not(.custom-control-label):not(.no-star-required):after, .label.r
   content: "*";
   color: $danger;
 }
+
+textarea {
+  border-radius: $rounded !important;
+}
+
+input:not([type='checkbox']):not([type='radio']) {
+  //border: ;
+  border-radius: 50rem !important;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}

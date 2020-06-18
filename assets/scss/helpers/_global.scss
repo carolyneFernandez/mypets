@@ -1,5 +1,21 @@
+html {
+  background-color: $primary;
+}
+
+body {
+  background-color: transparent;
+  //color: $white;
+}
+
+.contenu {
+  background-color: $white;
+  border-top-left-radius: 1rem;
+}
+
 .container {
+  //background-color: $white;
   min-height: 600px;
+
 }
 
 .pull-right {
@@ -35,4 +51,8 @@
 
 .d-content.dropdown-menu.show {
   display: contents;
+}
+
+.rounded {
+  border-radius: $rounded !important;
 }
