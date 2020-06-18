@@ -9,8 +9,25 @@
     </nav>
     <div class="collapse navbar-collapse my-2 " id="navbarToggleExternalContent">
         <ul class="navbar-nav ml-auto mr-0">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ app.user ==false ? url('app_login') : '#' }}"> MON COMPTE</a>
+            <li class="nav-item dropdown d-flex align-items-center cursor-pointer">
+                <a class="nav-link d-flex  align-items-center" href="#" id="navbarDropdownAccount" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ app.user.nomPrenom }}
+                    {#                {% include public_dir~asset('assets/img/svg/user-circle-solid.svg') %}#}
+                    {#                <img src="{{ asset('assets/img/svg/user-circle-solid.svg') }}" alt="userlogo" class="logo-user logo-user__default">#}
+                    {% if app.user.avatar %}
+                        <span class="logo-user ml-2">
+                            <img src="{{ asset(dir_avatar_user ~ app.user.avatar) }}" alt="{{ '<i class=\'fas fa-user-circle\'></i>'|raw }}" class="rounded-pill">
+                        </span>
+                    {% else %}
+                        <span class="logo-user__default ml-2">
+                            <i class="fas fa-user-circle"></i>
+                        </span>
+                    {% endif %}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownAccount">
+                    <a class="dropdown-item" href="{{ url('user_account') }}">Mon compte</a>
+                    <a class="dropdown-item" href="{{ url('app_logout') }}"><i class="fas text-danger fa-power-off mr-1"></i>Déconnexion</a>
+                </div>
             </li>
         </ul>
     </div>
