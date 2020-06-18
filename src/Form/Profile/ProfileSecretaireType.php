@@ -21,13 +21,13 @@ use App\Entity\Clinique;
 class ProfileSecretaireType extends ProfileUserType
 {
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-//        $builder
+//    public function buildForm(FormBuilderInterface $builder, array $options)
+//    {
+////        $builder
+////
+////        ;
 //
-//        ;
-
-    }
+//    }
 
     public function configureOptions(OptionsResolver $resolver)
     {
