@@ -13,3 +13,5 @@ twig:
         project_dir: '%kernel.project_dir%'
         public_dir: '%kernel.project_dir%/public/'
         url: '%env(URL)%'
+
+        dir_avatar_user: '%dir_avatar_user%'

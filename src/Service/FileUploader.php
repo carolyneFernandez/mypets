@@ -33,17 +33,17 @@ class FileUploader
 
         try {
             $file->move($dir, $filename);
-            if ($uniqueFilename) {
-                $this->container->get('session')
-                                ->getFlashBag()
-                                ->add('success', 'Le fichier a bien été importé.')
-                ;
-            } else {
-                $this->container->get('session')
-                                ->getFlashBag()
-                                ->add('success', 'Le fichier ' . $filename . ' a bien été importé.')
-                ;
-            }
+//            if ($uniqueFilename) {
+//                $this->container->get('session')
+//                                ->getFlashBag()
+//                                ->add('success', 'Le fichier a bien été importé.')
+//                ;
+//            } else {
+//                $this->container->get('session')
+//                                ->getFlashBag()
+//                                ->add('success', 'Le fichier ' . $filename . ' a bien été importé.')
+//                ;
+//            }
 
         } catch (FileException $e) {
             $this->container->get('session')
