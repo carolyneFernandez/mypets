@@ -35,8 +35,8 @@
                 <td>{{ veterinaire.intervalBetweenRdv ? veterinaire.intervalBetweenRdv|date('H:i:s') : '' }}</td>
                 <td>{{ veterinaire.formations }}</td>
                 <td>
-                    <a href="{{ path('veterinaire_show', {'id': veterinaire.id}) }}">Détails</a>
-                    <a href="{{ path('veterinaire_edit', {'id': veterinaire.id}) }}">Modifier</a>
+                    <a class="btn btn-secondary btn-sm rounded" href="{{ path('veterinaire_show', {'id': veterinaire.id}) }}">Détails</a>
+                    <a class="btn btn-warning btn-sm rounded" href="{{ path('veterinaire_edit', {'id': veterinaire.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}

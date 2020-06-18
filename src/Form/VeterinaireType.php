@@ -37,9 +37,6 @@ class VeterinaireType extends AbstractType
             ->add('email', TextType::class, [
                 'label' => 'Email'
             ])
-            ->add('password', PasswordType::class, [
-                'label' => 'Mot de passe'
-            ])
             ->add('actif', CheckboxType::class, [
                 'label' => 'Compte actif ?',
                 'required' => false
