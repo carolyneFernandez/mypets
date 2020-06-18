@@ -57,19 +57,6 @@ class CliniqueAdminController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="admin_clinique_show", methods={"GET"})
-     * @Security("is_granted('ROLE_CLINIQUE') or is_granted('ROLE_ADMIN')")
-     * @param Clinique $clinique
-     * @return Response
-     */
-    public function show(Clinique $clinique): Response
-    {
-        return $this->render('clinique/show.html.twig', [
-            'clinique' => $clinique,
-        ]);
-    }
-
-    /**
      * @Route("/{id}/edit", name="admin_clinique_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Clinique $clinique

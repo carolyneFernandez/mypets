@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Clinique;
 use App\Form\CliniqueType;
 use App\Repository\CliniqueRepository;
+use http\Client\Curl\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,38 +17,16 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
  */
 class CliniqueController extends AbstractController
 {
+
     /**
      * @Route("/", name="clinique_index", methods={"GET"})
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @param CliniqueRepository $cliniqueRepository
+     * @return Response
      */
     public function index(CliniqueRepository $cliniqueRepository): Response
     {
         return $this->render('clinique/index.html.twig', [
             'cliniques' => $cliniqueRepository->findAll(),
-        ]);
-    }
-
-    /**
-     * @Route("/new", name="clinique_new", methods={"GET","POST"})
-     * @Security("is_granted('ROLE_ADMIN')")
-     */
-    public function new(Request $request): Response
-    {
-        $clinique = new Clinique();
-        $form = $this->createForm(CliniqueType::class, $clinique);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($clinique);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('clinique_index');
-        }
-
-        return $this->render('clinique/new.html.twig', [
-            'clinique' => $clinique,
-            'form' => $form->createView(),
         ]);
     }
 
@@ -88,18 +67,4 @@ class CliniqueController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="clinique_delete", methods={"DELETE"})
-     * @Security("is_granted('ROLE_ADMIN')")
-     */
-    public function delete(Request $request, Clinique $clinique): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$clinique->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($clinique);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('clinique_index');
-    }
 }

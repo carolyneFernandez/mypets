@@ -5,7 +5,7 @@
 {% block body %}
     <h1 class="text-center">Toutes les cliniques</h1>
 
-    <a class="btn btn-success rounded pull-right mb-2" href="{{ path('clinique_new') }}">Nouvelle clinique</a>
+    <a class="btn btn-success rounded pull-right mb-2 btn-sm" href="{{ path('admin_clinique_new') }}"><i class="fas fa-plus mr-1"></i>Nouvelle clinique</a>
 
     <table class="table">
         <thead>
@@ -16,9 +16,9 @@
             <th>Email</th>
             <th>Telephone</th>
             <th>Rendez-vous à domicile ?</th>
-                <th>Siret</th>
-                <th>actions</th>
-            </tr>
+            <th>Siret</th>
+            <th>actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for clinique in cliniques %}
