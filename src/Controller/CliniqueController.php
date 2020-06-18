@@ -20,6 +20,7 @@ class CliniqueController extends AbstractController
 
     /**
      * @Route("/", name="clinique_index", methods={"GET"})
+     * @Security("is_granted('ROLE_ADMIN')")
      * @param CliniqueRepository $cliniqueRepository
      * @return Response
      */

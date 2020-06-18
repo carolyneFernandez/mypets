@@ -10,6 +10,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use App\Service\MailService;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
 
 /**
@@ -39,8 +42,9 @@ class VeterinaireController extends AbstractController
     /**
      * @Route("/new", name="veterinaire_new", methods={"GET","POST"})
      * @Security("is_granted('ROLE_CLINIQUE') or is_granted('ROLE_ADMIN')")
+     * @param UserPasswordEncoderInterface $passwordEncoder
      */
-    public function new(Request $request): Response
+    public function new(Request $request, MailService $mailService, UserPasswordEncoderInterface $passwordEncoder, TokenGeneratorInterface $tokenGenerator): Response
     {
         $veterinaire = new Veterinaire();
         $form = $this->createForm(VeterinaireType::class, $veterinaire);
@@ -49,15 +53,24 @@ class VeterinaireController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
+        // password générer aléatoirement lors de la création d'un vétérinaire
+        $randomPassword = random_bytes(10);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             
             if(in_array($this->getParameter('ROLE_CLINIQUE'), $user->getRoles())){
                 $veterinaire->setClinique($user->getClinique());
             }
-            
+
+            $veterinaire->setPassword($passwordEncoder->encodePassword($veterinaire, $randomPassword));
+            $veterinaire->setToken($tokenGenerator->generateToken());
             $entityManager->persist($veterinaire);
             $entityManager->flush();
+            
+            $this->addFlash('Success', 'Un mail de confirmation va être envoyé au vétérinaire !');
+            //envoie de mail de confirmation au vétérinaire pour nouveau mot de passe
+            $mailService->setAndSendMail($veterinaire->getEmail(), 'Votre compte vétérinaire MyPets', 'mail/set_password.html.twig', ['user' => $veterinaire]);
             return $this->redirectToRoute('veterinaire_index');
         }
 
