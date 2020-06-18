@@ -13,7 +13,7 @@ parameters:
 
 
     knp_paginator.template.pagination: 'layout/_pagination.html.twig'
-
+    dir_avatar_user: 'uploads/avatars/users/'
 
 services:
     # default configuration for services in *this* file

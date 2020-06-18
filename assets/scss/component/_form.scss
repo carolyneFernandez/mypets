@@ -13,10 +13,11 @@ textarea {
 
 form:not(.no-input-br) {
 
-  input:not([type='checkbox']):not([type='radio']) {
+  input:not([type='checkbox']):not([type='radio']), .custom-file {
     //border: ;
     border-radius: 50rem !important;
     padding-left: 1rem;
     padding-right: 1rem;
   }
+
 }
