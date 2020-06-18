@@ -236,4 +236,9 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getNomPrenom()
+    {
+        return $this->getNom() . ' ' . $this->getPrenom();
+    }
+
 }

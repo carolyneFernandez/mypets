@@ -11,9 +11,12 @@ textarea {
   border-radius: $rounded !important;
 }
 
-input:not([type='checkbox']):not([type='radio']) {
-  //border: ;
-  border-radius: 50rem !important;
-  padding-left: 1rem;
-  padding-right: 1rem;
+form:not(.no-input-br) {
+
+  input:not([type='checkbox']):not([type='radio']) {
+    //border: ;
+    border-radius: 50rem !important;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }

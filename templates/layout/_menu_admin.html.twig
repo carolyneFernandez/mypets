@@ -8,12 +8,17 @@
         </button>
     </nav>
     <div class="collapse navbar-collapse my-2 " id="navbarToggleExternalContent">
-        <ul class="navbar-nav ml-auto mr-0">
+        <ul class="navbar-nav ml-auto mr-0 d-flex align-items-center">
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('admin_clinique_index') }}">CLINIQUES</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ app.user ==false ? url('app_login') : '#' }}">MON COMPTE</a>
+            <li class="nav-item d-flex align-items-center">
+                <span class="logo-user__default">
+                    <i class="fas fa-user-circle"></i>
+                </span>
+                {#                {% include public_dir~asset('assets/img/svg/user-circle-solid.svg') %}#}
+                {#                <img src="{{ asset('assets/img/svg/user-circle-solid.svg') }}" alt="userlogo" class="logo-user logo-user__default">#}
+                <a class="nav-link" href="{{ app.user ==false ? url('app_login') : '#' }}">{{ app.user.nomPrenom }}</a>
             </li>
         </ul>
     </div>
