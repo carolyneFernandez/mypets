@@ -10,5 +10,5 @@ twig:
 
         MAIL_ADMIN: '%MAIL_ADMIN%'
         project_dir: '%kernel.project_dir%'
-        public_dir: '%kernel.project_dir%/public'
+        public_dir: '%kernel.project_dir%/public/'
         url: '%env(URL)%'

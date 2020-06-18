@@ -86,7 +86,7 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator implements P
         $check = $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
 
         if (!$user->getActif()) {
-            throw new CustomUserMessageAuthenticationException('Votre compte n\'est plus actif.');
+            throw new CustomUserMessageAuthenticationException('Votre compte n\'est pas actif.');
 
         }
 
