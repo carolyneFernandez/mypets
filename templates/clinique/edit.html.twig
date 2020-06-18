@@ -1,13 +1,16 @@
 {% extends 'layout/base_user.html.twig' %}
 
-{% block title %}Edit Clinique{% endblock %}
+{% block title %}MyPets | Modifier clinique{% endblock %}
 
 {% block body %}
-    <h1>Edit Clinique</h1>
+    <h1 class="text-center">Modifier la clinique: {{ clinique.nom }}</h1>
 
-    {{ include('clinique/_form.html.twig', {'button_label': 'Update'}) }}
+    {% if ROLE_CLINIQUE in app.user.roles %}
+        <a class="btn btn-secondary rounded" href="{{ path('clinique_show', {'id': clinique.id}) }}">RETOUR</a>
+    {% else %}
+        <a class="btn btn-secondary rounded" href="{{ path('clinique_index') }}">RETOUR</a>
+    {% endif %}
+    
+    {{ include('clinique/_form.html.twig', {'button_label': 'METTRE À JOUR'}) }}
 
-    <a href="{{ path('clinique_index') }}">back to list</a>
-
-    {{ include('clinique/_delete_form.html.twig') }}
 {% endblock %}

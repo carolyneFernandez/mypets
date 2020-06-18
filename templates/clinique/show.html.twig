@@ -11,10 +11,6 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ clinique.id }}</td>
-            </tr>
-            <tr>
                 <th>Nom</th>
                 <td>{{ clinique.nom }}</td>
             </tr>
@@ -31,8 +27,8 @@
                 <td>{{ clinique.telephone }}</td>
             </tr>
             <tr>
-                <th>RdvDomicile</th>
-                <td>{{ clinique.rdvDomicile ? 'Yes' : 'No' }}</td>
+                <th>Rendez-vous à domicile</th>
+                <td>{{ clinique.rdvDomicile ? 'Oui' : 'Non' }}</td>
             </tr>
             <tr>
                 <th>Siret</th>

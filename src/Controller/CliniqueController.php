@@ -18,6 +18,7 @@ class CliniqueController extends AbstractController
 {
     /**
      * @Route("/", name="clinique_index", methods={"GET"})
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function index(CliniqueRepository $cliniqueRepository): Response
     {
@@ -28,6 +29,7 @@ class CliniqueController extends AbstractController
 
     /**
      * @Route("/new", name="clinique_new", methods={"GET","POST"})
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function new(Request $request): Response
     {
@@ -62,14 +64,20 @@ class CliniqueController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="clinique_edit", methods={"GET","POST"})
+     * @Security("is_granted('ROLE_CLINIQUE') or is_granted('ROLE_ADMIN')")
      */
     public function edit(Request $request, Clinique $clinique): Response
     {
         $form = $this->createForm(CliniqueType::class, $clinique);
         $form->handleRequest($request);
+        /** @var User $user */
+        $user = $this->getUser();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            if(in_array($this->getParameter('ROLE_CLINIQUE'), $user->getRoles())){
+                return $this->redirectToRoute('clinique_show', ['id' => $clinique->getId()]);
+            }
 
             return $this->redirectToRoute('clinique_index');
         }
@@ -82,6 +90,7 @@ class CliniqueController extends AbstractController
 
     /**
      * @Route("/{id}", name="clinique_delete", methods={"DELETE"})
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function delete(Request $request, Clinique $clinique): Response
     {

@@ -1,9 +1,11 @@
 {% extends 'layout/base_user.html.twig' %}
 
-{% block title %}Clinique index{% endblock %}
+{% block title %}MyPets | Cliniques{% endblock %}
 
 {% block body %}
-    <h1>Clinique index</h1>
+    <h1 class="text-center">Toutes les cliniques</h1>
+
+    <a class="btn btn-success rounded pull-right mb-2" href="{{ path('clinique_new') }}">NOUVELLE CLINIQUE</a>
 
     <table class="table">
         <thead>
@@ -13,7 +15,7 @@
                 <th>Adresse</th>
                 <th>Email</th>
                 <th>Telephone</th>
-                <th>RdvDomicile</th>
+                <th>Rendez-vous à domicile ?</th>
                 <th>Siret</th>
                 <th>actions</th>
             </tr>
@@ -26,20 +28,19 @@
                 <td>{{ clinique.adresse }}</td>
                 <td>{{ clinique.email }}</td>
                 <td>{{ clinique.telephone }}</td>
-                <td>{{ clinique.rdvDomicile ? 'Yes' : 'No' }}</td>
+                <td>{{ clinique.rdvDomicile ? 'Oui' : 'Non' }}</td>
                 <td>{{ clinique.siret }}</td>
                 <td>
-                    <a href="{{ path('clinique_show', {'id': clinique.id}) }}">show</a>
-                    <a href="{{ path('clinique_edit', {'id': clinique.id}) }}">edit</a>
+                    <a class="btn btn-secondary rounded" href="{{ path('clinique_show', {'id': clinique.id}) }}">DÉTAILS</a>
+                    <a class="btn btn-warning rounded" href="{{ path('clinique_edit', {'id': clinique.id}) }}">MODIFIER</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="8">no records found</td>
+                <td colspan="8">Aucunes cliniques inscrites sur la plateforme.</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('clinique_new') }}">Create new</a>
 {% endblock %}
