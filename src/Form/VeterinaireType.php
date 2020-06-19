@@ -37,9 +37,6 @@ class VeterinaireType extends AbstractType
             ->add('email', TextType::class, [
                 'label' => 'Email'
             ])
-            ->add('password', PasswordType::class, [
-                'label' => 'Mot de passe'
-            ])
             ->add('actif', CheckboxType::class, [
                 'label' => 'Compte actif ?',
                 'required' => false
@@ -57,18 +54,6 @@ class VeterinaireType extends AbstractType
                 'label' => 'Formations'
             ])
         ;
-
-        if($this->security->isGranted('ROLE_ADMIN')){
-            $builder
-                ->add('clinique', EntityType::class, [
-                    'label' => 'Clinique',
-                    'class' => Clinique::class,
-                    'choice_label' => function($clinique){
-                        return $clinique->getNom();
-                    }
-                ])
-            ;
-        }
     }
 
     public function configureOptions(OptionsResolver $resolver)

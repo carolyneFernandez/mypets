@@ -6,9 +6,9 @@
     <h1 class="text-center">Modifier la clinique: {{ clinique.nom }}</h1>
 
     {% if ROLE_CLINIQUE in app.user.roles %}
-        <a class="btn btn-secondary rounded" href="{{ path('clinique_show', {'id': clinique.id}) }}">RETOUR</a>
+        <a class="btn btn-secondary rounded" href="{{ path('clinique_show', {'id': clinique.id}) }}">Retour</a>
     {% else %}
-        <a class="btn btn-secondary rounded" href="{{ path('clinique_index') }}">RETOUR</a>
+        <a class="btn btn-secondary rounded" href="{{ path('clinique_index') }}"><i class="fas fa-arrow-left mr-1"></i>Retour à la liste</a>
     {% endif %}
     
     {{ include('clinique/_form.html.twig', {'button_label': 'Modifier'}) }}
