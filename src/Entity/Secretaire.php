@@ -6,8 +6,10 @@ use App\Repository\SecretaireRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Exception;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
+ * @ApiResource()
  * @ORM\Entity(repositoryClass=SecretaireRepository::class)
  */
 class Secretaire extends User

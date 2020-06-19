@@ -4,8 +4,10 @@ namespace App\Entity;
 
 use App\Repository\VaccinRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
+ * @ApiResource()
  * @ORM\Entity(repositoryClass=VaccinRepository::class)
  */
 class Vaccin

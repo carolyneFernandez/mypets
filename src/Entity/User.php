@@ -7,9 +7,40 @@ use Doctrine\ORM\Mapping as ORM;
 use Exception;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
+ * @ApiResource(
+ *     itemOperations={},
+ *     collectionOperations={
+ *          "apilogin"={
+ *              "method"="POST",
+ *              "path"="/login",
+ *              "controller"=API\APIIndexController::class,
+ *              "normalization_context"={"groups"={"afup"}},
+ *              "defaults"={"_api_receive"=false},
+ *              "swagger_context"={
+ *                  "summary" = "Login",
+ *                  "parameters"={
+ *                      {
+ *                          "name" = "User",
+ *                          "in" = "body",
+ *                          "schema" = {
+ *                              "type" = "object",
+ *                              "properties" = {
+ *                                  "password" = {"type"="string"},
+ *                                  "email" = {"type"="string"},
+ *                              }
+ *                           },
+ *                          "required" = "true",
+ *                      }
+ *                  },
+ *              }
+ *          }
+ *      }
+ * )
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="type", type="string", length=30)
@@ -32,6 +63,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
+     * @Groups({"user:afup"})
      */
     private $email;
 
@@ -43,6 +75,7 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Groups({"user:afup"})
      */
     private $password;
 
@@ -80,6 +113,11 @@ class User implements UserInterface
      * @ORM\Column(type="text", nullable=true)
      */
     private $avatar;
+
+    /**
+     * @ORM\Column(type="string", length=255, unique=true, nullable=true)
+     */
+    private $apiToken;
 
     /**
      * User constructor.
@@ -272,6 +310,18 @@ class User implements UserInterface
     public function setAvatar(?string $avatar): self
     {
         $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    public function getApiToken(): ?string
+    {
+        return $this->apiToken;
+    }
+
+    public function setApiToken(?string $apiToken): self
+    {
+        $this->apiToken = $apiToken;
 
         return $this;
     }

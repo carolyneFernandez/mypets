@@ -5,6 +5,7 @@
         "php": "^7.2.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "api-platform/api-pack": "^1.2",
         "friendsofsymfony/jsrouting-bundle": "^2.6",
         "knplabs/knp-paginator-bundle": "^5.2",
         "laminas/laminas-code": "^3.4",
@@ -36,7 +37,8 @@
         "symfony/validator": "5.1.*",
         "symfony/web-link": "5.1.*",
         "symfony/webpack-encore-bundle": "^1.7",
-        "symfony/yaml": "5.1.*"
+        "symfony/yaml": "5.1.*",
+        "ext-json": "*"
     },
     "require-dev": {
         "symfony/debug-pack": "*",

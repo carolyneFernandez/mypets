@@ -6,8 +6,13 @@ use App\Repository\ProprietaireRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
+ * @ApiResource(
+ *     collectionOperations={"get"},
+ *     itemOperations={"get","put"}
+ * )
  * @ORM\Entity(repositoryClass=ProprietaireRepository::class)
  */
 class Proprietaire extends User

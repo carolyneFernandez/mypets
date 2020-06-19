@@ -6,8 +6,10 @@ use App\Repository\RdvRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
+ * @ApiResource()
  * @ORM\Entity(repositoryClass=RdvRepository::class)
  */
 class Rdv
@@ -52,19 +54,10 @@ class Rdv
     private $urgence;
 
     /**
-     * @ORM\OneToMany(targetEntity=Consultation::class, mappedBy="rdv")
-     */
-    private $consultations;
-
-    /**
      * @ORM\OneToOne(targetEntity=Consultation::class, mappedBy="rdv", cascade={"persist", "remove"})
      */
     private $consultation;
 
-    public function __construct()
-    {
-        $this->consultations = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -139,37 +132,6 @@ class Rdv
     public function setUrgence(bool $urgence): self
     {
         $this->urgence = $urgence;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Consultation[]
-     */
-    public function getConsultations(): Collection
-    {
-        return $this->consultations;
-    }
-
-    public function addConsultation(Consultation $consultation): self
-    {
-        if (!$this->consultations->contains($consultation)) {
-            $this->consultations[] = $consultation;
-            $consultation->setRdv($this);
-        }
-
-        return $this;
-    }
-
-    public function removeConsultation(Consultation $consultation): self
-    {
-        if ($this->consultations->contains($consultation)) {
-            $this->consultations->removeElement($consultation);
-            // set the owning side to null (unless already changed)
-            if ($consultation->getRdv() === $this) {
-                $consultation->setRdv(null);
-            }
-        }
 
         return $this;
     }

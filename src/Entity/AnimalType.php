@@ -7,8 +7,20 @@ use App\Repository\AnimalTypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
+ * @ApiResource(
+ *
+ *     normalizationContext={"groups"={"animalType:read"}},
+ *     denormalizationContext={"groups"={"animalType:write"}},
+ *     collectionOperations={
+ *          "get",
+ *          "post"={"security"="is_granted('ROLE_USER')"}
+ *     },
+ *     itemOperations={"get","put"}
+ * )
  * @ORM\Entity(repositoryClass=AnimalTypeRepository::class)
  */
 class AnimalType
@@ -22,16 +34,19 @@ class AnimalType
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"animalType:read", "animalType:write"})
      */
     private $nom;
 
     /**
      * @ORM\OneToMany(targetEntity=Animal::class, mappedBy="type", orphanRemoval=true)
+     * @Groups({"animalType:read"})
      */
     private $animals;
 
     /**
      * @ORM\OneToMany(targetEntity=VaccinType::class, mappedBy="animalType")
+     * @Groups({"animalType:read"})
      */
     private $vaccinTypes;
 
