@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "0bfa8ab94d911ae0e3a724a93c291dc8",
+  "content-hash": "705844ccf049f9c77b54817621d253cf",
   "packages": [
     {
       "name": "api-platform/api-pack",
@@ -204,16 +204,16 @@
       "dist": {
         "type": "zip",
         "url": "https://api.github.com/repos/doctrine/annotations/zipball/5db60a4969eba0e0c197a19c077780aadbc43c5d",
-                "reference": "5db60a4969eba0e0c197a19c077780aadbc43c5d",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/lexer": "1.*",
-                "ext-tokenizer": "*",
-                "php": "^7.1 || ^8.0"
-            },
-            "require-dev": {
-                "doctrine/cache": "1.*",
+        "reference": "5db60a4969eba0e0c197a19c077780aadbc43c5d",
+        "shasum": ""
+      },
+      "require": {
+        "doctrine/lexer": "1.*",
+        "ext-tokenizer": "*",
+        "php": "^7.1 || ^8.0"
+      },
+      "require-dev": {
+        "doctrine/cache": "1.*",
                 "phpunit/phpunit": "^7.5"
             },
             "type": "library",
@@ -1446,16 +1446,16 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Eduardo Gulias Davis"
-                }
-            ],
-            "description": "A library for validating emails against several RFCs",
-            "homepage": "https://github.com/egulias/EmailValidator",
+          "license": [
+            "MIT"
+          ],
+          "authors": [
+            {
+              "name": "Eduardo Gulias Davis"
+            }
+          ],
+          "description": "A library for validating emails against several RFCs",
+          "homepage": "https://github.com/egulias/EmailValidator",
           "keywords": [
             "email",
             "emailvalidation",
@@ -1533,16 +1533,16 @@
       "dist": {
         "type": "zip",
         "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/9deaf916760ce1d64cf46460473260b02751cee5",
-                "reference": "9deaf916760ce1d64cf46460473260b02751cee5",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1",
-                "symfony/console": "~3.3|^4.0|^5.0",
-                "symfony/framework-bundle": "~3.3|^4.0|^5.0",
-                "symfony/serializer": "~3.3|^4.0|^5.0",
-                "willdurand/jsonp-callback-validator": "~1.0"
-            },
+        "reference": "9deaf916760ce1d64cf46460473260b02751cee5",
+        "shasum": ""
+      },
+      "require": {
+        "php": "^7.1",
+        "symfony/console": "~3.3|^4.0|^5.0",
+        "symfony/framework-bundle": "~3.3|^4.0|^5.0",
+        "symfony/serializer": "~3.3|^4.0|^5.0",
+        "willdurand/jsonp-callback-validator": "~1.0"
+      },
             "require-dev": {
                 "symfony/expression-language": "~3.3|^4.0|^5.0",
                 "symfony/phpunit-bridge": "^3.3|^4.0"
@@ -1961,16 +1961,16 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jordi Boggiano",
-                    "email": "j.boggiano@seld.be",
-                    "homepage": "http://seld.be"
-                }
-            ],
+          "license": [
+            "MIT"
+          ],
+          "authors": [
+            {
+              "name": "Jordi Boggiano",
+              "email": "j.boggiano@seld.be",
+              "homepage": "http://seld.be"
+            }
+          ],
           "description": "Sends your logs to files, sockets, inboxes, databases and various web services",
           "homepage": "http://github.com/Seldaek/monolog",
           "keywords": [
@@ -2048,16 +2048,16 @@
       "dist": {
         "type": "zip",
         "url": "https://api.github.com/repos/Ocramius/PackageVersions/zipball/1d32342b8c1eb27353c8887c366147b4c2da673c",
-                "reference": "1d32342b8c1eb27353c8887c366147b4c2da673c",
-                "shasum": ""
-            },
-            "require": {
-                "composer-plugin-api": "^1.0.0",
-                "php": "^7.3.0"
-            },
-            "require-dev": {
-                "composer/composer": "^1.8.6",
-                "doctrine/coding-standard": "^6.0.0",
+        "reference": "1d32342b8c1eb27353c8887c366147b4c2da673c",
+        "shasum": ""
+      },
+      "require": {
+        "composer-plugin-api": "^1.0.0",
+        "php": "^7.3.0"
+      },
+      "require-dev": {
+        "composer/composer": "^1.8.6",
+        "doctrine/coding-standard": "^6.0.0",
                 "ext-zip": "*",
                 "infection/infection": "^0.13.4",
                 "phpunit/phpunit": "^8.2.5",
@@ -7848,16 +7848,16 @@
             "require-dev": {
                 "phpunit/phpunit": "~3.7"
             },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "JsonpCallbackValidator": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
+          "type": "library",
+          "autoload": {
+            "psr-0": {
+              "JsonpCallbackValidator": "src/"
+            }
+          },
+          "notification-url": "https://packagist.org/downloads/",
+          "license": [
+            "MIT"
+          ],
           "authors": [
             {
               "name": "William Durand",
@@ -7921,16 +7921,16 @@
       "time": "2017-05-14T17:21:12+00:00"
     }
   ],
-    "packages-dev": [
-        {
-            "name": "nikic/php-parser",
-            "version": "v4.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "53c2753d756f5adb586dca79c2ec0e2654dd9463"
-            },
-            "dist": {
+  "packages-dev": [
+    {
+      "name": "nikic/php-parser",
+      "version": "v4.5.0",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/nikic/PHP-Parser.git",
+        "reference": "53c2753d756f5adb586dca79c2ec0e2654dd9463"
+      },
+      "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/53c2753d756f5adb586dca79c2ec0e2654dd9463",
                 "reference": "53c2753d756f5adb586dca79c2ec0e2654dd9463",
@@ -8588,9 +8588,10 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.2.5",
-        "ext-ctype": "*",
-        "ext-iconv": "*"
+      "php": "^7.2.5",
+      "ext-ctype": "*",
+      "ext-iconv": "*",
+      "ext-json": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "1.1.0"

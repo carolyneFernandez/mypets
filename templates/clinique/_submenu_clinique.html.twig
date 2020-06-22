@@ -1,23 +1,38 @@
-<ul class="nav nav-pills d-flex flex-sm-row flex-lg-column nowrap h-100 w-100 bg-primary pt-5 pb-5 nav-left">
+<ul class="nav nav-pills d-flex flex-column nowrap h-100 w-100 bg-primary py-5 pr-0 nav-left col-3 col-lg-2">
 
-    <li class="nav-item mr-0 p-2">
-        <img src="{{ asset("assets/img/svg/dog_50x50.svg") }}" alt="animal">
-        <a href="#" class="ml-1">ANIMAUX</a>
+    <li class="nav-item mr-0 p-2 white-space-nowrap w-100 {{ app.request.attributes.get('_route') starts with 'clinique_' ? 'active' }}">
+        <a href="{{ url('clinique_show', {id:   app.user.clinique.id}) }}" class="ml-1">
+            <img src="{{ asset("assets/img/svg/health-clinic_50x50.svg") }}" alt="clinique" class="mr-2">
+            CLINIQUE
+        </a>
     </li>
 
-    <li class="nav-item mr-0 p-2 active">
-        <img src="{{ asset("assets/img/svg/vet_50x50.svg") }}" alt="vet">
-        <a href="{{ path('veterinaire_index') }}" class="ml-1">VETERINAIRES</a>
+    <li class="nav-item mr-0 p-2 white-space-nowrap w-100">
+        <a href="#" class="ml-1">
+            <img src="{{ asset("assets/img/svg/dog_50x50.svg") }}" alt="animal" class="mr-2">
+            ANIMAUX
+        </a>
     </li>
 
-    <li class="nav-item mr-0 p-2">
-        <img src="{{ asset("assets/img/svg/person_50x50.svg") }}" alt="person">
-        <a href="#" class="ml-1">PARTICULIERS</a>
+    <li class="nav-item mr-0 p-2  white-space-nowrap w-100 {{ app.request.attributes.get('_route') starts with 'veterinaire_' ? 'active' }}">
+        <a href="{{ path('veterinaire_index') }}" class="ml-1">
+            <img src="{{ asset("assets/img/svg/vet_50x50.svg") }}" alt="vet" class="mr-2">
+            VETERINAIRES
+        </a>
     </li>
 
-    <li class="nav-item mr-0 p-2">
-        <img src="{{ asset("assets/img/svg/calendar_50x50.svg") }}" alt="calendar">
-        <a href="#" class="ml-1">RENDEZ-VOUS</a>
+    <li class="nav-item mr-0 p-2 white-space-nowrap w-100">
+        <a href="#" class="ml-1">
+            <img src="{{ asset("assets/img/svg/person_50x50.svg") }}" alt="person" class="mr-2">
+            PARTICULIERS
+        </a>
+    </li>
+
+    <li class="nav-item mr-0 p-2 white-space-nowrap w-100">
+        <a href="#" class="ml-1">
+            <img src="{{ asset("assets/img/svg/calendar_50x50.svg") }}" alt="calendar" class="mr-2">
+            RENDEZ-VOUS
+        </a>
     </li>
 
 </ul>

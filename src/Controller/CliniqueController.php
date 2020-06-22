@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Clinique;
 use App\Form\CliniqueType;
 use App\Repository\CliniqueRepository;
+use App\Service\FileUploader;
 use http\Client\Curl\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,7 +47,7 @@ class CliniqueController extends AbstractController
      * @Route("/{id}/edit", name="clinique_edit", methods={"GET","POST"})
      * @Security("is_granted('ROLE_CLINIQUE') or is_granted('ROLE_ADMIN')")
      */
-    public function edit(Request $request, Clinique $clinique): Response
+    public function edit(Request $request, Clinique $clinique, FileUploader $fileUploader): Response
     {
         $form = $this->createForm(CliniqueType::class, $clinique);
         $form->handleRequest($request);
@@ -54,8 +55,26 @@ class CliniqueController extends AbstractController
         $user = $this->getUser();
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-            if(in_array($this->getParameter('ROLE_CLINIQUE'), $user->getRoles())){
+
+            $photo = $form->get('avatar')
+                          ->getData()
+            ;
+
+            if ($photo != null) {
+
+                $dir = $this->getParameter('dir_avatar_clinique');
+                $filename = $fileUploader->upload($photo, $dir, true);
+                if ($filename) {
+                    $clinique->setAvatar($filename);
+                }
+            }
+
+            $this->getDoctrine()
+                 ->getManager()
+                 ->flush()
+            ;
+
+            if (in_array($this->getParameter('ROLE_CLINIQUE'), $user->getRoles())) {
                 return $this->redirectToRoute('clinique_show', ['id' => $clinique->getId()]);
             }
 

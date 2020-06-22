@@ -60,7 +60,7 @@ class ProfileUserType extends AbstractType
                     'label' => 'Avatar',
                     'constraints' => [
                         new File([
-                            'maxSize' => '50M',
+                            'maxSize' => '10M',
                             'mimeTypes' => [
                                 'image/*',
                             ],
@@ -68,7 +68,7 @@ class ProfileUserType extends AbstractType
                         ])
                     ],
                     'mapped' => false,
-                    'help' => 'Image < 50 Mo',
+                    'help' => 'Image < 10 Mo',
                     'required' => false,
                 ])
         ;
