@@ -10,25 +10,8 @@
     <div class="clearfix mb-3"></div>
     {% for veterinaire in veterinaires %}
         {# @var veterinaire \App\Entity\Veterinaire #}
-        <div class="card rounded" style="width: 18rem;">
-            <div class="card-body d-flex">
-                <div class="mr-3">
-                    <a href="{{ url('veterinaire_show', {id: veterinaire.id}) }}">
-                        {% if veterinaire.avatar %}
-                            <img src="{{ asset(dir_avatar_user ~ veterinaire.avatar) }}" alt="{{ '<i class=\'fas fa-user-circle\'></i>'|raw }}" class="rounded-pill">
-                        {% else %}
-                            <span class="logo-user__default ml-2"><i class="fas fa-user-circle"></i></span>
-                        {% endif %}
-                    </a>
-                </div>
-                <div>
-                    <h5 class="card-title">{{ veterinaire.nomPrenom }}</h5>
-                    <p class="card-text">{{ veterinaire.formations|nl2br }}</p>
-                </div>
-
-            </div>
-            <a class="btn btn-warning rounded-pill btn-sm icon-card" href="{{ url('veterinaire_edit', {id: veterinaire.id}) }}"><i class="fas fa-pen"></i> </a>
-
+        <div class="col-4">
+            {% include 'veterinaire/include/_card.html.twig' with {clinique: veterinaire.clinique} %}
         </div>
 
     {% endfor %}

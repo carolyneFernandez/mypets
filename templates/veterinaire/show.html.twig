@@ -4,54 +4,53 @@
 
 {% block body %}
     <h1 class="text-center"> Fiche du vétérinaire : {{ veterinaire.nom }}  {{ veterinaire.prenom }}</h1>
-    <a class="btn btn-secondary rounded btn-sm" href="{{ path('veterinaire_index') }}"><i class="fas fa-arrow-left mr-1"></i>Retour à la liste</a>
 
-    <a class="btn btn-warning pull-right mb-2 rounded btn-sm" href="{{ path('veterinaire_edit', {'id': veterinaire.id}) }}">Modifier</a>
+    {% if 'clinique' in app.request.headers.get('referer') %}
+        <a class="btn btn-secondary rounded btn-sm" href="{{ path('clinique_show', {id: veterinaire.clinique.id}) }}"><i class="fas fa-arrow-left mr-1"></i>Retour à la liste</a>
+    {% else %}
+        <a class="btn btn-secondary rounded btn-sm" href="{{ path('veterinaire_index') }}"><i class="fas fa-arrow-left mr-1"></i>Retour à la liste</a>
+    {% endif %}
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Email</th>
-                <td>{{ veterinaire.email }}</td>
-            </tr>
+    <div class="clearfix mb-3"></div>
 
-            {% if ROLE_ADMIN in app.user.roles %}
-                <tr>
-                    <th>Rôles</th>
-                    <td>{{ veterinaire.roles ? veterinaire.roles|json_encode : '' }}</td>
-                </tr>
-            {% endif %}
+    <div class="card rounded col-8 mx-auto">
+        <div class="card-body d-flex">
+            <div class="mr-3">
+                <a href="{{ url('veterinaire_show', {id: veterinaire.id}) }}">
+                    {% if veterinaire.avatar %}
+                        <img src="{{ asset(dir_avatar_user ~ veterinaire.avatar) }}" alt="{{ '<i class=\'fas fa-user-circle\'></i>'|raw }}" class="rounded-pill">
+                    {% else %}
+                        <span class="logo-user__default ml-2"><i class="fas fa-user-circle"></i></span>
+                    {% endif %}
+                </a>
+            </div>
+            <div>
+                <h5 class="card-title">{{ veterinaire.nomPrenom }}</h5>
+                <p class="card-text">
+                    {{ veterinaire.formations|nl2br }}<br>
+                    <br>
+                    Email : <a href="mailto:{{ veterinaire.email }}">{{ veterinaire.email }}</a><br>
+                    <br>
+                    Horaires :<br>
+                    {% for horaire in veterinaire.veterinaireHoraires %}
+                        {{ horaire.jour }} : de {{ horaire.heureDebut|date('H\\h:i') }} à {{ horaire.heureFin|date('H\\h:i') }}
+                    {% endfor %}
 
-            <tr>
-                <th>Date de création</th>
-                <td>{{ veterinaire.dateCreation ? veterinaire.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Actif</th>
-                <td>{{ veterinaire.actif ? 'Oui' : 'Non' }}</td>
-            </tr>
-            <tr>
-                <th>Dernière connexion</th>
-                <td>{{ veterinaire.derniereConnexion ? veterinaire.derniereConnexion|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ veterinaire.nom }}</td>
-            </tr>
-            <tr>
-                <th>Prénom</th>
-                <td>{{ veterinaire.prenom }}</td>
-            </tr>
-            <tr>
-                <th>Interval entre rendez-vous</th>
-                <td>{{ veterinaire.intervalBetweenRdv ? veterinaire.intervalBetweenRdv|date('H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Formations</th>
-                <td>{{ veterinaire.formations }}</td>
-            </tr>
-        </tbody>
-    </table>
+                    <br>
+                    Interval entre 2 rendez-vous : {{ veterinaire.intervalBetweenRdv|date('H\\hi') }}min<br>
+                    Créé le : {{ veterinaire.dateCreation|date('d/m/Y \\à H\\hi') }}<br>
+                    Dernière connexion le : {{ veterinaire.derniereConnexion ? veterinaire.derniereConnexion|date('d/m/Y \\à H\\hi') }}<br>
+
+                </p>
+            </div>
+
+        </div>
+        <a class="btn btn-warning rounded-pill btn-sm icon-card" href="{{ url('veterinaire_edit', {id: veterinaire.id}) }}"><i class="fas fa-pen"></i> </a>
+
+    </div>
+
+
+
 
 
 {% endblock %}

@@ -51,7 +51,7 @@ class VeterinaireType extends AbstractType
                     ]
                 ])
                 ->add('intervalBetweenRdv', TimeType::class, [
-                    'label' => 'Interval entre rendez-vous',
+                    'label' => 'Interval entre 2 rendez-vous',
                     'attr' => [
                         'class' => 'flatpickr-time'
                     ],
