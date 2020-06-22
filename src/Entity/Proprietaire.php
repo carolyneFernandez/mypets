@@ -44,6 +44,7 @@ class Proprietaire extends User
 
     public function __construct()
     {
+        parent::__construct();
         $this->animals = new ArrayCollection();
     }
 
