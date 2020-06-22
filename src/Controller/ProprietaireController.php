@@ -21,7 +21,7 @@ class ProprietaireController extends AbstractController
 {
     /**
      * @Route("/", name="proprietaire_index", methods={"GET"})
-     * @Security("is_granted('ROLE_CLINIQUE')")
+     * @Security("is_granted('ROLE_CLINIQUE') or is_granted('ROLE_VETERINAIRE')")
      */
     public function index(ProprietaireRepository $proprietaireRepository): Response
     {
@@ -32,7 +32,7 @@ class ProprietaireController extends AbstractController
 
     /**
      * @Route("/new", name="proprietaire_new", methods={"GET","POST"})
-     * @Security("is_granted('ROLE_CLINIQUE')")
+     * @Security("is_granted('ROLE_CLINIQUE') or is_granted('ROLE_VETERINAIRE')")
      * @param Request $request
      * @param MailService $mailService
      * @param UserPasswordEncoderInterface $passwordEncoder
@@ -73,7 +73,7 @@ class ProprietaireController extends AbstractController
 
     /**
      * @Route("/{id}", name="proprietaire_show", methods={"GET"})
-     * @Security("is_granted('ROLE_CLINIQUE') or is_granted('ROLE_PROPRIETAIRE')")
+     * @Security("is_granted('ROLE_CLINIQUE') or is_granted('ROLE_PROPRIETAIRE') or or is_granted('ROLE_VETERINAIRE')")
      */
     public function show(Proprietaire $proprietaire): Response
     {
@@ -84,7 +84,7 @@ class ProprietaireController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="proprietaire_edit", methods={"GET","POST"})
-     * @Security("is_granted('ROLE_CLINIQUE') or is_granted('ROLE_PROPRIETAIRE')")
+     * @Security("is_granted('ROLE_CLINIQUE') or is_granted('ROLE_PROPRIETAIRE') or is_granted('ROLE_VETERINAIRE')")
      */
     public function edit(Request $request, Proprietaire $proprietaire): Response
     {
