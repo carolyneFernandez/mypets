@@ -31,7 +31,8 @@ class Veterinaire extends User
     private $formations;
 
     /**
-     * @ORM\OneToMany(targetEntity=VeterinaireHoraire::class, mappedBy="veterinaire", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=VeterinaireHoraire::class, mappedBy="veterinaire", orphanRemoval=true, cascade={"persist"})
+     * @ORM\OrderBy({"jour"="ASC", "heureDebut"="ASC"})
      */
     private $veterinaireHoraires;
 

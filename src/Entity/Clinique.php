@@ -52,7 +52,7 @@ class Clinique
     private $siret;
 
     /**
-     * @ORM\OneToMany(targetEntity=CliniqueHoraire::class, mappedBy="clinique", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=CliniqueHoraire::class, mappedBy="clinique", orphanRemoval=true, cascade={"persist"})
      */
     private $cliniqueHoraires;
 

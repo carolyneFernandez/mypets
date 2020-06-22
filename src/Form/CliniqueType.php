@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Clinique;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
@@ -36,14 +37,14 @@ class CliniqueType extends AbstractType
                 ->add('telephone', TelType::class, [
                     'label' => 'Téléphone'
                 ])
-                ->add('rdvDomicile', CheckboxType::class, [
+            ->add('rdvDomicile', CheckboxType::class, [
                     'label' => 'Proposez-vous des rendez-vous à domicile ?',
                     'required' => false,
                     'label_attr' => [
                         'class' => 'checkbox-custom'
                     ]
                 ])
-                ->add('avatar', FileType::class, [
+            ->add('avatar', FileType::class, [
                     'label' => 'Avatar',
                     'constraints' => [
                         new File([
@@ -57,7 +58,15 @@ class CliniqueType extends AbstractType
                     'mapped' => false,
                     'help' => 'Image < 10 Mo',
                     'required' => false,
-                ])
+            ])
+            ->add('cliniqueHoraires', CollectionType::class, [
+                'label' => 'Horaires',
+                'allow_add' => true,
+                'allow_delete' => true,
+                'entry_type' => CliniqueHoraireType::class,
+                'delete_empty' => true,
+                'by_reference' => false,
+            ])
         ;
     }
 
