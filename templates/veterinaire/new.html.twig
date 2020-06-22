@@ -6,7 +6,10 @@
     <h1 class="text-center">Nouveau vétérinaire</h1>
 
     <a class="btn btn-secondary rounded btn-sm" href="{{ path('veterinaire_index') }}"><i class="fas fa-arrow-left mr-1"></i>Retour à la liste</a>
-    
-    {{ include('veterinaire/_form.html.twig') }}
+
+    <div class="mx-auto col-10 col-sm-8 col-md-7 col-lg-5">
+
+        {{ include('veterinaire/_form.html.twig') }}
+    </div>
 
 {% endblock %}

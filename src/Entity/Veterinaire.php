@@ -64,6 +64,7 @@ class Veterinaire extends User
         $this->rdvs = new ArrayCollection();
         $this->consultations = new ArrayCollection();
         $this->addRole('ROLE_VETERINAIRE');
+        $this->intervalBetweenRdv = new \DateTime('00:00');
     }
 
     public function getIntervalBetweenRdv(): ?\DateTimeInterface

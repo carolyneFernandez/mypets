@@ -1,11 +1,13 @@
 {% extends 'layout/base_user.html.twig' %}
 
-{% block title %}New Clinique{% endblock %}
+{% block title %}Clinique{% endblock %}
 
 {% block body %}
     <h1>Create new Clinique</h1>
 
-    {{ include('clinique/_form.html.twig') }}
+    <div class="mx-auto col-10 col-sm-8 col-md-7 col-lg-5">
+        {{ include('clinique/_form.html.twig') }}
+    </div>
 
     <a href="{{ path('clinique_index') }}">back to list</a>
 {% endblock %}

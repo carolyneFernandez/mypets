@@ -71,6 +71,11 @@ class Clinique
      */
     private $demande = 0;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $avatar;
+
     public function __construct()
     {
         $this->cliniqueHoraires = new ArrayCollection();
@@ -270,6 +275,18 @@ class Clinique
             return true;
 
         return false;
+    }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): self
+    {
+        $this->avatar = $avatar;
+
+        return $this;
     }
 
 }

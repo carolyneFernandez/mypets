@@ -4,47 +4,33 @@
 
 {% block body %}
     <h1 class="text-center">Tous les vétérinaires</h1>
-    
+
     <a class="btn btn-success rounded pull-right mb-2 btn-sm" href="{{ path('veterinaire_new') }}"><i class="fas fa-plus mr-1"></i>Ajouter un vétérinaire</a>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Date de création</th>
-                <th>Actif</th>
-                <th>Dernière connexion</th>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Interval entre rendez-vous</th>
-                <th>Formations</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for veterinaire in veterinaires %}
-            <tr>
-                <td>{{ veterinaire.id }}</td>
-                <td>{{ veterinaire.email }}</td>
-                <td>{{ veterinaire.dateCreation ? veterinaire.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ veterinaire.actif ? 'Oui' : 'Non' }}</td>
-                <td>{{ veterinaire.derniereConnexion ? veterinaire.derniereConnexion|date('d-m-Y H:i:s') : '' }}</td>
-                <td>{{ veterinaire.nom }}</td>
-                <td>{{ veterinaire.prenom }}</td>
-                <td>{{ veterinaire.intervalBetweenRdv ? veterinaire.intervalBetweenRdv|date('H:i:s') : '' }}</td>
-                <td>{{ veterinaire.formations }}</td>
-                <td>
-                    <a class="btn btn-secondary btn-sm rounded" href="{{ path('veterinaire_show', {'id': veterinaire.id}) }}">Détails</a>
-                    <a class="btn btn-warning btn-sm rounded" href="{{ path('veterinaire_edit', {'id': veterinaire.id}) }}">Modifier</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="12">Aucun vétérinaires dans la clinique.</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="clearfix mb-3"></div>
+    {% for veterinaire in veterinaires %}
+        {# @var veterinaire \App\Entity\Veterinaire #}
+        <div class="card rounded" style="width: 18rem;">
+            <div class="card-body d-flex">
+                <div class="mr-3">
+                    <a href="{{ url('veterinaire_show', {id: veterinaire.id}) }}">
+                        {% if veterinaire.avatar %}
+                            <img src="{{ asset(dir_avatar_user ~ veterinaire.avatar) }}" alt="{{ '<i class=\'fas fa-user-circle\'></i>'|raw }}" class="rounded-pill">
+                        {% else %}
+                            <span class="logo-user__default ml-2"><i class="fas fa-user-circle"></i></span>
+                        {% endif %}
+                    </a>
+                </div>
+                <div>
+                    <h5 class="card-title">{{ veterinaire.nomPrenom }}</h5>
+                    <p class="card-text">{{ veterinaire.formations|nl2br }}</p>
+                </div>
+
+            </div>
+            <a class="btn btn-warning rounded-pill btn-sm icon-card" href="{{ url('veterinaire_edit', {id: veterinaire.id}) }}"><i class="fas fa-pen"></i> </a>
+
+        </div>
+
+    {% endfor %}
 
 {% endblock %}

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Veterinaire;
 use App\Form\VeterinaireType;
 use App\Repository\VeterinaireRepository;
@@ -21,6 +22,7 @@ use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 class VeterinaireController extends AbstractController
 {
     /**
+     * @Security("is_granted('ROLE_VETERINAIRE') or is_granted('ROLE_CLINIQUE')")
      * @Route("/", name="veterinaire_index", methods={"GET"})
      */
     public function index(VeterinaireRepository $veterinaireRepository): Response
@@ -42,14 +44,19 @@ class VeterinaireController extends AbstractController
     /**
      * @Route("/new", name="veterinaire_new", methods={"GET","POST"})
      * @Security("is_granted('ROLE_CLINIQUE') or is_granted('ROLE_ADMIN')")
+     * @param Request $request
+     * @param MailService $mailService
      * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param TokenGeneratorInterface $tokenGenerator
+     * @return Response
+     * @throws \Exception
      */
     public function new(Request $request, MailService $mailService, UserPasswordEncoderInterface $passwordEncoder, TokenGeneratorInterface $tokenGenerator): Response
     {
         $veterinaire = new Veterinaire();
         $form = $this->createForm(VeterinaireType::class, $veterinaire);
         $form->handleRequest($request);
-        
+
         /** @var User $user */
         $user = $this->getUser();
 
@@ -58,7 +65,7 @@ class VeterinaireController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            
+
             if(in_array($this->getParameter('ROLE_CLINIQUE'), $user->getRoles())){
                 $veterinaire->setClinique($user->getClinique());
             }
@@ -67,10 +74,11 @@ class VeterinaireController extends AbstractController
             $veterinaire->setToken($tokenGenerator->generateToken());
             $entityManager->persist($veterinaire);
             $entityManager->flush();
-            
-            $this->addFlash('Success', 'Un mail de confirmation va être envoyé au vétérinaire !');
+
+            $this->addFlash('success', 'Un mail de confirmation va être envoyé au vétérinaire !');
             //envoie de mail de confirmation au vétérinaire pour nouveau mot de passe
             $mailService->setAndSendMail($veterinaire->getEmail(), 'Votre compte vétérinaire MyPets', 'mail/set_password.html.twig', ['user' => $veterinaire]);
+
             return $this->redirectToRoute('veterinaire_index');
         }
 

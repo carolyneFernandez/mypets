@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Veterinaire;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Security;
@@ -33,26 +35,35 @@ class VeterinaireType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('email', TextType::class, [
-                'label' => 'Email'
+        $builder->add('nom', TextType::class, [
+                'label' => 'Nom',
             ])
-            ->add('actif', CheckboxType::class, [
-                'label' => 'Compte actif ?',
-                'required' => false
-            ])
-            ->add('nom', TextType::class, [
-                'label' => 'Nom'
-            ])
-            ->add('prenom', TextType::class, [
-                'label' => 'Prénom'
-            ])
-            ->add('intervalBetweenRdv', TimeType::class, [
-                'label' => 'Interval entre rendez-vous'
-            ])
-            ->add('formations', TextType::class, [
-                'label' => 'Formations'
-            ])
+                ->add('prenom', TextType::class, [
+                    'label' => 'Prénom',
+                ])
+                ->add('email', EmailType::class, [
+                    'label' => 'Email',
+                ])
+                ->add('formations', TextareaType::class, [
+                    'label' => 'Formations',
+                    'attr' => [
+                        'rows' => 4,
+                    ]
+                ])
+                ->add('intervalBetweenRdv', TimeType::class, [
+                    'label' => 'Interval entre rendez-vous',
+                    'attr' => [
+                        'class' => 'flatpickr-time'
+                    ],
+                    'widget' => 'single_text',
+                ])
+                ->add('actif', CheckboxType::class, [
+                    'label' => 'Compte actif ?',
+                    'required' => false,
+                    'label_attr' => [
+                        'class' => 'checkbox-custom'
+                    ],
+                ])
         ;
     }
 
