@@ -1,0 +1,32 @@
+{% import 'clinique/include/_prototypes.html.twig' as formMacro %}
+
+
+{{ form_start(form) }}
+    {{ form_row(form.nom) }}
+    {{ form_row(form.siret) }}
+    {{ form_row(form.adresse) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.telephone) }}
+    {{ form_row(form.rdvDomicile) }}
+    {{ form_row(form.avatar) }}
+
+<h4 class="text-center">{{ form_label(form.cliniqueHoraires) }}</h4>
+<div id="divCliniqueHoraires" data-prototype='{{ formMacro.printHoraire(form.cliniqueHoraires.vars.prototype)|e }}' data-widget-tags="<div class='item-horaire'></div>" data-widget-conter="{{ form.cliniqueHoraires|length }}">
+    {% for horaire in form.cliniqueHoraires %}
+        <div class="item-fourniture">
+            {{ formMacro.printHoraire(horaire) }}
+        </div>
+    {% endfor %}
+</div>
+<section class="text-center mb-5">
+    <button type="button" class="btn btn-outline-success btn-sm add-another-collection-lien-widget add-fourniture-button" data-list-selector="#divCliniqueHoraires"><i class="fa fa-plus"></i></button>
+</section>
+
+<div class="d-none">
+    {{ form_rest(form) }}
+</div>
+
+<div class="text-center">
+    <button class="btn btn-warning rounded-pill">{{ button_label|default('Save') }}</button>
+</div>
+{{ form_end(form) }}

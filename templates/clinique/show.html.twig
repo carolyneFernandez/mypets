@@ -9,28 +9,28 @@
         <a class="btn btn-secondary rounded btn-sm" href="{{ path('clinique_index') }}"><i class="fas fa-arrow-left mr-1"></i>Retour à la liste </a>
     {% endif %}
 
-    {% if is_granted(ROLE_ADMIN) or clinique.hasUser(app.user) %}
-        <a class="btn btn-warning pull-right mb-2 rounded btn-sm" href="{{ path('clinique_edit', {'id': clinique.id}) }}">Modifier</a>
-    {% endif %}
+    {#    {% if is_granted(ROLE_ADMIN) or clinique.hasUser(app.user) %}#}
+    {#        <a class="btn btn-warning pull-right mb-2 rounded btn-sm" href="{{ path('clinique_edit', {'id': clinique.id}) }}">Modifier</a>#}
+    {#    {% endif %}#}
 
     <div class="clearfix mb-3"></div>
 
 
-    <div class="d-flex col-12">
+    <div class="d-flex col-12 flex-column flex-lg-row">
 
 
-        <div class="card rounded col-6">
+        <div class="card rounded col-12 col-lg-6 mb-3">
             <div class="card-body ">
                 <h5 class="card-title">{{ clinique.nom }}</h5>
-                <div class="d-flex">
-                    <div class="mr-3 logo-clinique">
+                <div class="d-flex flex-column">
+                    <div class="mr-3 logo-clinique mb-3 text-center">
                         {% if clinique.avatar %}
                             <img src="{{ asset(dir_avatar_clinique ~ clinique.avatar) }}" alt="clinique" class="rounded-pill">
                         {% else %}
                             <span class="logo-clinique__default ml-2 d-flex align-items-start"><img src="{{ asset('assets/img/svg/health-clinic_50x50.svg') }}" alt="clinique"></span>
                         {% endif %}
                     </div>
-                    <div>
+                    <div class="w-100">
                         <p class="card-text">
                             <span>{{ clinique.adresse|nl2br }}</span><br>
                             <br>
@@ -39,14 +39,35 @@
                             Siret : {{ clinique.siret }}<br>
                             <br>
                             Horaires : <br>
-                            ....
                         </p>
+                        {% set dayPreced = null %}
+                        {% for horaire in clinique.cliniqueHoraires %}
+                            {% if dayPreced != horaire.jour and loop.first == false %}
+                                {#                                <hr>#}
+                            {% endif %}
+                            <div class="col-12 row {{ ("now"|date('N')) == horaire.jour ? "now"|date('H:i') >= horaire.heureDebut|date('H:i') and "now"|date('H:i') <= horaire.heureFin|date('H:i') ? 'text-success' : 'text-danger' }}">
+                                {% if dayPreced != horaire.jour %}
+                                    <div class="col-4">
+                                        {{ days[horaire.jour] }} :
+                                    </div>
+                                {% else %}
+                                    <div class="col-4">&nbsp;</div>
+                                {% endif %}
+                                <div class="col-8">
+                                    de {{ horaire.heureDebut|date('H\\hi') }} à {{ horaire.heureFin|date('H\\hi') }}
+                                </div>
+                                <div class="clearfix"></div>
+                                <br>
+                            </div>
+                            {% set dayPreced = horaire.jour %}
+                        {% endfor %}
                     </div>
                 </div>
 
             </div>
-            <a class="btn btn-warning rounded-pill btn-sm icon-card" href="{{ url('clinique_edit', {id: clinique.id}) }}"><i class="fas fa-pen"></i> </a>
-
+            {% if is_granted(ROLE_ADMIN) or clinique.hasUser(app.user) %}
+                <a class="btn btn-warning rounded-pill btn-sm icon-card" href="{{ url('clinique_edit', {id: clinique.id}) }}"><i class="fas fa-pen"></i> </a>
+            {% endif %}
         </div>
 
         <div class="col-6 d-flex flex-column align-items-center">

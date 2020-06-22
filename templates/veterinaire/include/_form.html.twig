@@ -1,0 +1,35 @@
+{% import 'veterinaire/include/_prototypes.html.twig' as formMacro %}
+
+
+{{ form_start(form) }}
+
+{{ form_row(form.nom) }}
+{{ form_row(form.prenom) }}
+{{ form_row(form.email) }}
+{{ form_row(form.formations) }}
+{{ form_row(form.intervalBetweenRdv) }}
+{{ form_row(form.actif) }}
+
+<h4 class="text-center">{{ form_label(form.veterinaireHoraires) }}</h4>
+<div id="divVeterinaireHoraires" data-prototype='{{ formMacro.printHoraire(form.veterinaireHoraires.vars.prototype)|e }}' data-widget-tags="<div class='item-horaire'></div>" data-widget-conter="{{ form.veterinaireHoraires|length }}">
+    {% for horaire in form.veterinaireHoraires %}
+        <div class="item-fourniture">
+            {{ formMacro.printHoraire(horaire) }}
+        </div>
+    {% endfor %}
+</div>
+
+<section class="text-center mb-5">
+    <button type="button" class="btn btn-outline-success btn-sm add-another-collection-lien-widget add-fourniture-button" data-list-selector="#divVeterinaireHoraires"><i class="fa fa-plus"></i></button>
+</section>
+
+
+<div class="d-none">
+    {{ form_rest(form) }}
+</div>
+
+<div class="text-center">
+    <button class="btn btn-warning rounded-pill">{{ button_label|default('Ajouter') }}</button>
+</div>
+
+{{ form_end(form) }}

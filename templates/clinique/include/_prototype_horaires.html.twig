@@ -1,0 +1,21 @@
+
+{#    {{ dump(service) }}#}
+<div class="col-12 d-flex p-0 flex-column flex-md-row flex-wrap item-collection border-bottom mb-2" data-id="{{ horaire.vars.value ? horaire.vars.value.id }}" data-name="{{ horaire.vars.name }}">
+
+    <div class="col-12 col-md-5">
+        {{ form_row(horaire.jour) }}
+    </div>
+    <div class="col-12 col-md-6">
+        {{ form_row(horaire.heureDebut) }}
+        {{ form_row(horaire.heureFin) }}
+    </div>
+    <div class="col-12 col-md-1 justify-content-center d-flex align-items-center">
+        <button class="btn btn-outline-danger btn-sm delete-collection mb-4" type="button"><i class="fas fa-minus"></i></button>
+    </div>
+    {#        <div class="clearfix"></div>#}
+    {#    <div class="col-sm-12 d-flex align-items-center justify-content-center ">#}
+    {#        <div class="col-sm-12 d-flex  justify-content-center">#}
+    {#        </div>#}
+    {#    </div>#}
+    {#    <hr class="w-50 mb-0">#}
+</div>

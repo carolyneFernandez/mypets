@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Veterinaire;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -44,26 +45,34 @@ class VeterinaireType extends AbstractType
                 ->add('email', EmailType::class, [
                     'label' => 'Email',
                 ])
-                ->add('formations', TextareaType::class, [
+            ->add('formations', TextareaType::class, [
                     'label' => 'Formations',
                     'attr' => [
                         'rows' => 4,
                     ]
                 ])
-                ->add('intervalBetweenRdv', TimeType::class, [
-                    'label' => 'Interval entre 2 rendez-vous',
-                    'attr' => [
+            ->add('intervalBetweenRdv', TimeType::class, [
+                'label' => 'Interval entre 2 rendez-vous',
+                'attr' => [
                         'class' => 'flatpickr-time'
-                    ],
-                    'widget' => 'single_text',
-                ])
-                ->add('actif', CheckboxType::class, [
-                    'label' => 'Compte actif ?',
-                    'required' => false,
-                    'label_attr' => [
-                        'class' => 'checkbox-custom'
-                    ],
-                ])
+                ],
+                'widget' => 'single_text',
+            ])
+            ->add('actif', CheckboxType::class, [
+                'label' => 'Compte actif ?',
+                'required' => false,
+                'label_attr' => [
+                    'class' => 'checkbox-custom'
+                ],
+            ])
+            ->add('veterinaireHoraires', CollectionType::class, [
+                'label' => 'Horaires',
+                'allow_add' => true,
+                'allow_delete' => true,
+                'entry_type' => VeterinaireHoraireType::class,
+                'delete_empty' => true,
+                'by_reference' => false,
+            ])
         ;
     }
 

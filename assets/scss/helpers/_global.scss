@@ -11,6 +11,9 @@ body {
 .contenu {
   background-color: $white;
   border-top-left-radius: 1rem;
+  padding-bottom: 2.5rem;
+  min-height: 100%;
+  height: min-content;
 }
 
 .container {

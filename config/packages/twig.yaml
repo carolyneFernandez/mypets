@@ -16,3 +16,8 @@ twig:
 
         dir_avatar_user: '%dir_avatar_user%'
         dir_avatar_clinique: '%dir_avatar_clinique%'
+
+        days: '%days%'
+
+    date:
+        timezone: Europe/Paris

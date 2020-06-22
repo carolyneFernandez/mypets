@@ -24,7 +24,7 @@
                     {% endif %}
                 </a>
             </div>
-            <div>
+            <div class="w-100">
                 <h5 class="card-title">{{ veterinaire.nomPrenom }}</h5>
                 <p class="card-text">
                     {{ veterinaire.formations|nl2br }}<br>
@@ -32,10 +32,29 @@
                     Email : <a href="mailto:{{ veterinaire.email }}">{{ veterinaire.email }}</a><br>
                     <br>
                     Horaires :<br>
-                    {% for horaire in veterinaire.veterinaireHoraires %}
-                        {{ horaire.jour }} : de {{ horaire.heureDebut|date('H\\h:i') }} à {{ horaire.heureFin|date('H\\h:i') }}
-                    {% endfor %}
-
+                </p>
+                {% set dayPreced = null %}
+                {% for horaire in veterinaire.veterinaireHoraires %}
+                    {% if dayPreced != horaire.jour and loop.first == false %}
+                        <hr>
+                    {% endif %}
+                    <div class="col-12 row ">
+                        {% if dayPreced != horaire.jour %}
+                            <div class="col-4">
+                                {{ days[horaire.jour] }} :
+                            </div>
+                        {% else %}
+                            <div class="col-4">&nbsp;</div>
+                        {% endif %}
+                        <div class="col-8 {{ ("now"|date('N')) == horaire.jour ? "now"|date('H:i') >= horaire.heureDebut|date('H:i') and "now"|date('H:i') <= horaire.heureFin|date('H:i') ? 'text-success' : 'text-danger' }}">
+                            de {{ horaire.heureDebut|date('H\\hi') }} à {{ horaire.heureFin|date('H\\hi') }} {% if horaire.rdvUniquement %}<span class="font-italic text-black-50">Sur rendez-vous</span>{% endif %}
+                        </div>
+                        <div class="clearfix"></div>
+                        <br>
+                    </div>
+                    {% set dayPreced = horaire.jour %}
+                {% endfor %}
+                <p>
                     <br>
                     Interval entre 2 rendez-vous : {{ veterinaire.intervalBetweenRdv|date('H\\hi') }}min<br>
                     Créé le : {{ veterinaire.dateCreation|date('d/m/Y \\à H\\hi') }}<br>

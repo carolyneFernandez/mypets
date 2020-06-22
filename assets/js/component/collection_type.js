@@ -1,3 +1,5 @@
+import {setFlatpickr} from "./flatpickr";
+
 $(document).ready(function () {
 
     $(".delete-collection").on("click", function (e) {
@@ -46,6 +48,8 @@ function addCollection() {
     // stickybits('.sticky-box', {useStickyClasses: true});
 
     $('select', newElem).selectpicker();
+
+    setFlatpickr();
 
 
 }
