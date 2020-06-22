@@ -15,65 +15,50 @@
 
     <div class="clearfix mb-3"></div>
 
-    <div class="card rounded col-6">
-        <div class="card-body ">
-            <h5 class="card-title">{{ clinique.nom }}</h5>
-            <div class="d-flex">
-                <div class="mr-3 logo-clinique">
-                    {% if clinique.avatar %}
-                        <img src="{{ asset(dir_avatar_clinique ~ clinique.avatar) }}" alt="clinique" class="rounded-pill">
-                    {% else %}
-                        <span class="logo-clinique__default ml-2 d-flex align-items-start"><img src="{{ asset('assets/img/svg/health-clinic_50x50.svg') }}" alt="clinique"></span>
-                    {% endif %}
+
+    <div class="row">
+
+
+        <div class="card rounded col-6">
+            <div class="card-body ">
+                <h5 class="card-title">{{ clinique.nom }}</h5>
+                <div class="d-flex">
+                    <div class="mr-3 logo-clinique">
+                        {% if clinique.avatar %}
+                            <img src="{{ asset(dir_avatar_clinique ~ clinique.avatar) }}" alt="clinique" class="rounded-pill">
+                        {% else %}
+                            <span class="logo-clinique__default ml-2 d-flex align-items-start"><img src="{{ asset('assets/img/svg/health-clinic_50x50.svg') }}" alt="clinique"></span>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <p class="card-text">
+                            <span>{{ clinique.adresse|nl2br }}</span><br>
+                            <br>
+                            Téléphone : <a href="tel:{{ clinique.telephone }}">{{ clinique.telephone }}</a><br>
+                            Email : <a href="mailto:{{ clinique.email }}">{{ clinique.email }}</a><br>
+                            Siret : {{ clinique.siret }}<br>
+                            <br>
+                            Horaires : <br>
+                            ....
+                        </p>
+                    </div>
                 </div>
-                <div>
-                    <p class="card-text">
-                        <span>{{ clinique.adresse|nl2br }}</span><br>
-                        <br>
-                        Téléphone : <a href="tel:{{ clinique.telephone }}">{{ clinique.telephone }}</a><br>
-                        Email : <a href="mailto:{{ clinique.email }}">{{ clinique.email }}</a><br>
-                        Siret : {{ clinique.siret }}<br>
-                        <br>
-                        Horaires : <br>
-                        ....
-                    </p>
-                </div>
+
             </div>
+            <a class="btn btn-warning rounded-pill btn-sm icon-card" href="{{ url('clinique_edit', {id: clinique.id}) }}"><i class="fas fa-pen"></i> </a>
 
         </div>
-        <a class="btn btn-warning rounded-pill btn-sm icon-card" href="{{ url('clinique_edit', {id: clinique.id}) }}"><i class="fas fa-pen"></i> </a>
 
+        <div class="col-6">
+
+        </div>
     </div>
 
 
-    <table class="table">
-        <tbody>
-        <tr>
-            <th>Nom</th>
-            <td>{{ clinique.nom }}</td>
-        </tr>
-        <tr>
-            <th>Adresse</th>
-            <td>{{ clinique.adresse }}</td>
-        </tr>
-        <tr>
-            <th>Email</th>
-            <td>{{ clinique.email }}</td>
-        </tr>
-        <tr>
-            <th>Telephone</th>
-            <td>{{ clinique.telephone }}</td>
-        </tr>
-        <tr>
-            <th>Rendez-vous à domicile ?</th>
-            <td>{{ clinique.rdvDomicile ? 'Oui' : 'Non' }}</td>
-        </tr>
-        <tr>
-            <th>Siret</th>
-            <td>{{ clinique.siret }}</td>
-        </tr>
-        </tbody>
-    </table>
+
+
+
+
 
     {% if is_granted(ROLE_ADMIN) and clinique.demande %}
         <div class="text-center">
