@@ -15,7 +15,7 @@
     {% elseif is_granted(ROLE_CLINIQUE) %}
         {% include 'layout/_menu_clinique.html.twig' %}
     {% elseif is_granted(ROLE_VETERINAIRE) %}
-        {% include 'layout/_menu.html.twig' %}
+        {% include 'layout/_menu_veterinaire.html.twig' %}
     {% elseif is_granted(ROLE_PROPRIETAIRE) %}
         {% include 'layout/_menu_proprietaire.html.twig' %}
     {% else %}

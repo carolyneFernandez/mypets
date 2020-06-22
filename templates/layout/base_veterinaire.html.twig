@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block bodySup %}
+
+    <div class="d-flex flex-sm-column flex-column flex-lg-row vh-100">
+
+        {% include 'veterinaire/include/_submenu_veterinaire.html.twig' %}
+
+        <div class="mx-auto pt-2 col-sm-12 col-lg-10 contenu">
+            {% block body %}{% endblock %}
+        </div>
+    </div>
+
+{% endblock %}

@@ -111,7 +111,7 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator implements P
 
         if (in_array($this->container->getParameter('ROLE_CLINIQUE'), $user->getRoles())) {
             return new RedirectResponse($this->urlGenerator->generate('clinique_show', ['id' => $user->getClinique()->getId()]));
-        } elseif (in_array($this->container->getParameter('ROLE_PROPRIETAIRE'), $user->getRoles())) {
+        } else {
             return new RedirectResponse($this->urlGenerator->generate('user_account'));
         }
 
