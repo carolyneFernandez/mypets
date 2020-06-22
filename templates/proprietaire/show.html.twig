@@ -1,0 +1,82 @@
+{% extends 'layout/base_user.html.twig' %}
+
+{% block title %}Proprietaire{% endblock %}
+
+{% block body %}
+    <h1>Proprietaire</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ proprietaire.id }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ proprietaire.email }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ proprietaire.roles ? proprietaire.roles|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ proprietaire.password }}</td>
+            </tr>
+            <tr>
+                <th>DateCreation</th>
+                <td>{{ proprietaire.dateCreation ? proprietaire.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Actif</th>
+                <td>{{ proprietaire.actif ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>DerniereConnexion</th>
+                <td>{{ proprietaire.derniereConnexion ? proprietaire.derniereConnexion|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ proprietaire.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ proprietaire.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Token</th>
+                <td>{{ proprietaire.token }}</td>
+            </tr>
+            <tr>
+                <th>Avatar</th>
+                <td>{{ proprietaire.avatar }}</td>
+            </tr>
+            <tr>
+                <th>ApiToken</th>
+                <td>{{ proprietaire.apiToken }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ proprietaire.adresse }}</td>
+            </tr>
+            <tr>
+                <th>DateNaissance</th>
+                <td>{{ proprietaire.dateNaissance ? proprietaire.dateNaissance|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ proprietaire.telephone }}</td>
+            </tr>
+            <tr>
+                <th>Mobile</th>
+                <td>{{ proprietaire.mobile }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('proprietaire_index') }}">back to list</a>
+
+    <a href="{{ path('proprietaire_edit', {'id': proprietaire.id}) }}">edit</a>
+
+    {{ include('proprietaire/_delete_form.html.twig') }}
+{% endblock %}

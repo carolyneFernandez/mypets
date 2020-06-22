@@ -1,0 +1,13 @@
+{% extends 'layout/base_user.html.twig' %}
+
+{% block title %}MyPets | Ajouter un particulier{% endblock %}
+
+{% block body %}
+    <h1 class="text-center" >Ajouter un particulier</h1>
+    
+    <a class="btn btn-secondary rounded btn-sm" href="{{ path('proprietaire_index') }}"><i class="fas fa-arrow-left mr-1"></i>Retour à la liste</a>
+    
+    <div class="mx-auto col-10 col-sm-8 col-md-7 col-lg-5">
+        {{ include('proprietaire/_form.html.twig') }}
+    </div>
+{% endblock %}

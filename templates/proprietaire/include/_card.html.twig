@@ -1,0 +1,21 @@
+<div class="card rounded w-100">
+    <div class="card-body d-flex">
+        <div class="mr-3">
+            <a href="{{ url('proprietaire_show', {id: proprietaire.id}) }}">
+                {% if proprietaire.avatar %}
+                    <img src="{{ asset(dir_avatar_user ~ proprietaire.avatar) }}" alt="{{ '<i class=\'fas fa-user-circle\'></i>'|raw }}" class="rounded-pill">
+                {% else %}
+                    <span class="logo-user__default ml-2"><i class="fas fa-user-circle"></i></span>
+                {% endif %}
+            </a>
+        </div>
+        <div>
+            <h5 class="card-title">{{ proprietaire.nomPrenom }}</h5>
+            <p class="card-text">{{ proprietaire.adresse|nl2br }}</p>
+        </div>
+
+    </div>
+    {% if is_granted(ROLE_ADMIN) or is_granted(ROLE_CLINIQUE) %}
+        <a class="btn btn-warning rounded-pill btn-sm icon-card" href="{{ url('proprietaire_edit', {id: proprietaire.id}) }}"><i class="fas fa-pen"></i> </a>
+    {% endif %}
+</div>

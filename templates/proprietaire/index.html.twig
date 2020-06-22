@@ -1,0 +1,18 @@
+{% extends 'layout/base_user.html.twig' %}
+
+{% block title %}MyPets | Tous les propriétaires{% endblock %}
+
+{% block body %}
+    <h1 class="text-center">Tous les propriétaires</h1>
+
+    <a class="btn btn-success rounded pull-right mb-2 btn-sm" href="{{ path('proprietaire_new') }}"><i class="fas fa-plus mr-1"></i>Ajouter un propriétaire</a>
+
+    <div class="clearfix mb-3"></div>
+
+    {% for proprietaire in proprietaires %}
+        <div class="col-4">
+            {% include 'proprietaire/include/_card.html.twig' %}
+        </div>
+    {% endfor %}
+    
+{% endblock %}
