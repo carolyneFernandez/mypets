@@ -1,82 +1,40 @@
 {% extends 'layout/base_user.html.twig' %}
 
-{% block title %}Proprietaire{% endblock %}
+{% block title %}MyPets | Détails propriétaire{% endblock %}
 
 {% block body %}
-    <h1>Proprietaire</h1>
+    <h1 class="text-center">Fiche du particulier : {{ proprietaire.nom }} {{ proprietaire.prenom }}</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ proprietaire.id }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ proprietaire.email }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ proprietaire.roles ? proprietaire.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ proprietaire.password }}</td>
-            </tr>
-            <tr>
-                <th>DateCreation</th>
-                <td>{{ proprietaire.dateCreation ? proprietaire.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Actif</th>
-                <td>{{ proprietaire.actif ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>DerniereConnexion</th>
-                <td>{{ proprietaire.derniereConnexion ? proprietaire.derniereConnexion|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ proprietaire.nom }}</td>
-            </tr>
-            <tr>
-                <th>Prenom</th>
-                <td>{{ proprietaire.prenom }}</td>
-            </tr>
-            <tr>
-                <th>Token</th>
-                <td>{{ proprietaire.token }}</td>
-            </tr>
-            <tr>
-                <th>Avatar</th>
-                <td>{{ proprietaire.avatar }}</td>
-            </tr>
-            <tr>
-                <th>ApiToken</th>
-                <td>{{ proprietaire.apiToken }}</td>
-            </tr>
-            <tr>
-                <th>Adresse</th>
-                <td>{{ proprietaire.adresse }}</td>
-            </tr>
-            <tr>
-                <th>DateNaissance</th>
-                <td>{{ proprietaire.dateNaissance ? proprietaire.dateNaissance|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Telephone</th>
-                <td>{{ proprietaire.telephone }}</td>
-            </tr>
-            <tr>
-                <th>Mobile</th>
-                <td>{{ proprietaire.mobile }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="card rounded col-8 mx-auto">
+        <div class="card-body d-flex">
+            <div class="mr-3">
+                <a href="{{ url('proprietaire_show', {id: proprietaire.id}) }}">
+                    {% if proprietaire.avatar %}
+                        <img src="{{ asset(dir_avatar_user ~ proprietaire.avatar) }}" alt="{{ '<i class=\'fas fa-user-circle\'></i>'|raw }}" class="rounded-pill">
+                    {% else %}
+                        <span class="logo-user__default ml-2"><i class="fas fa-user-circle"></i></span>
+                    {% endif %}
+                </a>
+            </div>
+            <div class="w-100">
+                <h5 class="card-title">{{ proprietaire.nomPrenom }}</h5>
+                <p class="card-text">
+                    Email : <a href="mailto:{{ proprietaire.email }}">{{ proprietaire.email }}</a><br>
+                    Téléphone : {{ proprietaire.telephone }}<br>
+                    Mobile : {{ proprietaire.mobile }}<br>
+                    Adresse : {{ proprietaire.adresse }}<br>
+                    Date de naissance : {{ proprietaire.dateNaissance|date('d/m/Y') }}<br>
+                    Animaux : 
+                    {% for animal in proprietaire.animals %}
+                        {{ animal.nom }} ({{ animal.race}}), 
+                    {% endfor %}
+                </p>
+            </div>
 
-    <a href="{{ path('proprietaire_index') }}">back to list</a>
+        </div>
+        <a class="btn btn-warning rounded-pill btn-sm icon-card" href="{{ url('proprietaire_edit', {id: proprietaire.id}) }}"><i class="fas fa-pen"></i> </a>
 
-    <a href="{{ path('proprietaire_edit', {'id': proprietaire.id}) }}">edit</a>
+    </div>
 
-    {{ include('proprietaire/_delete_form.html.twig') }}
+
 {% endblock %}

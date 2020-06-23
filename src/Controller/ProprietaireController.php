@@ -73,7 +73,7 @@ class ProprietaireController extends AbstractController
 
     /**
      * @Route("/{id}", name="proprietaire_show", methods={"GET"})
-     * @Security("is_granted('ROLE_CLINIQUE') or is_granted('ROLE_PROPRIETAIRE') or or is_granted('ROLE_VETERINAIRE')")
+     * @Security("is_granted('ROLE_CLINIQUE') or is_granted('ROLE_PROPRIETAIRE') or is_granted('ROLE_VETERINAIRE')")
      */
     public function show(Proprietaire $proprietaire): Response
     {
