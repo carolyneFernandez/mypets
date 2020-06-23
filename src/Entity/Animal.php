@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\AnimalRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -379,6 +380,15 @@ class Animal
         }
 
         return $this;
+    }
+
+    public function getAge()
+    {
+        $date = $this->getDateNaissance();
+        $now = new DateTime();
+        $interval = $now->diff($date);
+
+        return $interval->y . ' an' . ($interval->y > 1 ? 's' : '') . ' et ' . $interval->m . ' mois';
     }
 
 }

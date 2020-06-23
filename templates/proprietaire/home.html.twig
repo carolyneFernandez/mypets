@@ -3,15 +3,72 @@
 {% block title %}MyPets | Home{% endblock %}
 
 {% block body %}
-    <h1 class="text-center">Mes animaux</h1>
-    <div class="row col-12">
-        <div class="col-12 col-md-6">
-            {% for animaux in app.user.animals %}
-                {#                {% include '' %}#}
+    <h1 class="text-center my-4">Mes animaux</h1>
+    <div class="row col-12 justify-content-around">
+        <div class="col-12 col-md-5 column">
+            {% for animal in app.user.animals %}
+                <div class="card rounded w-100 mb-4 shadow">
+                    <div class="card-body d-flex align-items-center">
+                        <div class="mr-3 col-6">
+                            <a href="{{ url('animal_show', {id: animal.id}) }}">
+                                {% if animal.photo %}
+                                    <img src="{{ asset(dir_avatar_animal ~ animal.photo) }}" alt="{{ '<i class=\'fas fa-dog\'></i>' }}" height="100px" class="rounded-pill">
+                                {% else %}
+                                    <span class="logo-user__default ml-2"><i class="fas fa-dog"></i></span>
+                                {% endif %}
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <h5 class="card-title text-center">{{ animal.nom }}</h5>
+                            <p class="text-center">
+                                {{ animal.type.nom }}<br>
+                                {{ animal.age }}<br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             {% endfor %}
         </div>
 
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-4 d-flex flex-column">
+
+            <a href="{{ url('rdv_new') }}" class="btn btn-warning rounded shadow mb-3 p-4">Prendez un rendez-vous</a>
+            <a href="#" class="btn btn-warning rounded shadow mb-3 p-4">Cliniques à proximité</a>
+
+            <div class="col-12 bg-primary rounded shadow py-3 text-white">
+                <h3 class="text-center">Mes rendez-vous</h3>
+
+                {% for rdv in rdvs %}
+                    <div class="d-flex align-items-center py-3 {{ loop.last == false ? 'border-bottom' }}">
+                        <div class="col-3 pr-2">
+                            {% if rdv.animal.photo %}
+                                <img src="{{ asset(dir_avatar_animal ~ rdv.animal.photo) }}" alt="{{ '<i class=\'fas fa-paw\'></i>'|raw }}" class="rounded-pill mr-2 w-100">
+                            {% else %}
+                                <span class="logo-user__default ml-2 mr-2">
+                                        <i class="fas fa-paw"></i>
+                                    </span>
+                            {% endif %}
+                        </div>
+                        <div class="col-7">
+                            Le {{ rdv.date|date('d/m/Y \\à H\\hi') }}<br>
+                            {{ rdv.veterinaire.clinique.adresse|nl2br }}
+                        </div>
+                        <div class="col-2 pr-3">
+                            <a href="{{ url('rdv_show', {id: rdv.id}) }}"><i class="fas fa-arrow-right text-white"></i></a>
+                        </div>
+                    </div>
+
+                {% else %}
+                    <div class="text-center col-12 font-italic">
+                        Aucun rendez-vous à venir
+                    </div>
+                {% endfor %}
+
+                <div class="text-center col-12">
+                    <a href="{{ url('rdv_index') }}" class="text-white text-underline">Tous mes rendez-vous</a>
+                </div>
+
+            </div>
 
         </div>
 

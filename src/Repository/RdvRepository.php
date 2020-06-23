@@ -3,9 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\Clinique;
+use App\Entity\Proprietaire;
 use App\Entity\Rdv;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
 
 /**
  * @method Rdv|null find($id, $lockMode = null, $lockVersion = null)
@@ -32,6 +34,27 @@ class RdvRepository extends ServiceEntityRepository
                     ->setParameter('clinique', $clinique)
                     ->andWhere('r.completed = true')
                     ->orderBy('r.date', 'desc')
+                    ->getQuery()
+                    ->getResult()
+            ;
+    }
+
+    /**
+     * @param Proprietaire $proprietaire
+     * @return Rdv[] Returns an array of Rdv objects
+     * @throws Exception
+     */
+    public function findAVenirByProprietaire(Proprietaire $proprietaire)
+    {
+        $now = new \DateTime();
+
+        return $this->createQueryBuilder('r')
+                    ->andWhere('r.proprietaire = :proprietaire')
+                    ->setParameter('proprietaire', $proprietaire)
+                    ->andWhere('r.completed = true')
+                    ->orderBy('r.date', 'desc')
+                    ->andWhere('r.date >= :now')
+                    ->setParameter('now', $now)
                     ->getQuery()
                     ->getResult()
             ;

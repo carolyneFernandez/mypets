@@ -2,13 +2,13 @@
 
 {% block bodySup %}
 
-    <div class="d-flex flex-sm-column flex-column flex-lg-row vh-100">
+{#    <div class="d-flex flex-sm-column flex-column flex-lg-row vh-100">#}
 
-        {% include 'proprietaire/_submenu_proprietaire.html.twig' %}
+    {#        {% include 'proprietaire/_submenu_proprietaire.html.twig' %}#}
 
-        <div class="mx-auto pt-2 col-sm-12 col-lg-10 contenu">
-            {% block body %}{% endblock %}
+    <div class="mx-auto pt-2 col-12 contenu h100 position-absolute">
+        {% block body %}{% endblock %}
         </div>
-    </div>
+    {#    </div>#}
 
 {% endblock %}
