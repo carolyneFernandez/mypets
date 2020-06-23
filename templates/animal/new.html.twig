@@ -1,0 +1,13 @@
+{% extends 'layout/base_user.html.twig' %}
+
+{% block title %}MyPets | Créer un nouvel animal{% endblock %}
+
+{% block body %}
+    <h1 class="text-center">Créer un nouvel animal</h1>
+    
+    <a class="btn btn-secondary rounded btn-sm" href="{{ path('animal_index') }}"><i class="fas fa-arrow-left mr-1"></i>Retour à liste</a>
+    
+    <div class="mx-auto col-10 col-sm-8 col-md-7 col-lg-5">
+        {{ include('animal/_form.html.twig') }}
+    </div>
+{% endblock %}
