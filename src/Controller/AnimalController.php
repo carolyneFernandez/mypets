@@ -60,7 +60,9 @@ class AnimalController extends AbstractController
             if ($photo != null) {
                 $dir = $this->getParameter('dir_avatar_animal');
                 $filename = $fileUploader->upload($photo, $dir, true);
-                $animal->setPhoto($photo);
+                if($filename){
+                    $animal->setPhoto($filename);
+                }
             }
 
             $entityManager = $this->getDoctrine()->getManager();

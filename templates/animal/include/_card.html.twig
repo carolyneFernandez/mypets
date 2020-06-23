@@ -3,7 +3,9 @@
         <div class="mr-3">
             <a href="{{ url('animal_show', {id: animal.id}) }}">
                 {% if animal.photo %}
-                    <img src="{{ asset(dir_avatar_animal ~ animal.photo) }}" alt="{{ '<i class="fas fa-dog"></i>' }}" class="rounded-pill">
+                    <span class="logo-user ml-2">
+                        <img src="{{ asset(dir_avatar_animal ~ animal.photo) }}" class="rounded-pill">
+                    </span>
                 {% else %}
                     <span class="logo-user__default ml-2"><i class="fas fa-dog"></i></span>
                 {% endif %}
