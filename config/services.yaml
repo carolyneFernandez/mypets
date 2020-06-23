@@ -15,6 +15,7 @@ parameters:
     knp_paginator.template.pagination: 'layout/_pagination.html.twig'
     dir_avatar_user: 'uploads/avatars/users/'
     dir_avatar_clinique: 'uploads/avatars/cliniques/'
+    dir_avatar_animal: 'uploads/avatars/animaux/'
 
     days:
         1: 'Lundi'
