@@ -18,14 +18,15 @@ class ProprietaireType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nom', TextType::class, [
+        $builder
+            ->add('email', EmailType::class, [
+                'label' => 'Email'
+            ])
+            ->add('nom', TextType::class, [
                 'label' => 'Nom'
             ])
                 ->add('prenom', TextType::class, [
                     'label' => 'Prénom'
-                ])
-                ->add('email', EmailType::class, [
-                    'label' => 'Email'
                 ])
             ->add('adresse',  TextareaType::class, [
                 'label' => 'Adresse',
