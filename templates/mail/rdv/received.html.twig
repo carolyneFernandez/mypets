@@ -1,0 +1,12 @@
+{% extends 'mail/base_mail.html.twig' %}
+
+{% block body %}
+    <p>
+        Bonjour,<br>
+        <br>
+        Nous avons bien reçu votre demande de rendez-vous pour {{ rdv.animal.nom }} avec le vétérinaire &laquo; {{ rdv.veterinaire.nomPrenom }} &raquo; le {{ rdv.date|date('d/m/Y \\à H\\hi') }}.<br>
+        Nous traitons votre demande et reviendrons vers vous dès que possible.<br>
+        <br>
+
+    </p>
+{% endblock %}

@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Clinique;
 use App\Entity\Rdv;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -19,22 +20,22 @@ class RdvRepository extends ServiceEntityRepository
         parent::__construct($registry, Rdv::class);
     }
 
-    // /**
-    //  * @return Rdv[] Returns an array of Rdv objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param Clinique $clinique
+     * @return Rdv[] Returns an array of Rdv objects
+     */
+    public function findByClinique(Clinique $clinique)
     {
         return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('r.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+                    ->join('r.veterinaire', 'v')
+                    ->andWhere('v.clinique = :clinique')
+                    ->setParameter('clinique', $clinique)
+                    ->andWhere('r.completed = true')
+                    ->orderBy('r.date', 'desc')
+                    ->getQuery()
+                    ->getResult()
+            ;
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Rdv

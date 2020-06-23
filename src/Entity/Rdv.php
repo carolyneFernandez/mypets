@@ -23,7 +23,7 @@ class Rdv
 
     /**
      * @ORM\ManyToOne(targetEntity=Veterinaire::class, inversedBy="rdvs")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $veterinaire;
 
@@ -34,7 +34,7 @@ class Rdv
     private $animal;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $date;
 
@@ -46,17 +46,33 @@ class Rdv
     /**
      * @ORM\Column(type="boolean", options={"default"=0})
      */
-    private $domicile;
+    private $domicile = false;
 
     /**
      * @ORM\Column(type="boolean", options={"default"=0})
      */
-    private $urgence;
+    private $urgence = false;
 
     /**
      * @ORM\OneToOne(targetEntity=Consultation::class, mappedBy="rdv", cascade={"persist", "remove"})
      */
     private $consultation;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default"=0})
+     */
+    private $completed = false;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Proprietaire::class, inversedBy="rdvs")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $proprietaire;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default"=0})
+     */
+    private $valide = false;
 
 
     public function getId(): ?int
@@ -150,6 +166,42 @@ class Rdv
         if ($consultation->getRdv() !== $newRdv) {
             $consultation->setRdv($newRdv);
         }
+
+        return $this;
+    }
+
+    public function getCompleted(): ?bool
+    {
+        return $this->completed;
+    }
+
+    public function setCompleted(bool $completed): self
+    {
+        $this->completed = $completed;
+
+        return $this;
+    }
+
+    public function getProprietaire(): ?Proprietaire
+    {
+        return $this->proprietaire;
+    }
+
+    public function setProprietaire(?Proprietaire $proprietaire): self
+    {
+        $this->proprietaire = $proprietaire;
+
+        return $this;
+    }
+
+    public function getValide(): ?bool
+    {
+        return $this->valide;
+    }
+
+    public function setValide(?bool $valide): self
+    {
+        $this->valide = $valide;
 
         return $this;
     }

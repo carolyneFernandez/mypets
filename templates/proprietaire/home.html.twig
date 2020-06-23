@@ -1,0 +1,19 @@
+{% extends 'layout/base_user.html.twig' %}
+
+{% block title %}MyPets | Home{% endblock %}
+
+{% block body %}
+    <h1 class="text-center">Mes animaux</h1>
+    <div class="row col-12">
+        <div class="col-12 col-md-6">
+            {% for animaux in app.user.animals %}
+                {#                {% include '' %}#}
+            {% endfor %}
+        </div>
+
+        <div class="col-12 col-md-6">
+
+        </div>
+
+    </div>
+{% endblock %}

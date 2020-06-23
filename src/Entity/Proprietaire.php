@@ -38,14 +38,20 @@ class Proprietaire extends User
     private $mobile;
 
     /**
-     * @ORM\OneToMany(targetEntity=Animal::class, mappedBy="Proprietaire", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Animal::class, mappedBy="proprietaire", orphanRemoval=true)
      */
     private $animals;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Rdv::class, mappedBy="proprietaire", orphanRemoval=true)
+     */
+    private $rdvs;
 
     public function __construct()
     {
         parent::__construct();
         $this->animals = new ArrayCollection();
+        $this->rdvs = new ArrayCollection();
     }
 
     public function getAdresse(): ?string
@@ -121,6 +127,37 @@ class Proprietaire extends User
             // set the owning side to null (unless already changed)
             if ($animal->getProprietaire() === $this) {
                 $animal->setProprietaire(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Rdv[]
+     */
+    public function getRdvs(): Collection
+    {
+        return $this->rdvs;
+    }
+
+    public function addRdv(Rdv $rdv): self
+    {
+        if (!$this->rdvs->contains($rdv)) {
+            $this->rdvs[] = $rdv;
+            $rdv->setProprietaire($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRdv(Rdv $rdv): self
+    {
+        if ($this->rdvs->contains($rdv)) {
+            $this->rdvs->removeElement($rdv);
+            // set the owning side to null (unless already changed)
+            if ($rdv->getProprietaire() === $this) {
+                $rdv->setProprietaire(null);
             }
         }
 

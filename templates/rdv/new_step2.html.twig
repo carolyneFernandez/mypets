@@ -1,0 +1,14 @@
+{% extends 'layout/base_user.html.twig' %}
+
+{% block title %}MyPets | Nouveau rendez-vous{% endblock %}
+
+{% block body %}
+    <h1 class="text-center">Nouveau rendez-vous</h1>
+
+    <a class="btn btn-secondary rounded" href="{{ path('rdv_new', {rdv: rdv.id}) }}">Retour</a>
+
+    <div class="mx-auto col-10 col-sm-8 col-md-7 col-lg-5">
+        {{ include('rdv/include/_form.html.twig') }}
+    </div>
+
+{% endblock %}
