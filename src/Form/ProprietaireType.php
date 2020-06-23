@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Proprietaire;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -17,38 +18,42 @@ class ProprietaireType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('email', TextType::class, [
-                'label' => 'Email'
-            ])
-            ->add('nom', TextType::class, [
+        $builder->add('nom', TextType::class, [
                 'label' => 'Nom'
             ])
-            ->add('prenom', TextType::class, [
-                'label' => 'Prénom'
-            ])
+                ->add('prenom', TextType::class, [
+                    'label' => 'Prénom'
+                ])
+                ->add('email', EmailType::class, [
+                    'label' => 'Email'
+                ])
             ->add('adresse',  TextareaType::class, [
-                'label' => 'Adresse'
-            ])
-            ->add('dateNaissance', DateType::class, [
-                'label' => 'Date de naissance',
+                'label' => 'Adresse',
                 'attr' => [
-                    'class' => 'flatpickr-date'
+                    'rows' => 3,
                 ],
-                'widget' => 'single_text',
             ])
-            ->add('telephone',  TextType::class, [
-                'label' => 'Téléphone'
-            ])
-            ->add('mobile',  TextType::class, [
-                'label' => 'Mobile'
-            ])
+                ->add('dateNaissance', DateType::class, [
+                    'label' => 'Date de naissance',
+                    'attr' => [
+                        'class' => 'flatpickr-date'
+                    ],
+                    'widget' => 'single_text',
+                ])
+                ->add('telephone', TelType::class, [
+                    'label' => 'Téléphone',
+                    'required' => false,
+                ])
+                ->add('mobile', TelType::class, [
+                    'label' => 'Mobile',
+                    'required' => false,
+                ])
             ->add('actif', CheckboxType::class, [
                 'label' => 'Actif ?',
-                'required' => false,
                 'label_attr' => [
                     'class' => 'checkbox-custom'
                 ],
+                'required' => false,
             ])
         ;
     }
