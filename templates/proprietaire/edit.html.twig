@@ -5,7 +5,7 @@
 {% block body %}
     <h1 class="text-center" >Modifier le particulier</h1>
 
-    <a class="btn btn-secondary rounded" href="{{ path('proprietaire_index') }}">Retour à la liste</a>
+    <a class="btn btn-secondary rounded" href="{{ path('proprietaire_index') }}"><i class="fas fa-arrow-left mr-1"></i>Retour à la liste</a>
 
     <div class="mx-auto col-10 col-sm-8 col-md-7 col-lg-5">
         {{ include('proprietaire/_form.html.twig', {'button_label': 'Enregistrer'}) }}

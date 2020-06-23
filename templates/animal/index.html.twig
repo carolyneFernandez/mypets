@@ -1,0 +1,24 @@
+{% extends 'layout/base_user.html.twig' %}
+
+{% block title %}MyPets | Tous les animaux{% endblock %}
+
+{% block body %}
+    <h1 class="text-center">Tous mes animaux</h1>
+
+    {% if is_granted('ROLE_VETERINAIRE') %}
+    <a class="btn btn-success rounded pull-right mb-2 btn-sm" href="{{ path('animal_new') }}"><i class="fas fa-plus mr-1"></i>Ajouter un animal</a>
+    {% endif %}
+
+    <div class="clearfix mb-3"></div>
+
+        {% for animal in animals %}
+            <div class="col-4">
+                {% include 'animal/include/_card.html.twig' %}
+            </div>
+        {% else %}
+            <div class="col-4">
+                <p> Aucun animal pour le moment. </p>
+            </div>
+        {% endfor %}
+
+{% endblock %}
