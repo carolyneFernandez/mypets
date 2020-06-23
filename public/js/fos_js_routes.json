@@ -1,6 +1,29 @@
 {
   "base_url": "",
-  "routes": [],
+  "routes": {
+    "api_animal_get_by_proprietaire": {
+      "tokens": [
+        [
+          "variable",
+          "\/",
+          "[^\/]++",
+          "proprietaire",
+          true
+        ],
+        [
+          "text",
+          "\/api\/animaux\/get-by-proprietaire"
+        ]
+      ],
+      "defaults": [],
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "POST"
+      ],
+      "schemes": []
+    }
+  },
   "prefix": "",
   "host": "localhost",
   "port": "",

@@ -34,6 +34,7 @@ class ProfileProprietaireType extends ProfileUserType
         ])
                 ->add('dateNaissance', DateType::class, [
                     'label' => 'Date de naissance',
+                    'widget' => 'single_text',
                     'attr' => [
                         'class' => 'flatpickr-date',
                     ],

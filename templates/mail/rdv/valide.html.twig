@@ -1,0 +1,24 @@
+{% extends 'mail/base_mail.html.twig' %}
+
+{% block body %}
+    <p>
+        Bonjour,<br>
+        <br>
+        Nous revenons vers vous suite à votre demande de rendez-vous pour {{ rdv.animal.nom }} avec le vétérinaire &laquo; {{ rdv.veterinaire.nomPrenom }} &raquo;.<br>
+        Votre rendez-vous a été validé pour le {{ rdv.date|date('d/m/Y \\à H\\hi') }}.<br>
+        <br>
+    </p>
+    <div class="text-center mb-3">
+        <h2 class="text-warning text-center">Le {{ rdv.date|date('d/m/Y \\à H\\hi') }}</h2>
+        <div class="d-flex justify-content-center align-items-center">
+            {% if rdv.animal.photo %}
+                <img src="{{ absolute_url(asset(dir_avatar_animal ~ rdv.animal.photo)) }}" alt="Photo" class="rounded-pill mr-2" height="100px">
+            {% else %}
+                <img src="{{ absolute_url(asset('assets/img/svg/paw-solid.svg')) }}" alt="Photo" class="mr-2" height="100px">
+            {% endif %}
+            <div>
+                {{ rdv.animal.nom }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

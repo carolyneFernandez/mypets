@@ -7,8 +7,8 @@
         </a>
     </li>
 
-    <li class="nav-item mr-0 p-2 white-space-nowrap w-100">
-        <a href="#" class="ml-1">
+    <li class="nav-item mr-0 p-2 white-space-nowrap w-100 {{ app.request.attributes.get('_route') starts with 'rdv' ? 'active' }}">
+        <a href="{{ url('rdv_index') }}" class="ml-1">
             <img src="{{ asset("assets/img/svg/calendar_50x50.svg") }}" alt="calendar" class="mr-2">
             RENDEZ-VOUS
         </a>

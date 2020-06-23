@@ -76,7 +76,7 @@ class Animal
      * @ORM\ManyToOne(targetEntity=Proprietaire::class, inversedBy="animals")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $Proprietaire;
+    private $proprietaire;
 
     /**
      * @ORM\Column(type="boolean", options={"default"=0})
@@ -242,12 +242,12 @@ class Animal
 
     public function getProprietaire(): ?Proprietaire
     {
-        return $this->Proprietaire;
+        return $this->proprietaire;
     }
 
     public function setProprietaire(?Proprietaire $Proprietaire): self
     {
-        $this->Proprietaire = $Proprietaire;
+        $this->proprietaire = $Proprietaire;
 
         return $this;
     }

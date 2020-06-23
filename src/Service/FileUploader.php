@@ -30,7 +30,6 @@ class FileUploader
 
         if (!is_dir($dir))
             mkdir($dir, 0777, true);
-
         try {
             $file->move($dir, $filename);
 //            if ($uniqueFilename) {

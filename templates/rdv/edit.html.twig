@@ -1,0 +1,13 @@
+{% extends 'layout/base_user.html.twig' %}
+
+{% block title %}Edit Rdv{% endblock %}
+
+{% block body %}
+    <h1>Edit Rdv</h1>
+
+    {{ include('rdv/include/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+
+    <a href="{{ path('rdv_index') }}">back to list</a>
+
+    {{ include('rdv/include/_delete_form.html.twig') }}
+{% endblock %}
