@@ -23,6 +23,8 @@ class ProfileVeterinaireType extends ProfileUserType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        parent::buildForm($builder, $options);
+
         $builder->add('intervalBetweenRdv', TimeType::class, [
             'label' => 'Interval entre 2 rendez-vous',
             'widget' => 'single_text',

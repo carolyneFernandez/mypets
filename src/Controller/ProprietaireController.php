@@ -47,13 +47,11 @@ class ProprietaireController extends AbstractController
         $form->handleRequest($request);
         $proprietaire->addRole($this->getParameter('ROLE_PROPRIETAIRE'));
 
-        // password générer aléatoirement lors de la création d'un vétérinaire
-        $randomPassword = random_bytes(10);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
 
-            $proprietaire->setPassword($passwordEncoder->encodePassword($proprietaire, $randomPassword));
+            $proprietaire->setPassword($passwordEncoder->encodePassword($proprietaire, $tokenGenerator->generateToken()));
             $proprietaire->setToken($tokenGenerator->generateToken());
 
             $entityManager->persist($proprietaire);

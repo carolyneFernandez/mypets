@@ -52,7 +52,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
  * })
  * @UniqueEntity(fields={"email"}, message="Cette email est déjà utilisée par à un autre utilisateur")
  */
-class User implements UserInterface
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id()
@@ -324,6 +324,28 @@ class User implements UserInterface
         $this->apiToken = $apiToken;
 
         return $this;
+    }
+
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->email,
+            $this->password,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+
+    /** @param $serialized
+     * @see \Serializable::unserialize()
+     */
+    public function unserialize($serialized)
+    {
+        list ($this->id, $this->email, $this->password, // see section on salt below
+            // $this->salt
+            ) = unserialize($serialized);
     }
 
 }

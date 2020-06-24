@@ -97,30 +97,33 @@ class RdvType extends AbstractType
         ]);
 
 
-        $builder->addEventListener(FormEvents::PRE_SUBMIT, function(FormEvent $event) {
-            /** @var Rdv $rdv */
-            $rdv = $event->getData();
-            $form = $event->getForm();
-            $proprietaire = $rdv['proprietaire'];
-            if (!$rdv) {
-                return;
-            }
+        if ($this->security->isGranted($this->container->getParameter('ROLE_CLINIQUE'))) {
 
-            // checks whether the user has chosen to display their email or not.
-            // If the data was submitted previously, the additional value that is
-            // included in the request variables needs to be removed.
-            $form->add('animal', EntityType::class, [
-                'class' => Animal::class,
-                'query_builder' => function(AnimalRepository $ar) use ($proprietaire) {
-                    return $ar->createQueryBuilder('a')
-                              ->andWhere('a.proprietaire = :proprietaire')
-                              ->setParameter('proprietaire', $proprietaire)
-                              ->andWhere('a.decede = false')
-                        ;
-                },
+            $builder->addEventListener(FormEvents::PRE_SUBMIT, function(FormEvent $event) {
+                /** @var Rdv $rdv */
+                $rdv = $event->getData();
+                $form = $event->getForm();
+                $proprietaire = $rdv['proprietaire'];
+                if (!$rdv) {
+                    return;
+                }
 
-            ]);
-        });
+                // checks whether the user has chosen to display their email or not.
+                // If the data was submitted previously, the additional value that is
+                // included in the request variables needs to be removed.
+                $form->add('animal', EntityType::class, [
+                    'class' => Animal::class,
+                    'query_builder' => function(AnimalRepository $ar) use ($proprietaire) {
+                        return $ar->createQueryBuilder('a')
+                                  ->andWhere('a.proprietaire = :proprietaire')
+                                  ->setParameter('proprietaire', $proprietaire)
+                                  ->andWhere('a.decede = false')
+                            ;
+                    },
+
+                ]);
+            });
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)

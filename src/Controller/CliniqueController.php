@@ -34,7 +34,7 @@ class CliniqueController extends AbstractController
 
     /**
      * @Route("/{id}", name="clinique_show", methods={"GET"})
-     * @Security("is_granted('ROLE_CLINIQUE') or is_granted('ROLE_ADMIN')")
+     * @Security("is_granted('ROLE_CLINIQUE') or is_granted('ROLE_ADMIN') or is_granted('ROLE_VETERINAIRE')")
      */
     public function show(Clinique $clinique): Response
     {

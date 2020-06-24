@@ -26,6 +26,8 @@ class ProfileProprietaireType extends ProfileUserType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        parent::buildForm($builder, $options);
+
         $builder->add('adresse', TextareaType::class, [
             'label' => 'Adresse',
             'attr' => [

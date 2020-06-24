@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Exception;
 
 /**
  * @ApiResource(
@@ -47,6 +48,10 @@ class Proprietaire extends User
      */
     private $rdvs;
 
+    /**
+     * Proprietaire constructor.
+     * @throws Exception
+     */
     public function __construct()
     {
         parent::__construct();

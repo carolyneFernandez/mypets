@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use App\Entity\Secretaire;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -55,7 +56,7 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator implements P
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
         $request->getSession()
-                ->set(Security::LAST_USERNAME, $credentials['email'])
+            ->set(Security::LAST_USERNAME, $credentials['email'])
         ;
 
         return $credentials;
@@ -69,7 +70,7 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator implements P
         }
 
         $user = $this->entityManager->getRepository(User::class)
-                                    ->findOneBy(['email' => $credentials['email']])
+            ->findOneBy(['email' => $credentials['email']])
         ;
 
         if (!$user) {
@@ -110,14 +111,13 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator implements P
 
 
         if (in_array($this->container->getParameter('ROLE_CLINIQUE'), $user->getRoles())) {
+            /** @var Secretaire $user */
             return new RedirectResponse($this->urlGenerator->generate('clinique_show', [
                 'id' => $user->getClinique()
-                             ->getId()
+                    ->getId()
             ]));
         } elseif (in_array($this->container->getParameter('ROLE_PROPRIETAIRE'), $user->getRoles())) {
             return new RedirectResponse($this->urlGenerator->generate('index'));
-        } elseif (in_array($this->container->getParameter('ROLE_CLINIQUE'), $user->getRoles())) {
-            return new RedirectResponse($this->urlGenerator->generate('rdv_index'));
         }
 
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {

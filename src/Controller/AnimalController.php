@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Animal;
+use App\Entity\User;
 use App\Form\AnimalType;
 use App\Repository\AnimalRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,6 +25,8 @@ class AnimalController extends AbstractController
     /**
      * @Route("/", name="animal_index", methods={"GET"})
      * @Security("is_granted('ROLE_CLINIQUE') or is_granted('ROLE_VETERINAIRE') or is_granted('ROLE_PROPRIETAIRE')")
+     * @param AnimalRepository $animalRepository
+     * @return Response
      */
     public function index(AnimalRepository $animalRepository): Response
     {
@@ -85,6 +88,8 @@ class AnimalController extends AbstractController
     /**
      * @Route("/{id}", name="animal_show", methods={"GET"})
      * @Security("is_granted('ROLE_CLINIQUE') or is_granted('ROLE_VETERINAIRE') or is_granted('ROLE_PROPRIETAIRE')")
+     * @param Animal $animal
+     * @return Response
      */
     public function show(Animal $animal): Response
     {
@@ -96,6 +101,9 @@ class AnimalController extends AbstractController
     /**
      * @Route("/{id}/edit", name="animal_edit", methods={"GET","POST"})
      * @Security("is_granted('ROLE_CLINIQUE') or is_granted('ROLE_VETERINAIRE') or is_granted('ROLE_PROPRIETAIRE')")
+     * @param Request $request
+     * @param Animal $animal
+     * @return Response
      */
     public function edit(Request $request, Animal $animal): Response
     {
@@ -116,6 +124,9 @@ class AnimalController extends AbstractController
 
     /**
      * @Route("/{id}", name="animal_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Animal $animal
+     * @return Response
      */
     public function delete(Request $request, Animal $animal): Response
     {
