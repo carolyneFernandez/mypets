@@ -10,6 +10,7 @@ use App\Form\RdvType;
 use App\Repository\RdvRepository;
 use App\Service\MailService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -62,8 +63,22 @@ class RdvController extends AbstractController
                               ->getManager()
         ;
 
-        if ($rdv == null)
-            $rdv = new Rdv();
+        if ($rdv == null) {
+
+            $rdv = $entityManager->getRepository(Rdv::class)
+                                 ->findOneBy([
+                                     'author' => $this->getUser(),
+                                     'completed' => false
+                                 ])
+            ;
+
+            if (!$rdv) {
+                $rdv = new Rdv();
+                $rdv->setAuthor($this->getUser());
+            } else {
+                $this->addFlash('info', 'Vous êtes sur un rendez-vous déjà en cours de saisie. Vous pouvez annuler sa saisie et en créer un nouveau en cliquant <a href="' . $this->generateUrl('rdv_annule_and_new', ['id' => $rdv->getId()]) . '">ici</a> ');
+            }
+        }
 
         if ($this->isGranted($this->getParameter('ROLE_PROPRIETAIRE'))) {
             /** @var Proprietaire $proprietaire */
@@ -115,7 +130,7 @@ class RdvController extends AbstractController
             ]);
         }
 
-        return $this->render('rdv/new.html.twig', [
+        return $this->render('rdv/new_step2.html.twig', [
             'rdv' => $rdv,
             'form' => $form->createView(),
         ]);
@@ -157,7 +172,7 @@ class RdvController extends AbstractController
             return $this->redirectToRoute('rdv_index', []);
         }
 
-        return $this->render('rdv/new.html.twig', [
+        return $this->render('rdv/new_step3.html.twig', [
             'rdv' => $rdv,
             'form' => $form->createView(),
         ]);
@@ -210,6 +225,31 @@ class RdvController extends AbstractController
         }
 
         return $this->redirectToRoute('rdv_index');
+    }
+
+
+    /**
+     * @Route("/annule/{id}", name="rdv_annule_and_new", methods={"GET"})
+     * @param Rdv $rdv
+     * @return RedirectResponse
+     */
+    public function annuleRdvAndNew(Rdv $rdv)
+    {
+        if ($rdv->getAuthor() != $this->getUser() || $rdv->getCompleted()) {
+            $this->addFlash('danger', 'Accès interdit.');
+
+            return $this->redirectToRoute('rdv_index');
+        }
+
+        $em = $this->getDoctrine()
+                   ->getManager()
+        ;
+
+        $em->remove($rdv);
+        $em->flush();
+
+        return $this->redirectToRoute('rdv_new');
+
     }
 
 }

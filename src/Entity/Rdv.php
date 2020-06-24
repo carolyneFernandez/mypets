@@ -74,6 +74,18 @@ class Rdv
      */
     private $valide = false;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Clinique::class, inversedBy="rdvs")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $clinique;
+
 
     public function getId(): ?int
     {
@@ -202,6 +214,30 @@ class Rdv
     public function setValide(?bool $valide): self
     {
         $this->valide = $valide;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    public function getClinique(): ?Clinique
+    {
+        return $this->clinique;
+    }
+
+    public function setClinique(?Clinique $clinique): self
+    {
+        $this->clinique = $clinique;
 
         return $this;
     }

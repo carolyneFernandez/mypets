@@ -19,7 +19,29 @@
       "requirements": [],
       "hosttokens": [],
       "methods": [
-        "POST"
+        "GET"
+      ],
+      "schemes": []
+    },
+    "api_veterinaire_get_by_clinique": {
+      "tokens": [
+        [
+          "variable",
+          "\/",
+          "[^\/]++",
+          "clinique",
+          true
+        ],
+        [
+          "text",
+          "\/api\/veterinaire\/get-by-clinique"
+        ]
+      ],
+      "defaults": [],
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "GET"
       ],
       "schemes": []
     }

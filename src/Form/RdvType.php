@@ -59,11 +59,10 @@ class RdvType extends AbstractType
                 'choice_attr' => function(Proprietaire $choice, $key, $value) {
                     $attr = [];
                     if ($choice->getAvatar()) {
-                        $attr['data-content'] = '<img src=\'/' . $this->container->getParameter('dir_avatar_user') . $choice->getAvatar() . '\' alt="photo" height="100px" class="mr-2 rounded-pill">' . $choice->getNomPrenom() . ' - ' . $choice->getEmail();
+                        $attr['data-content'] = '<img src=\'/' . $this->container->getParameter('dir_avatar_user') . $choice->getAvatar() . '\' alt="photo" width="100px" class="mr-2 rounded-pill">' . $choice->getNomPrenom() . ' - ' . $choice->getEmail();
                     } else {
-                        $attr['data-content'] = '<img src=\'/assets/img/svg/user-circle-solid.svg\' alt="photo" height="50px" class="mr-2 rounded-pill">' . $choice->getNomPrenom() . ' - ' . $choice->getEmail();
+                        $attr['data-content'] = '<div class="text-center d-inline-block mr-2" style="width: 100px !important;"><img src=\'/assets/img/svg/user-circle-solid.svg\' alt="photo" height="50px" class="rounded-pill"></div>' . $choice->getNomPrenom() . ' - ' . $choice->getEmail();
                     }
-
                     return $attr;
                 }
 
@@ -89,7 +88,9 @@ class RdvType extends AbstractType
             'choice_attr' => function(Animal $choice, $key, $value) {
                 $attr = [];
                 if ($choice->getPhoto()) {
-                    $attr['data-content'] = '<img src=\'/' . $this->container->getParameter('dir_avatar_animal') . $choice->getPhoto() . '\' alt=\'photo\' height="100px" class="mr-2 rounded-pill">' . $choice->getNom();
+                    $attr['data-content'] = '<img src=\'/' . $this->container->getParameter('dir_avatar_animal') . $choice->getPhoto() . '\' alt=\'photo\' width="100px" class="mr-2 rounded-pill">' . $choice->getNom();
+                } else {
+                    $attr['data-content'] = '<div class="text-center d-inline-block mr-2" style="width: 100px !important;"><span style="font-size: 50px;" class="align-middle"><i class="fas fa-paw"></i></span></div>' . $choice->getNom();
                 }
 
                 return $attr;

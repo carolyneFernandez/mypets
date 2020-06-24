@@ -76,11 +76,17 @@ class Clinique
      */
     private $avatar;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Rdv::class, mappedBy="clinique", orphanRemoval=true)
+     */
+    private $rdvs;
+
     public function __construct()
     {
         $this->cliniqueHoraires = new ArrayCollection();
         $this->veterinaires = new ArrayCollection();
         $this->secretaires = new ArrayCollection();
+        $this->rdvs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -285,6 +291,37 @@ class Clinique
     public function setAvatar(?string $avatar): self
     {
         $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Rdv[]
+     */
+    public function getRdvs(): Collection
+    {
+        return $this->rdvs;
+    }
+
+    public function addRdv(Rdv $rdv): self
+    {
+        if (!$this->rdvs->contains($rdv)) {
+            $this->rdvs[] = $rdv;
+            $rdv->setClinique($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRdv(Rdv $rdv): self
+    {
+        if ($this->rdvs->contains($rdv)) {
+            $this->rdvs->removeElement($rdv);
+            // set the owning side to null (unless already changed)
+            if ($rdv->getClinique() === $this) {
+                $rdv->setClinique(null);
+            }
+        }
 
         return $this;
     }
