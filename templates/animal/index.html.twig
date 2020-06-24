@@ -3,7 +3,7 @@
 {% block title %}MyPets | Tous les animaux{% endblock %}
 
 {% block body %}
-    <h1 class="text-center">Tous mes animaux</h1>
+    <h1 class="text-center">Tous les animaux</h1>
 
     {% if is_granted('ROLE_VETERINAIRE') %}
     <a class="btn btn-success rounded pull-right mb-2 btn-sm" href="{{ path('animal_new') }}"><i class="fas fa-plus mr-1"></i>Ajouter un animal</a>
