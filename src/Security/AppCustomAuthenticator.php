@@ -116,6 +116,8 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator implements P
             ]));
         } elseif (in_array($this->container->getParameter('ROLE_PROPRIETAIRE'), $user->getRoles())) {
             return new RedirectResponse($this->urlGenerator->generate('index'));
+        } elseif (in_array($this->container->getParameter('ROLE_CLINIQUE'), $user->getRoles())) {
+            return new RedirectResponse($this->urlGenerator->generate('rdv_index'));
         }
 
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
