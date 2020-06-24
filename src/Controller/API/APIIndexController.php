@@ -73,7 +73,8 @@ class APIIndexController extends AbstractController
 
                 return new JsonResponse([
                     'data' => 'Succès',
-                    'token' => $token
+                    'token' => $token,
+                    'id' => $user->getId()
                 ], 200);
             }
 
