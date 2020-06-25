@@ -60,7 +60,7 @@ class APIIndexController extends AbstractController
                    ->findOneBy(['email' => $email])
         ;
 
-        if ($user) {
+        if ($user && (in_array($this->getParameter('ROLE_PROPRIETAIRE'), $user->getRoles()))) {
 
             if (!$user->getActif()) {
                 return new JsonResponse('Votre compte n\'est pas actif', 403);
