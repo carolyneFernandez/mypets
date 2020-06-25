@@ -1,0 +1,25 @@
+{% extends 'layout/base_user.html.twig' %}
+
+{% block title %}MyPets | Détails type animal{% endblock %}
+
+{% block body %}
+    <h1 class="text-center">Type d'animal : {{ animal_type.nom }}</h1>
+
+    <a class="btn btn-secondary rounded btn-sm" href="{{ path('animal_type_index') }}"><i class="fas fa-arrow-left mr-1"></i>Retour à la liste</a>
+
+    <a class="btn btn-warning rounded btn-sm" href="{{ path('animal_type_edit', {'id': animal_type.id}) }}">Modifier</a>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ animal_type.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ animal_type.nom }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}
