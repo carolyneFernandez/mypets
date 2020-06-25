@@ -31,32 +31,32 @@ class CliniqueAdminController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/new", name="admin_clinique_new", methods={"GET","POST"})
-     * @param Request $request
-     * @return Response
-     */
-    public function new(Request $request): Response
-    {
-        $clinique = new Clinique();
-        $form = $this->createForm(CliniqueType::class, $clinique);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()
-                                  ->getManager()
-            ;
-            $entityManager->persist($clinique);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('admin_clinique_index');
-        }
-
-        return $this->render('clinique/new.html.twig', [
-            'clinique' => $clinique,
-            'form' => $form->createView(),
-        ]);
-    }
+//    /**
+//     * @Route("/new", name="admin_clinique_new", methods={"GET","POST"})
+//     * @param Request $request
+//     * @return Response
+//     */
+//    public function new(Request $request): Response
+//    {
+//        $clinique = new Clinique();
+//        $form = $this->createForm(CliniqueType::class, $clinique);
+//        $form->handleRequest($request);
+//
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $entityManager = $this->getDoctrine()
+//                                  ->getManager()
+//            ;
+//            $entityManager->persist($clinique);
+//            $entityManager->flush();
+//
+//            return $this->redirectToRoute('admin_clinique_index');
+//        }
+//
+//        return $this->render('clinique/new.html.twig', [
+//            'clinique' => $clinique,
+//            'form' => $form->createView(),
+//        ]);
+//    }
 
     /**
      * @Route("/{id}/edit", name="admin_clinique_edit", methods={"GET","POST"})

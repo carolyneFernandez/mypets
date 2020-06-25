@@ -1,6 +1,9 @@
-{{ form_start(form) }}
+{% if form|length > 1 %}
+    {{ form_start(form) }}
     {{ form_widget(form) }}
-<div class="text-center">
-    <button class="btn btn-warning rounded-pill">{{ button_label|default('Enregistrer') }}</button>
-</div>
-{{ form_end(form) }}
+
+    <div class="text-center">
+        <button class="btn btn-warning rounded-pill">{{ button_label|default('Enregistrer') }}</button>
+    </div>
+    {{ form_end(form) }}
+{% endif %}

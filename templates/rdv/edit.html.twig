@@ -1,13 +1,24 @@
 {% extends 'layout/base_user.html.twig' %}
 
-{% block title %}Edit Rdv{% endblock %}
+{% block title %}MyPets | Rendez-vous{% endblock %}
 
 {% block body %}
-    <h1>Edit Rdv</h1>
+    <h2 class="text-center">Rendez-vous de {{ rdv.animal.nom }}</h2>
 
-    {{ include('rdv/include/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+    <a class="btn btn-secondary rounded-pill" href="{{ path('rdv_show', {id: rdv.id}) }}">Retour</a>
 
-    <a href="{{ path('rdv_index') }}">back to list</a>
+    <div class="d-flex flex-column flex-lg-row mt-3">
+        <div class="col-12 col-lg-6">
+            {% include 'animal/include/_card.html.twig' with {animal: rdv.animal} %}
+        </div>
+        <div class="col-12 col-lg-6 column">
+            {{ include('rdv/include/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+            <div class="text-center mt-2">
+            {% if rdv.date > "now"|date %}
+                <button type="button" class="btn btn-danger rounded-pill btn-sm">Annuler</button>
+            {% endif %}
+            </div>
+        </div>
+    </div>
 
-    {{ include('rdv/include/_delete_form.html.twig') }}
 {% endblock %}

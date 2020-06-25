@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Proprietaire;
 use App\Entity\Rdv;
+use App\Entity\Secretaire;
 use App\Entity\User;
 use App\Entity\Veterinaire;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -36,6 +37,14 @@ class IndexController extends AbstractController
 
             return $this->redirectToRoute('clinique_show', [
                 'id' => $veterinaire->getClinique()
+                                    ->getId()
+            ]);
+        } elseif ($this->isGranted($this->getParameter('ROLE_CLINIQUE'))) {
+            /** @var Secretaire $secretaire */
+            $secretaire = $this->getUser();
+
+            return $this->redirectToRoute('clinique_show', [
+                'id' => $secretaire->getClinique()
                                     ->getId()
             ]);
         }
