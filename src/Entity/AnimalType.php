@@ -29,6 +29,7 @@ class AnimalType
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"animalType:read"})
      */
     private $id;
 
