@@ -1,0 +1,12 @@
+{% extends 'layout/base_user.html.twig' %}
+
+{% block title %}Edit AnimalType{% endblock %}
+
+{% block body %}
+    <h1>Edit AnimalType</h1>
+
+    {{ include('animal_type/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+    <a class="btn btn-secondary rounded btn-sm" href="{{ path('animal_type_index') }}">Retour à la liste</a>
+
+{% endblock %}

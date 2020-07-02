@@ -190,13 +190,29 @@ class RdvController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="rdv_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Rdv $rdv
+     * @return Response
      */
     public function edit(Request $request, Rdv $rdv): Response
     {
-        $form = $this->createForm(RdvType::class, $rdv);
+        if ($rdv->getDate() < new \DateTime()) {
+           $this->addFlash('danger', 'Ce rendez-vous est déjà passé. Aucune modification possible.');
+           return $this->redirectToRoute('rdv_show', ['id' => $rdv->getId()]);
+        }
+
+        $rdvOld = clone $rdv;
+        $form = $this->createForm(RdvStep3Type::class, $rdv, ['edit' => true]);
         $form->handleRequest($request);
 
+
+
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if ($rdvOld->getDate() !== $rdv->getDate()) {
+
+            }
+
             $this->getDoctrine()
                  ->getManager()
                  ->flush()

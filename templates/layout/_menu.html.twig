@@ -10,10 +10,10 @@
     <div class="collapse navbar-collapse my-2 " id="navbarToggleExternalContent">
         <ul class="navbar-nav ml-auto mr-0">
             <li class="nav-item">
-                <a class="nav-link" href="#"> CLINIQUES À PROXIMITÉ</a>
+                <a class="nav-link" href="{{ path('clinique_proximite') }}"> Cliniques à proximité</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ app.user ==false ? url('app_login') : '#' }}"> MON COMPTE</a>
+                <a class="nav-link" href="{{ app.user ==false ? url('app_login') : '#' }}"> Mon compte</a>
             </li>
         </ul>
     </div>

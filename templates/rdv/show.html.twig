@@ -1,37 +1,30 @@
 {% extends 'layout/base_user.html.twig' %}
 
-{% block title %}Rdv{% endblock %}
+{% block title %}MyPets | Rendez-vous{% endblock %}
 
 {% block body %}
-    <h1>Rdv</h1>
+    <h2 class="text-center mb-2">Rendez-vous {{ rdv.animal.nom }}</h2>
 
-    <table class="table">
-        <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ rdv.id }}</td>
-        </tr>
-        <tr>
-            <th>Date</th>
-            <td>{{ rdv.date ? rdv.date|date('Y-m-d H:i:s') : '' }}</td>
-        </tr>
-        <tr>
-            <th>Observations</th>
-            <td>{{ rdv.observations }}</td>
-        </tr>
-        <tr>
-            <th>Domicile</th>
-            <td>{{ rdv.domicile ? 'Yes' : 'No' }}</td>
-        </tr>
-        <tr>
-            <th>Urgence</th>
-            <td>{{ rdv.urgence ? 'Yes' : 'No' }}</td>
-        </tr>
-        </tbody>
-    </table>
+    <a class="btn rounded-pill btn-secondary" href="{{ path('rdv_index') }}">Retour</a>
 
-    <a href="{{ path('rdv_index') }}">back to list</a>
 
-    <a href="{{ path('rdv_edit', {'id': rdv.id}) }}">edit</a>
+    <div class="mt-4 d-flex flex-column flex-lg-row col-12">
+
+        <div class="col-12 col-lg-6">
+            {% include 'rdv/include/_card.html.twig' with {editable: (rdv.date > "now"|date ? true : false)} %}
+        </div>
+
+        <div class="col-12 col-lg-6 column">
+            <div class="mb-3">
+            {% include 'veterinaire/include/_card.html.twig' with {veterinaire: rdv.veterinaire, clinique: rdv.clinique} %}
+            </div>
+
+            {% include 'animal/include/_card.html.twig' with {animal: rdv.animal} %}
+        </div>
+
+    </div>
+
+
+
 
 {% endblock %}

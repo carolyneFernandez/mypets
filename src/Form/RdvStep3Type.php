@@ -34,13 +34,18 @@ class RdvStep3Type extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        /** @var Rdv $rdv */
+        $rdv = $options['data'];
+
+        if($options['edit'] === false || $this->security->isGranted($this->container->getParameter('ROLE_VETERINAIRE')) || $this->security->isGranted($this->container->getParameter('ROLE_CLINIQUE')) || !$rdv->getValide())
+
         $builder->add('date', DateTimeType::class, [
-                'label' => 'Date',
-                'widget' => 'single_text',
-                'attr' => [
-                    'class' => 'flatpickr-datetime'
-                ]
-            ])
+            'label' => 'Date',
+            'widget' => 'single_text',
+            'attr' => [
+                'class' => 'flatpickr-datetime'
+            ]
+        ])
                 ->add('observations', TextareaType::class, [
                     'label' => 'Observations',
                     'attr' => [
@@ -48,12 +53,23 @@ class RdvStep3Type extends AbstractType
                     ]
                 ])
         ;
+
+        if ($options['edit'] === true && ($this->security->isGranted($this->container->getParameter('ROLE_VETERINAIRE')) || $this->security->isGranted($this->container->getParameter('ROLE_CLINIQUE'))) ) {
+            $builder->add('valide', CheckboxType::class, [
+                'label' => 'Validé',
+                'label_attr' => [
+                    'class' => 'checkbox-custom',
+                ],
+                'required' => false,
+            ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => Rdv::class,
+            'edit' => false,
         ]);
     }
 

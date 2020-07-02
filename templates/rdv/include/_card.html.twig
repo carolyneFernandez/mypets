@@ -1,0 +1,33 @@
+<div class="card rounded w-100 d-flex wrap">
+    <div class="card-body d-flex">
+        {#        <div class="mr-3">#}
+        {#            <a href="{{ url('animal_show', {id: animal.id}) }}">#}
+        {#                {% if animal.photo %}#}
+        {#                    <span class="logo-user ml-2">#}
+        {#                        <img src="{{ asset(dir_avatar_animal ~ animal.photo) }}" class="rounded-pill">#}
+        {#                    </span>#}
+        {#                {% else %}#}
+        {#                    <span class="logo-user__default ml-2"><i class="fas fa-dog"></i></span>#}
+        {#                {% endif %}#}
+        {#            </a>#}
+        {#        </div>#}
+        <div>
+            <h5 class="card-title">Résumé</h5>
+            <p class="card-text">
+                Date : {{ rdv.date|date('d/m/Y \\à H\\hi') }} <br/>
+                Observations : {{ rdv.observations|nl2br }} <br/>
+                <br>
+                {{ rdv.urgence ? '<span class="text-danger">Urgence</span>'|raw }}
+
+                {{ rdv.valide == false ? '<span class="text-warning">Non validé pour le moment</span>'|raw : '<span class="text-info">Validé</span>'|raw }}
+
+            </p>
+        </div>
+
+    </div>
+    {% if is_granted(ROLE_ADMIN) or is_granted(ROLE_CLINIQUE) or is_granted(ROLE_VETERINAIRE) or is_granted(ROLE_PROPRIETAIRE) %}
+        {% if editable is not defined or editable == true %}
+            <a class="btn btn-warning rounded-pill btn-sm icon-card" href="{{ url('rdv_edit', {id: rdv.id}) }}"><i class="fas fa-pen"></i> </a>
+        {% endif %}
+    {% endif %}
+</div>

@@ -7,12 +7,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use JsonSerializable;
+
 
 /**
  * @ApiResource()
  * @ORM\Entity(repositoryClass=CliniqueRepository::class)
  */
-class Clinique
+class Clinique implements JsonSerializable
 {
     /**
      * @ORM\Id()
@@ -80,6 +82,16 @@ class Clinique
      * @ORM\OneToMany(targetEntity=Rdv::class, mappedBy="clinique", orphanRemoval=true)
      */
     private $rdvs;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $lat;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $longitude;
 
     public function __construct()
     {
@@ -324,6 +336,44 @@ class Clinique
         }
 
         return $this;
+    }
+
+    public function getLat(): ?float
+    {
+        return $this->lat;
+    }
+
+    public function setLat(?float $lat): self
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude(?float $longitude): self
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'clinique' => [
+                'nom' => $this->nom,
+                'adresse' => $this->adresse,
+                'lat' => $this->lat,
+                'longitude' => $this->longitude,
+                'telephone' => $this->telephone,
+                'email' => $this->email,
+            ]
+        ];
     }
 
 }

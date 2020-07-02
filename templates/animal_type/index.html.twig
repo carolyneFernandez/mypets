@@ -1,0 +1,37 @@
+{% extends 'layout/base_user.html.twig' %}
+
+{% block title %}MyPets | Tout les types d'animaux{% endblock %}
+
+{% block body %}
+    <h1 class="text-center">Tout les types d'animaux</h1>
+
+    <a class="btn btn-success rounded pull-right mb-2 btn-sm" href="{{ path('animal_type_new') }}"><i class="fas fa-plus mr-1"></i>Ajouter</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for animal_type in animal_types %}
+            <tr>
+                <td>{{ animal_type.id }}</td>
+                <td>{{ animal_type.nom }}</td>
+                <td>
+                    <a class="btn btn-secondary btn-sm rounded" href="{{ path('animal_type_show', {'id': animal_type.id}) }}">Détails</a>
+                    <a class="btn btn-warning btn-sm rounded" href="{{ path('animal_type_edit', {'id': animal_type.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucun type d'animaux renseignés.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

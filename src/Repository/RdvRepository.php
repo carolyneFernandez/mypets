@@ -54,7 +54,7 @@ class RdvRepository extends ServiceEntityRepository
                     ->andWhere('r.completed = true')
                     ->orderBy('r.date', 'desc')
                     ->andWhere('r.date >= :now')
-                    ->setParameter('now', $now)
+                    ->setParameter('now', $now->format('Y-m-d 00:00:00'))
                     ->getQuery()
                     ->getResult()
             ;
