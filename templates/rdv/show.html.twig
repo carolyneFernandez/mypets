@@ -12,8 +12,12 @@
 
         <div class="col-12 col-lg-6">
             {% include 'rdv/include/_card.html.twig' with {editable: (rdv.date > "now"|date ? true : false)} %}
+            <div class="mt-3">
+                {% include 'consultation/include/_card.html.twig' with {'consultation' : rdv.consultation  } %}
+            </div>
         </div>
 
+        
         <div class="col-12 col-lg-6 column">
             <div class="mb-3">
             {% include 'veterinaire/include/_card.html.twig' with {veterinaire: rdv.veterinaire, clinique: rdv.clinique} %}
@@ -21,6 +25,7 @@
 
             {% include 'animal/include/_card.html.twig' with {animal: rdv.animal} %}
         </div>
+
 
     </div>
 

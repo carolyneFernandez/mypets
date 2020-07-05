@@ -1,0 +1,37 @@
+{% extends 'layout/base_user.html.twig' %}
+
+{% block title %}MyPets | Toutes les consultations{% endblock %}
+
+{% block body %}
+    <h1 class="text-center">Toutes les consultations</h1>
+
+    <a class="btn btn-success rounded pull-right mb-2 btn-sm" href="{{ path('consultation_new') }}"><i class="fas fa-plus mr-1"></i>Ajouter une consultation</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Compte rendu</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for consultation in consultations %}
+            <tr>
+                <td>{{ consultation.id }}</td>
+                <td>{{ consultation.compteRendu }}</td>
+                <td>
+                    <a href="{{ path('consultation_show', {'id': consultation.id}) }}">Détail</a>
+                    <a href="{{ path('consultation_edit', {'id': consultation.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucunes consultations trouvées.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

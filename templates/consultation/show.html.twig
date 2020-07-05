@@ -1,0 +1,25 @@
+{% extends 'layout/base_user.html.twig' %}
+
+{% block title %}Consultation{% endblock %}
+
+{% block body %}
+    <h1>Consultation</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ consultation.id }}</td>
+            </tr>
+            <tr>
+                <th>Compte rendu</th>
+                <td>{{ consultation.compteRendu }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-secondary rounded-pill" href="{{ path('consultation_index') }}">Retour à la liste</a>
+
+    <a class="btn btn-warning rounded-pill" href="{{ path('consultation_edit', {'id': consultation.id}) }}">Modifier</a>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'layout/base_user.html.twig' %}
+
+{% block title %}MyPets | Modifier la consultation{% endblock %}
+
+{% block body %}
+    <h1 class="text-center">Modifier la consultation</h1>
+
+    <a class="btn btn-secondary rounded-pill btn-sm" href="{{ path('consultation_index') }}">Retour à la liste</a>
+    <div class="mx-auto col-10 col-sm-8 col-md-7 col-lg-5">
+        {{ include('consultation/_form.html.twig', {'button_label': 'Modifier'}) }}
+    </div>
+
+{% endblock %}

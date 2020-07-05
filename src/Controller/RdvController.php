@@ -28,6 +28,8 @@ class RdvController extends AbstractController
     public function index(RdvRepository $rdvRepository): Response
     {
         $rdv = [];
+        /** @var User $user */
+        $user = $this->getUser();
 
         if ($this->isGranted($this->getParameter('ROLE_PROPRIETAIRE'))) {
             $rdv = $this->getDoctrine()
@@ -43,6 +45,12 @@ class RdvController extends AbstractController
                         ->findByClinique($this->getUser()
                                               ->getClinique())
             ;
+        } elseif (in_array($this->getParameter('ROLE_VETERINAIRE'), $user->getRoles())){
+            $rdv = $this->getDoctrine()
+                        ->getRepository(Rdv::class)
+                        ->findBy([
+                            'veterinaire' => $user
+                        ], ['date' => 'DESC']);
         }
 
         return $this->render('rdv/index.html.twig', [
