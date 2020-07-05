@@ -17,7 +17,7 @@
         </div>
 
     </div>
-    {% if is_granted(ROLE_VETERINAIRE) %}
+    {% if is_granted(ROLE_VETERINAIRE) and consultation %}
         {% if editable is not defined or editable == true %}
             <a class="btn btn-warning rounded-pill btn-sm icon-card" href="{{ path('consultation_edit', {id: consultation.id}) }}"><i class="fas fa-pen"></i> </a>
         {% endif %}
