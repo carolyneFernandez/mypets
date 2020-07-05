@@ -69,7 +69,12 @@ class ConsultationController extends AbstractController
      */
     public function edit(Request $request, Consultation $consultation): Response
     {   
-        $today = new \DateTime();
+        $today = new \DateTime('today');
+
+        if($consultation->getDateCreation() != $today){
+            $this->addFlash('warning', "Vous pouvez modifier votre consultation seulement le même jour de sa création.");
+        }
+
         $form = $this->createForm(ConsultationType::class, $consultation);
         $form->handleRequest($request);
 

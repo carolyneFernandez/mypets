@@ -41,6 +41,20 @@ class Consultation
      */
     private $rdv;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $dateCreation;
+
+    /**
+     * Consultation constructor.
+     * @throws Exception
+     */
+    public function __construct()
+    {
+        $this->dateCreation = new \DateTime('today');
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +104,18 @@ class Consultation
     public function setRdv(?Rdv $rdv): self
     {
         $this->rdv = $rdv;
+
+        return $this;
+    }
+
+    public function getDateCreation(): ?\DateTimeInterface
+    {
+        return $this->dateCreation;
+    }
+
+    public function setDateCreation(\DateTimeInterface $dateCreation): self
+    {
+        $this->dateCreation = $dateCreation;
 
         return $this;
     }
