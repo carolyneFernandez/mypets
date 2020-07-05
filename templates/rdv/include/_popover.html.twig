@@ -1,0 +1,27 @@
+<div class="column align-items-center" style="width: 300px">
+    <div class="col-12 text-center">
+        {% if rdv.animal.photo %}
+            <span class="logo-user ml-2">
+                <img src="{{ asset(dir_avatar_animal ~ rdv.animal.photo) }}" class="rounded-pill">
+            </span>
+        {% else %}
+            <span class="logo-user__default ml-2"><i class="fas fa-dog"></i></span>
+        {% endif %}
+    </div>
+    <div class="col-12">
+        <h5 class="card-title">{{ rdv.animal.nom }}</h5>
+        <p>
+            Type : {{ rdv.animal.type.nom }} <br/>
+            Race : {{ rdv.animal.race }} <br/>
+            <br>
+            Propriétaire : {{ rdv.proprietaire.nomPrenom }} <br/>
+            Adresse : {{ rdv.proprietaire.adresse|nl2br }} <br/>
+            Téléphone : {{ rdv.proprietaire.mobile }} <br/>
+            <br>
+            Date : {{ rdv.date|date('d/m/Y \\à H\\hi') }} <br/>
+            Vétérinaire : {{ rdv.veterinaire.nomPrenom }}<br>
+            <br>
+            Observation : {{ rdv.observations|nl2br }}
+        </p>
+    </div>
+</div>

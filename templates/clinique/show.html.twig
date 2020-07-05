@@ -65,7 +65,7 @@
                 </div>
 
             </div>
-            {% if is_granted(ROLE_ADMIN) or clinique.hasUser(app.user) %}
+            {% if is_granted(ROLE_ADMIN) or clinique.hasUser(app.user) and is_granted(ROLE_VETERINAIRE) == false %}
                 <a class="btn btn-warning rounded-pill btn-sm icon-card" href="{{ url('clinique_edit', {id: clinique.id}) }}"><i class="fas fa-pen"></i> </a>
             {% endif %}
         </div>

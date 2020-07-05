@@ -56,6 +56,11 @@ class Veterinaire extends User
      */
     private $consultations;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $colorRdv;
+
     public function __construct()
     {
         parent::__construct();
@@ -255,6 +260,18 @@ class Veterinaire extends User
                 $consultation->setVeterinaire(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getColorRdv(): ?string
+    {
+        return $this->colorRdv;
+    }
+
+    public function setColorRdv(string $colorRdv): self
+    {
+        $this->colorRdv = $colorRdv;
 
         return $this;
     }

@@ -8,12 +8,15 @@
     <a class="btn btn-success rounded pull-right mb-2 btn-sm" href="{{ path('veterinaire_new') }}"><i class="fas fa-plus mr-1"></i>Ajouter un vétérinaire</a>
 
     <div class="clearfix mb-3"></div>
-    {% for veterinaire in veterinaires %}
-        {# @var veterinaire \App\Entity\Veterinaire #}
-        <div class="col-4">
-            {% include 'veterinaire/include/_card.html.twig' with {clinique: veterinaire.clinique} %}
-        </div>
+    <div class="row col-12">
 
-    {% endfor %}
+        {% for veterinaire in veterinaires %}
+            {# @var veterinaire \App\Entity\Veterinaire #}
+            <div class="col-4">
+                {% include 'veterinaire/include/_card.html.twig' with {clinique: veterinaire.clinique} %}
+            </div>
+
+        {% endfor %}
+    </div>
 
 {% endblock %}

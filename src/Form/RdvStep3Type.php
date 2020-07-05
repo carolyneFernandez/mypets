@@ -42,6 +42,7 @@ class RdvStep3Type extends AbstractType
         $builder->add('date', DateTimeType::class, [
             'label' => 'Date',
             'widget' => 'single_text',
+            'view_timezone' => 'Europe/Paris',
             'attr' => [
                 'class' => 'flatpickr-datetime'
             ]
