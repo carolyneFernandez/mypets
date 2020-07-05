@@ -9,6 +9,7 @@
 {{ form_row(form.formations) }}
 {{ form_row(form.intervalBetweenRdv) }}
 {{ form_row(form.actif) }}
+{{ form_row(form.colorRdv) }}
 
 <h4 class="text-center">{{ form_label(form.veterinaireHoraires) }}</h4>
 <div id="divVeterinaireHoraires" data-prototype='{{ formMacro.printHoraire(form.veterinaireHoraires.vars.prototype)|e }}' data-widget-tags="<div class='item-horaire'></div>" data-widget-conter="{{ form.veterinaireHoraires|length }}">

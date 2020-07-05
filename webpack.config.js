@@ -30,6 +30,7 @@ Encore
     .addEntry('js/app', './assets/js/app.js')
     .addEntry('js/component/clinique/valide.js', './assets/js/component/clinique/valide.js')
     .addEntry('js/component/rdv/form', './assets/js/component/rdv/form.js')
+    .addEntry('js/component/fullcalendar', './assets/js/component/fullcalendar.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 

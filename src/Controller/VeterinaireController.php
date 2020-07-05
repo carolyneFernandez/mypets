@@ -30,9 +30,10 @@ class VeterinaireController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
-        if(in_array($this->getParameter('ROLE_CLINIQUE'), $user->getRoles())){
+        if (in_array($this->getParameter('ROLE_CLINIQUE'), $user->getRoles())) {
             return $this->render('veterinaire/index.html.twig', [
-                'veterinaires' => $user->getClinique()->getVeterinaires(),
+                'veterinaires' => $user->getClinique()
+                                       ->getVeterinaires(),
             ]);
         }
 
@@ -64,9 +65,11 @@ class VeterinaireController extends AbstractController
         $randomPassword = random_bytes(10);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $this->getDoctrine()
+                                  ->getManager()
+            ;
 
-            if(in_array($this->getParameter('ROLE_CLINIQUE'), $user->getRoles())){
+            if (in_array($this->getParameter('ROLE_CLINIQUE'), $user->getRoles())) {
                 $veterinaire->setClinique($user->getClinique());
             }
 
@@ -101,15 +104,28 @@ class VeterinaireController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="veterinaire_edit", methods={"GET","POST"})
-     * @Security("is_granted('ROLE_CLINIQUE') or is_granted('ROLE_ADMIN')")
+     * @Security("is_granted('ROLE_CLINIQUE') or is_granted('ROLE_ADMIN') or is_granted('ROLE_VETERINAIRE')")
+     * @param Request $request
+     * @param Veterinaire $veterinaire
+     * @return Response
      */
     public function edit(Request $request, Veterinaire $veterinaire): Response
     {
+        if ($this->isGranted($this->getParameter('ROLE_VETERINAIRE')) && ($veterinaire != $this->getUser() or !$veterinaire->getActif())) {
+            $this->addFlash('danger', 'Accès interdit');
+
+            return $this->redirectToRoute('index');
+        }
+
+
         $form = $this->createForm(VeterinaireType::class, $veterinaire);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $this->getDoctrine()
+                 ->getManager()
+                 ->flush()
+            ;
 
             return $this->redirectToRoute('veterinaire_index');
         }
@@ -125,12 +141,15 @@ class VeterinaireController extends AbstractController
      */
     public function delete(Request $request, Veterinaire $veterinaire): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$veterinaire->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
+        if ($this->isCsrfTokenValid('delete' . $veterinaire->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()
+                                  ->getManager()
+            ;
             $entityManager->remove($veterinaire);
             $entityManager->flush();
         }
 
         return $this->redirectToRoute('veterinaire_index');
     }
+
 }

@@ -8,62 +8,103 @@
 
     <a class="btn btn-success rounded pull-right mb-2 btn-sm" href="{{ path('rdv_new') }}"><i class="fas fa-plus mr-1"></i>Nouveau</a>
 
-    <table class="table td-align-middle">
-        <thead>
-        <tr class="text-center">
-            <th>Date</th>
-            <th>Animal</th>
-            <th>Vétérinaire</th>
-            <th>Validé</th>
-            <th>actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for rdv in rdvs %}
-            <tr>
-                <td>{{ rdv.date ? rdv.date|date('d/m/Y \\à H\\hi') : '' }}</td>
-                <td>
-                    <div class="d-flex justify-content-center align-items-center">
-                        {% if rdv.animal.photo %}
-                            <img src="{{ asset(dir_avatar_animal ~ rdv.animal.photo) }}" alt="{{ '<i class=\'fas fa-paw\'></i>'|raw }}" class="rounded-pill mr-2" height="50px">
-                        {% else %}
-                            <span class="logo-user__default ml-2 mr-2">
+    {% if is_granted(ROLE_CLINIQUE) or is_granted(ROLE_VETERINAIRE) %}
+
+        <div class="col-12 col-lg-11 col-xl-11 mx-auto mt-2 mb-3 d-flex flex-column justify-content-between">
+            {% if is_granted(ROLE_CLINIQUE) %}
+                <h6>Vétérinaires : </h6>
+                <div class="row col-12">
+                    {% for veterinaire in app.user.clinique.veterinaires %}
+                        <span class="badge " style="background-color: {{ veterinaire.colorRdv }}; color: {{ getContrastColor(veterinaire.colorRdv) }}">{{ veterinaire.nomPrenom }}</span>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div class="mt-3 w-100" style="height:900px;">
+                <div id="calendar-holder"></div>
+            </div>
+        </div>
+
+
+        <div class="none" id="div-parameter"
+             data-url_load_events="{{ url('fc_load_events') }}"
+        ></div>
+
+    {% else %}
+
+        <table class="table td-align-middle">
+            <thead>
+            <tr class="text-center">
+                <th>Date</th>
+                <th>Animal</th>
+                <th>Vétérinaire</th>
+                <th>Validé</th>
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for rdv in rdvs %}
+                <tr>
+                    <td>{{ rdv.date ? rdv.date|date('d/m/Y \\à H\\hi') : '' }}</td>
+                    <td>
+                        <div class="d-flex justify-content-center align-items-center">
+                            {% if rdv.animal.photo %}
+                                <img src="{{ asset(dir_avatar_animal ~ rdv.animal.photo) }}" alt="{{ '<i class=\'fas fa-paw\'></i>'|raw }}" class="rounded-pill mr-2" height="50px">
+                            {% else %}
+                                <span class="logo-user__default ml-2 mr-2">
                                 <i class="fas fa-paw"></i>
                             </span>
-                        {% endif %}
-                        <div>
-                            {{ rdv.animal.nom }}
+                            {% endif %}
+                            <div>
+                                {{ rdv.animal.nom }}
+                            </div>
                         </div>
-                    </div>
-                </td>
-                <td>
-                    <div class="d-flex justify-content-center align-items-center">
-                        {% if rdv.veterinaire.avatar %}
-                            <img src="{{ asset(dir_avatar_user ~ rdv.veterinaire.avatar) }}" alt="{{ '<i class=\'fas fa-user-circle\'></i>'|raw }}" class="rounded-pill mr-2">
-                        {% else %}
-                            <span class="logo-user__default ml-2 mr-2">
+                    </td>
+                    <td>
+                        <div class="d-flex justify-content-center align-items-center">
+                            {% if rdv.veterinaire.avatar %}
+                                <img src="{{ asset(dir_avatar_user ~ rdv.veterinaire.avatar) }}" alt="{{ '<i class=\'fas fa-user-circle\'></i>'|raw }}" class="rounded-pill mr-2">
+                            {% else %}
+                                <span class="logo-user__default ml-2 mr-2">
                                 <i class="fas fa-user-circle"></i>
                             </span>
-                        {% endif %}
-                        <div>
-                            {{ rdv.veterinaire.nomPrenom }}
+                            {% endif %}
+                            <div>
+                                {{ rdv.veterinaire.nomPrenom }}
+                            </div>
                         </div>
-                    </div>
-                </td>
-                <td class="text-center">
-                    {{ rdv.valide ? '<i class="fas fa-check"></i>' }}
-                </td>
-                <td class="text-center">
-                    <a class="btn btn-sm btn-primary rounded-pill" href="{{ path('rdv_show', {'id': rdv.id}) }}"><i class="fas fa-eye"></i></a>
-                    <a class="btn btn-sm btn-warning rounded-pill" href="{{ path('rdv_edit', {'id': rdv.id}) }}"><i class="fas fa-pen"></i></a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                    </td>
+                    <td class="text-center">
+                        {{ rdv.valide ? '<i class="fas fa-check"></i>' }}
+                    </td>
+                    <td class="text-center">
+                        <a class="btn btn-sm btn-primary rounded-pill" href="{{ path('rdv_show', {'id': rdv.id}) }}"><i class="fas fa-eye"></i></a>
+                        <a class="btn btn-sm btn-warning rounded-pill" href="{{ path('rdv_edit', {'id': rdv.id}) }}"><i class="fas fa-pen"></i></a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6" class="text-center">Aucun rendez-vous trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
+    {% endif %}
+
+
+
+{% endblock %}
+
+
+{% block stylesheets %}
+    {% if is_granted(ROLE_CLINIQUE) or is_granted(ROLE_VETERINAIRE) %}
+        {{ encore_entry_link_tags('css/fullCalendar') }}
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {% if is_granted(ROLE_CLINIQUE) or is_granted(ROLE_VETERINAIRE) %}
+        {{ encore_entry_script_tags('js/component/fullcalendar') }}
+    {% endif %}
 {% endblock %}
