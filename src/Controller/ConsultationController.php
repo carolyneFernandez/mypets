@@ -14,12 +14,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/consultation")
- * @Security("is_granted('ROLE_VETERINAIRE')")
  */
 class ConsultationController extends AbstractController
 {
     /**
      * @Route("/", name="consultation_index", methods={"GET"})
+     * @Security("is_granted('ROLE_VETERINAIRE') or is_granted('ROLE_PROPRIETAIRE') or is_granted('ROLE_SECRETAIRE')")
      */
     public function index(ConsultationRepository $consultationRepository): Response
     {
@@ -30,6 +30,7 @@ class ConsultationController extends AbstractController
 
     /**
      * @Route("/new", name="consultation_new", methods={"GET","POST"})
+     * @Security("is_granted('ROLE_VETERINAIRE')")
      */
     public function new(Request $request): Response
     {
@@ -56,6 +57,7 @@ class ConsultationController extends AbstractController
 
     /**
      * @Route("/{id}", name="consultation_show", methods={"GET"})
+     * @Security("is_granted('ROLE_VETERINAIRE') or is_granted('ROLE_PROPRIETAIRE') or is_granted('ROLE_SECRETAIRE')")
      */
     public function show(Consultation $consultation): Response
     {
@@ -66,6 +68,7 @@ class ConsultationController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="consultation_edit", methods={"GET","POST"})
+     * @Security("is_granted('ROLE_VETERINAIRE')")
      */
     public function edit(Request $request, Consultation $consultation): Response
     {   
@@ -90,17 +93,4 @@ class ConsultationController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="consultation_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, Consultation $consultation): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$consultation->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($consultation);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('consultation_index');
-    }
 }
